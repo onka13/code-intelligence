@@ -38,6 +38,11 @@ test('CIN-07: the map of a subfolder, with fields and a depth limit, from the st
   ].join('\n'));
   const full = execFileSync('node', [CLI, 'map', '--out', out, '--full'], { encoding: 'utf8' });
   assert.ok(full.includes('class Order { id: string; total(): number; }') && full.includes('function far();'));
+  const oneFile = execFileSync('node', [CLI, 'map', 'src/orders/order.ts', '--out', out, '--full'], { encoding: 'utf8' });
+  assert.equal(oneFile, 'class Order { id: string; total(): number; }\n');
+  assert.throws(() => execFileSync('node', [CLI, 'map', 'src/missing.ts', '--out', out], { encoding: 'utf8', stdio: 'pipe' }), /Not in the code map: src\/missing\.ts/);
+  const folders = execFileSync('node', [CLI, 'map', '--out', out, '--folders', '--depth', '1'], { encoding: 'utf8' });
+  assert.deepEqual(folders.split('\n').slice(1), ['└── 📁 src/', '    └── 📁 orders/', '']);
 });
 
 test('CIN-08: a neighborhood within a token budget, with reasons, the same every time', async () => {

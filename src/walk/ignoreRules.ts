@@ -12,6 +12,9 @@ export const DEFAULT_IGNORED_DIRS = new Set([
   'ios', 'android', 'windows', 'macos', 'linux', 'web', 'public', 'assets', 'static',
 ]);
 
+/** Files that hold secrets: never read, never listed (dot files such as `.env` are left out already). */
+const SECRET_FILES = ignore().add(['*.pem', '*.key', '*.p12', '*.pfx', 'id_rsa', 'id_rsa.*', 'id_ed25519', 'id_ed25519.*', 'credentials.json', 'secrets.json', '*serviceAccountKey*.json']);
+
 const IGNORE_FILES = ['.gitignore', '.contextignore'];
 
 interface Anchored {
@@ -65,6 +68,7 @@ export class IgnoreRules {
     const name = relPath.split('/').pop() as string;
     if (name.startsWith('.')) return true;
     if (isDir && DEFAULT_IGNORED_DIRS.has(name.toLowerCase())) return true;
+    if (!isDir && SECRET_FILES.ignores(name)) return true;
     if (this.excluded.some((ex) => relPath === ex || relPath.startsWith(`${ex}/`))) return true;
     return this.anchored.some((a) => this.matches(a, relPath, isDir));
   }

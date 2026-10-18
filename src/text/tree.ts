@@ -13,6 +13,8 @@ export interface TreeOptions {
   rootName: string;
   /** Folder levels below the root to print; unlimited when absent. */
   maxDepth?: number;
+  /** Print folders only. */
+  foldersOnly?: boolean;
   describe(path: string): FileText;
 }
 
@@ -50,12 +52,13 @@ function renderFiles(folder: Folder, prefix: string, opts: TreeOptions, lines: s
 function renderFolder(folder: Folder, depth: number, prefix: string, opts: TreeOptions, lines: string[]): void {
   if (opts.maxDepth !== undefined && depth > opts.maxDepth) return;
   const folders = [...folder.folders.values()].sort((a, b) => byName(a.name, b.name));
+  const showFiles = !opts.foldersOnly && folder.files.size > 0;
   folders.forEach((sub, i) => {
-    const last = i === folders.length - 1 && folder.files.size === 0;
+    const last = i === folders.length - 1 && !showFiles;
     lines.push(`${prefix}${last ? '└── ' : '├── '}📁 ${sub.name}/`);
     renderFolder(sub, depth + 1, prefix + (last ? '    ' : '│   '), opts, lines);
   });
-  renderFiles(folder, prefix, opts, lines);
+  if (showFiles) renderFiles(folder, prefix, opts, lines);
 }
 
 /** The tree of the given file paths under a `📁 <root>/` header. */

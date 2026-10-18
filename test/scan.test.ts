@@ -72,7 +72,7 @@ test('CIN-01: a scan writes the published outputs with members, imports and a su
   assert.match(printed, /Scanned 6 files \(0 parsed, 6 unchanged\) in \d+ ms/);
 });
 
-test('CIN-02: ignore files, excluded paths and the default list are honoured', async () => {
+test('CIN-02: ignore files, excluded paths, the default list and secret files are honoured', async () => {
   const root = tempDir();
   writeFiles(root, {
     '.gitignore': 'generated/\n',
@@ -90,6 +90,10 @@ test('CIN-02: ignore files, excluded paths and the default list are honoured', a
     '.dart_tool/cache.dart': 'class C {}\n',
     '.agency/app/x.json': '{}\n',
     '.git/HEAD': 'ref\n',
+    'config/credentials.json': '{ "token": "x" }\n',
+    'config/secrets.json': '{ "key": "x" }\n',
+    'config/firebase-serviceAccountKey.json': '{ "private_key": "x" }\n',
+    'certs/server.pem': 'x\n',
   });
   const { map } = await scan({ root, out: path.join(tempDir(), 'out'), exclude: ['docs/'], packs: PACKS });
   assert.deepEqual(map.files.map((f) => f.path), ['src/keep.ts', 'src/nested/shared.ts']);

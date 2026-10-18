@@ -14,8 +14,8 @@ const USAGE = `Usage: codeintel <command> [options]
         Scan a folder and write ast_code_map.json, graphify_topology.json, TopologyFULL.txt and
         project_structure.md to --out (default <folder>/.codeintel). Unchanged files are not parsed
         again unless --full is given.
-  map [<subfolder>] [--out <dir>] [--fields] [--full] [--depth <n>]
-        Print the repo map of the scanned folder or a subfolder.
+  map [<subfolder or file>] [--out <dir>] [--fields] [--full] [--depth <n>] [--folders]
+        Print the repo map of the scanned folder, a subfolder, or one file's declarations.
   neighborhood <file>... --budget <tokens> [--out <dir>] [--json]
         The files around the given ones, most central first, within a token budget.
   hubs [--top <n>] [--out <dir>] [--json]
@@ -59,7 +59,7 @@ async function runScan(args: Args): Promise<number> {
   if (!folder) { console.error('scan needs a folder.'); return 2; }
   const out = value(args, 'out');
   const result = await scan({ root: folder, out: out && path.resolve(out), exclude: args.values.get('exclude'), full: args.flags.has('full'), packs: PACKS });
-  if (args.flags.has('json')) console.log(JSON.stringify({ out: result.out, summary: result.map.summary }, null, 2));
+  if (args.flags.has('json')) console.log(JSON.stringify({ out: result.out, generatorVersion: result.map.generatorVersion, schemaVersion: result.map.schemaVersion, summary: result.map.summary }, null, 2));
   else printSummary(result.map.summary);
   return 0;
 }
@@ -87,7 +87,7 @@ async function main(argv: string[]): Promise<number> {
   switch (args.positional[0]) {
     case 'scan': return runScan(args);
     case 'map':
-      console.log(renderMap(readCodeMap(outDir(args)), { folder: args.positional[1], fields: args.flags.has('fields'), full: args.flags.has('full'), depth: numberValue(args, 'depth') }));
+      console.log(renderMap(readCodeMap(outDir(args)), { folder: args.positional[1], fields: args.flags.has('fields'), full: args.flags.has('full'), depth: numberValue(args, 'depth'), foldersOnly: args.flags.has('folders') }));
       return 0;
     case 'neighborhood': return runNeighborhood(args);
     case 'hubs': return runHubs(args);
