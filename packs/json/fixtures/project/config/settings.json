@@ -1,0 +1,6 @@
+{
+  "service": { "url": "https://example.com", "retries": 3, "tags": ["a", "b"] },
+  "features": [{ "name": "beta", "enabled": false, "rollout": null }],
+  "empty": {},
+  "list": []
+}

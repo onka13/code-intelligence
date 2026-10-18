@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "",
+  "generatedAt": "",
+  "rootName": "project",
+  "summary": {
+    "files": 3,
+    "parsed": 0,
+    "reused": 0,
+    "failed": [
+      {
+        "path": "config/broken.yaml",
+        "error": "Invalid YAML: Flow sequence in block collection must be sufficiently indented and end with a ] at line 2, column 1:"
+      }
+    ],
+    "unsupported": {},
+    "languages": {
+      "yaml": 3
+    },
+    "symbols": 0,
+    "rawTokens": 117,
+    "skeletonTokens": 133,
+    "durationMs": 0
+  },
+  "files": [
+    {
+      "path": "config/app.yml",
+      "language": "yaml",
+      "sizeBytes": 84,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [],
+      "skeleton": "// YAML shape\n{\n  server: {\n    port: number\n    hosts: [string]\n  }\n  logging: {\n    level: string\n  }\n}",
+      "rawTokens": 23,
+      "skeletonTokens": 28
+    },
+    {
+      "path": "config/broken.yaml",
+      "language": "yaml",
+      "sizeBytes": 28,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [],
+      "skeleton": "",
+      "rawTokens": 8,
+      "skeletonTokens": 0,
+      "error": "Invalid YAML: Flow sequence in block collection must be sufficiently indented and end with a ] at line 2, column 1:"
+    },
+    {
+      "path": "pubspec.yaml",
+      "language": "yaml",
+      "sizeBytes": 325,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [],
+      "skeleton": "// YAML shape\n{\n  name: string\n  version: string\n  environment: {\n    sdk: string\n  }\n  dependencies: {\n    flutter: {\n      sdk: string\n    }\n    http: string\n    local_tools: {\n      path: string\n    }\n    forked: {\n      git: {\n        url: string\n        ref: string\n      }\n    }\n    anything: null\n  }\n  dev_dependencies: {\n    flutter_test: {\n      sdk: string\n    }\n    lints: string\n  }\n}",
+      "rawTokens": 86,
+      "skeletonTokens": 105,
+      "declares": [
+        {
+          "name": "flutter",
+          "version": "sdk: flutter",
+          "dev": false,
+          "sdk": true
+        },
+        {
+          "name": "http",
+          "version": "1.2.2",
+          "dev": false
+        },
+        {
+          "name": "local_tools",
+          "version": "path: ../local_tools",
+          "dev": false
+        },
+        {
+          "name": "forked",
+          "version": "git: {\"url\":\"https://example.com/forked.git\",\"ref\":\"main\"}",
+          "dev": false
+        },
+        {
+          "name": "anything",
+          "version": "any",
+          "dev": false
+        },
+        {
+          "name": "flutter_test",
+          "version": "sdk: flutter",
+          "dev": true,
+          "sdk": true
+        },
+        {
+          "name": "lints",
+          "version": "4.0.0",
+          "dev": true
+        }
+      ]
+    }
+  ],
+  "audit": [
+    {
+      "name": "flutter",
+      "manifest": "pubspec.yaml",
+      "version": "sdk: flutter",
+      "dev": false,
+      "dormant": false,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "http",
+      "manifest": "pubspec.yaml",
+      "version": "1.2.2",
+      "dev": false,
+      "dormant": true,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "local_tools",
+      "manifest": "pubspec.yaml",
+      "version": "path: ../local_tools",
+      "dev": false,
+      "dormant": true,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "forked",
+      "manifest": "pubspec.yaml",
+      "version": "git: {\"url\":\"https://example.com/forked.git\",\"ref\":\"main\"}",
+      "dev": false,
+      "dormant": true,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "anything",
+      "manifest": "pubspec.yaml",
+      "version": "any",
+      "dev": false,
+      "dormant": true,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "flutter_test",
+      "manifest": "pubspec.yaml",
+      "version": "sdk: flutter",
+      "dev": true,
+      "dormant": false,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "lints",
+      "manifest": "pubspec.yaml",
+      "version": "4.0.0",
+      "dev": true,
+      "dormant": false,
+      "importCount": 0,
+      "files": []
+    }
+  ]
+}

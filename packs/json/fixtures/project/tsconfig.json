@@ -1,0 +1,7 @@
+{
+  // Comments and trailing commas are allowed here, as the TypeScript compiler allows them.
+  "compilerOptions": {
+    "strict": true, /* every check */
+    "paths": { "@app/*": ["src/*"], },
+  },
+}

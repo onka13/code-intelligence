@@ -1,0 +1,5 @@
+📁 project/
+├── 📁 config/
+│   ├── 📄 app.yml
+│   └── 📄 broken.yaml
+└── 📄 pubspec.yaml

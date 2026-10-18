@@ -1,0 +1,6 @@
+📁 project/
+├── 📁 config/
+│   ├── 📄 broken.json
+│   └── 📄 settings.json
+├── 📄 package.json
+└── 📄 tsconfig.json

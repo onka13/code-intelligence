@@ -1,0 +1,60 @@
+📁 project/
+├── 📁 src/
+│   ├── 📁 controllers/
+│   │   ├── 📄 BaseController.ts
+│   │   │     abstract class BaseController { protected readonly name: string; protected ok<T>(res: Response, data: T): void; protected fail(res: Response, status: number, error: string): void; }
+│   │   └── 📄 OrderController.ts
+│   │         class OrderController extends BaseController { public requestCount; async show(req: Request, res: Response): Promise<void>; async create(req: Request, res: Response): Promise<void>; }
+│   ├── 📁 edge/
+│   │   ├── 📄 aliasUser.ts
+│   │   │     const describe = (order: Order): string;
+│   │   └── 📄 declarations.ts
+│   │         interface Repo<T> extends Iterable<T> { readonly size: number; get(id: string): T | undefined; }
+│   │         abstract class Store<T> implements Repo<T> { static instances: number; protected readonly name: string; public tag: string; get size(): number; set label(value: string); abstract get(id: string): T | undefined; *[Symbol.iterator](): Iterator<T>; }
+│   │         const VERSION;
+│   │         const count: number;
+│   │         function* ids(): Generator<number>;
+│   ├── 📁 legacy/
+│   │   └── 📄 csvExport.js
+│   │         function toCsv(orders);
+│   ├── 📁 orders/
+│   │   ├── 📄 orderEvents.ts
+│   │   │     class OrderEvents { placed(order: Order, source: OrderService): void; }
+│   │   ├── 📄 orderRepository.ts
+│   │   │     interface IOrderRepository { findById(id: string): Promise<Order | undefined>; save(order: Order): Promise<Order>; }
+│   │   │     class InMemoryOrderRepository implements IOrderRepository { async findById(id: string): Promise<Order | undefined>; async save(order: Order): Promise<Order>; }
+│   │   ├── 📄 orderService.ts
+│   │   │     interface IOrderService { find(id: string): Promise<Order | undefined>; place(items: OrderItem[]): Promise<Result<Order>>; }
+│   │   │     class OrderService implements IOrderService { async find(id: string): Promise<Order | undefined>; async place(items: OrderItem[]): Promise<Result<Order>>; }
+│   │   ├── 📄 types.ts
+│   │   │     type OrderStatus = 'NEW' | 'PAID' | 'SHIPPED';
+│   │   │     enum PaymentMethod { Card, Transfer }
+│   │   │     interface OrderItem { sku: string; quantity: number; }
+│   │   │     interface Order { id: string; items: OrderItem[]; status: OrderStatus; payment?: PaymentMethod; }
+│   │   │     const MAX_ITEMS;
+│   │   └── 📄 validation.ts
+│   │         const orderSchema;
+│   │         type Validation<T> = { ok: true; value: T } | { ok: false; error: string };
+│   │         function validateOrder(body: unknown): Validation<OrderItem[]>;
+│   ├── 📁 routes/
+│   │   └── 📄 orderRoutes.ts
+│   │         const orderRoutes = (service: OrderService): Router;
+│   ├── 📁 shared/
+│   │   ├── 📄 logger.ts
+│   │   │     interface Logger { info(message: string): void; error(message: string, cause?: unknown): void; }
+│   │   │     function createLogger(prefix: string): Logger;
+│   │   │     const logger;
+│   │   └── 📄 result.ts
+│   │         class Result<T> { readonly value?: T; readonly error?: string; static ok<T>(value: T): Result<T>; static fail<T>(error: string): Result<T>; get isOk(): boolean; }
+│   ├── 📁 ui/
+│   │   └── 📄 Counter.tsx
+│   │         class Counter extends React.Component<Props, { value: number }> { state; componentDidMount(): void; increment = (): void; render(); }
+│   │         const Badge = ({ label }: { label: string });
+│   ├── 📄 app.ts
+│   │     function createApp(): Express;
+│   └── 📄 index.ts
+│         async function main(): Promise<void>;
+├── 📁 test/
+│   └── 📄 orderService.test.ts
+├── 📄 package.json
+└── 📄 tsconfig.json

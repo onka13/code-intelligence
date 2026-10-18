@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "graphify_topology.json",
+  "description": "The dependency graph: files and their top-level declarations, import, defines, extends and implements edges, degrees, centrality, PageRank, cycles, clusters and hubs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "generatorVersion", "generatedAt", "summary", "nodes", "edges"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "generatorVersion": { "type": "string" },
+    "generatedAt": { "type": "string" },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["totalFiles", "totalSymbols", "totalNodes", "totalEdges", "density", "circularDependencies", "clusters", "topHubs"],
+      "properties": {
+        "totalFiles": { "$ref": "#/$defs/count" },
+        "totalSymbols": { "$ref": "#/$defs/count" },
+        "totalNodes": { "$ref": "#/$defs/count" },
+        "totalEdges": { "$ref": "#/$defs/count" },
+        "density": { "type": "number", "minimum": 0 },
+        "circularDependencies": {
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["cycle"],
+            "properties": { "cycle": { "type": "array", "items": { "type": "string" }, "minItems": 2 } }
+          }
+        },
+        "clusters": {
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["name", "nodeCount"],
+            "properties": { "name": { "type": "string" }, "nodeCount": { "$ref": "#/$defs/count" } }
+          }
+        },
+        "topHubs": { "type": "array", "items": { "$ref": "#/$defs/hub" } }
+      }
+    },
+    "nodes": { "type": "array", "items": { "$ref": "#/$defs/node" } },
+    "edges": { "type": "array", "items": { "$ref": "#/$defs/edge" } }
+  },
+  "$defs": {
+    "count": { "type": "integer", "minimum": 0 },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "path", "type", "inDegree", "outDegree", "centralityScore", "pageRank", "cluster"],
+      "properties": {
+        "id": { "type": "string", "description": "file:<path> or symbol:<path>#<name>" },
+        "label": { "type": "string" },
+        "path": { "type": "string" },
+        "type": { "enum": ["file", "class", "interface", "enum", "mixin", "extension", "type", "function"] },
+        "language": { "type": "string" },
+        "line": { "type": "integer", "minimum": 1 },
+        "tokenEstimate": { "$ref": "#/$defs/count" },
+        "inDegree": { "$ref": "#/$defs/count" },
+        "outDegree": { "$ref": "#/$defs/count" },
+        "centralityScore": { "$ref": "#/$defs/count" },
+        "pageRank": { "type": "number", "minimum": 0 },
+        "cluster": { "type": "string" }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "target", "type"],
+      "properties": {
+        "source": { "type": "string" },
+        "target": { "type": "string" },
+        "type": { "enum": ["imports", "defines", "extends", "implements"] }
+      }
+    },
+    "hub": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "path", "inDegree", "outDegree", "centralityScore", "pageRank"],
+      "properties": {
+        "id": { "type": "string" },
+        "path": { "type": "string" },
+        "inDegree": { "$ref": "#/$defs/count" },
+        "outDegree": { "$ref": "#/$defs/count" },
+        "centralityScore": { "$ref": "#/$defs/count" },
+        "pageRank": { "type": "number", "minimum": 0 }
+      }
+    }
+  }
+}

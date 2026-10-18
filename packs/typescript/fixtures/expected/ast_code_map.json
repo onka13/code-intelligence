@@ -1,0 +1,1505 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "",
+  "generatedAt": "",
+  "rootName": "project",
+  "summary": {
+    "files": 19,
+    "parsed": 0,
+    "reused": 0,
+    "failed": [],
+    "unsupported": {},
+    "languages": {
+      "json": 2,
+      "typescript": 17
+    },
+    "symbols": 90,
+    "rawTokens": 2288,
+    "skeletonTokens": 1017,
+    "durationMs": 0
+  },
+  "files": [
+    {
+      "path": "package.json",
+      "language": "json",
+      "sizeBytes": 414,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [],
+      "skeleton": "// JSON shape\n{\n  name: string\n  version: string\n  private: boolean\n  type: string\n  scripts: {\n    build: string\n    test: string\n  }\n  dependencies: {\n    express: string\n    lodash: string\n    zod: string\n    react: string\n  }\n  devDependencies: {\n    @types/express: string\n    @types/node: string\n    typescript: string\n    vitest: string\n  }\n}",
+      "rawTokens": 109,
+      "skeletonTokens": 92,
+      "declares": [
+        {
+          "name": "express",
+          "version": "4.21.2",
+          "dev": false
+        },
+        {
+          "name": "lodash",
+          "version": "4.17.21",
+          "dev": false
+        },
+        {
+          "name": "zod",
+          "version": "3.24.1",
+          "dev": false
+        },
+        {
+          "name": "react",
+          "version": "18.3.1",
+          "dev": false
+        },
+        {
+          "name": "@types/express",
+          "version": "5.0.0",
+          "dev": true
+        },
+        {
+          "name": "@types/node",
+          "version": "22.10.2",
+          "dev": true
+        },
+        {
+          "name": "typescript",
+          "version": "5.8.3",
+          "dev": true
+        },
+        {
+          "name": "vitest",
+          "version": "2.1.8",
+          "dev": true
+        }
+      ]
+    },
+    {
+      "path": "src/app.ts",
+      "language": "typescript",
+      "sizeBytes": 494,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "function",
+          "name": "createApp",
+          "signature": "function createApp(): Express",
+          "exported": true,
+          "visibility": "public",
+          "type": "Express",
+          "lineStart": 7,
+          "lineEnd": 13
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "express",
+          "line": 1,
+          "kind": "package",
+          "package": "express"
+        },
+        {
+          "specifier": "./routes/orderRoutes",
+          "line": 2,
+          "kind": "file",
+          "target": "src/routes/orderRoutes.ts"
+        },
+        {
+          "specifier": "./orders/orderRepository",
+          "line": 3,
+          "kind": "file",
+          "target": "src/orders/orderRepository.ts"
+        },
+        {
+          "specifier": "./orders/orderService",
+          "line": 4,
+          "kind": "file",
+          "target": "src/orders/orderService.ts"
+        }
+      ],
+      "skeleton": "function createApp(): Express;",
+      "rawTokens": 130,
+      "skeletonTokens": 8
+    },
+    {
+      "path": "src/controllers/BaseController.ts",
+      "language": "typescript",
+      "sizeBytes": 408,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "class",
+          "name": "BaseController",
+          "signature": "abstract class BaseController",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 3,
+          "lineEnd": 17,
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "signature": "protected readonly name: string",
+              "exported": false,
+              "visibility": "protected",
+              "type": "string",
+              "lineStart": 4,
+              "lineEnd": 4
+            },
+            {
+              "kind": "constructor",
+              "name": "constructor",
+              "signature": "constructor(name: string)",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 6,
+              "lineEnd": 8
+            },
+            {
+              "kind": "method",
+              "name": "ok",
+              "signature": "protected ok<T>(res: Response, data: T): void",
+              "exported": false,
+              "visibility": "protected",
+              "type": "void",
+              "lineStart": 10,
+              "lineEnd": 12
+            },
+            {
+              "kind": "method",
+              "name": "fail",
+              "signature": "protected fail(res: Response, status: number, error: string): void",
+              "exported": false,
+              "visibility": "protected",
+              "type": "void",
+              "lineStart": 14,
+              "lineEnd": 16
+            }
+          ]
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "express",
+          "line": 1,
+          "kind": "package",
+          "package": "express"
+        }
+      ],
+      "skeleton": "abstract class BaseController {\n  protected readonly name: string;\n  constructor(name: string);\n  protected ok<T>(res: Response, data: T): void;\n  protected fail(res: Response, status: number, error: string): void;\n}",
+      "rawTokens": 108,
+      "skeletonTokens": 57
+    },
+    {
+      "path": "src/controllers/OrderController.ts",
+      "language": "typescript",
+      "sizeBytes": 918,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "class",
+          "name": "OrderController",
+          "signature": "class OrderController extends BaseController",
+          "exported": true,
+          "visibility": "public",
+          "extends": [
+            "BaseController"
+          ],
+          "lineStart": 6,
+          "lineEnd": 28,
+          "members": [
+            {
+              "kind": "field",
+              "name": "service",
+              "signature": "private readonly service: OrderService",
+              "exported": false,
+              "visibility": "private",
+              "type": "OrderService",
+              "lineStart": 7,
+              "lineEnd": 7
+            },
+            {
+              "kind": "field",
+              "name": "requestCount",
+              "signature": "public requestCount",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 8,
+              "lineEnd": 8
+            },
+            {
+              "kind": "constructor",
+              "name": "constructor",
+              "signature": "constructor(service: OrderService)",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 10,
+              "lineEnd": 13
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "signature": "async show(req: Request, res: Response): Promise<void>",
+              "exported": true,
+              "visibility": "public",
+              "type": "Promise<void>",
+              "lineStart": 15,
+              "lineEnd": 20
+            },
+            {
+              "kind": "method",
+              "name": "create",
+              "signature": "async create(req: Request, res: Response): Promise<void>",
+              "exported": true,
+              "visibility": "public",
+              "type": "Promise<void>",
+              "lineStart": 22,
+              "lineEnd": 27
+            }
+          ]
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "express",
+          "line": 1,
+          "kind": "package",
+          "package": "express"
+        },
+        {
+          "specifier": "./BaseController",
+          "line": 2,
+          "kind": "file",
+          "target": "src/controllers/BaseController.ts"
+        },
+        {
+          "specifier": "../orders/orderService",
+          "line": 3,
+          "kind": "file",
+          "target": "src/orders/orderService.ts"
+        },
+        {
+          "specifier": "../orders/validation",
+          "line": 4,
+          "kind": "file",
+          "target": "src/orders/validation.ts"
+        }
+      ],
+      "skeleton": "class OrderController extends BaseController {\n  public requestCount;\n  constructor(service: OrderService);\n  async show(req: Request, res: Response): Promise<void>;\n  async create(req: Request, res: Response): Promise<void>;\n}",
+      "rawTokens": 242,
+      "skeletonTokens": 60
+    },
+    {
+      "path": "src/edge/aliasUser.ts",
+      "language": "typescript",
+      "sizeBytes": 179,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "name": "describe",
+          "exported": true,
+          "visibility": "public",
+          "kind": "function",
+          "signature": "const describe = (order: Order): string",
+          "type": "string",
+          "lineStart": 4,
+          "lineEnd": 4
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "@shared/logger",
+          "line": 1,
+          "kind": "file",
+          "target": "src/shared/logger.ts"
+        },
+        {
+          "specifier": "../orders/types.js",
+          "line": 2,
+          "typeOnly": true,
+          "kind": "file",
+          "target": "src/orders/types.ts"
+        }
+      ],
+      "skeleton": "const describe = (order: Order): string;",
+      "rawTokens": 48,
+      "skeletonTokens": 11
+    },
+    {
+      "path": "src/edge/declarations.ts",
+      "language": "typescript",
+      "sizeBytes": 939,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "function",
+          "name": "Dec",
+          "signature": "function Dec(): ClassDecorator",
+          "exported": false,
+          "visibility": "private",
+          "type": "ClassDecorator",
+          "lineStart": 4,
+          "lineEnd": 6
+        },
+        {
+          "kind": "interface",
+          "name": "Repo",
+          "signature": "interface Repo<T> extends Iterable<T>",
+          "exported": true,
+          "visibility": "public",
+          "extends": [
+            "Iterable<T>"
+          ],
+          "lineStart": 8,
+          "lineEnd": 11,
+          "members": [
+            {
+              "kind": "field",
+              "name": "size",
+              "signature": "readonly size: number",
+              "exported": true,
+              "visibility": "public",
+              "type": "number",
+              "lineStart": 9,
+              "lineEnd": 9
+            },
+            {
+              "kind": "method",
+              "name": "get",
+              "signature": "get(id: string): T | undefined",
+              "exported": true,
+              "visibility": "public",
+              "type": "T | undefined",
+              "lineStart": 10,
+              "lineEnd": 10
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "name": "Store",
+          "signature": "abstract class Store<T> implements Repo<T>",
+          "exported": true,
+          "visibility": "public",
+          "implements": [
+            "Repo<T>"
+          ],
+          "lineStart": 13,
+          "lineEnd": 36,
+          "members": [
+            {
+              "kind": "field",
+              "name": "items",
+              "signature": "private readonly items",
+              "exported": false,
+              "visibility": "private",
+              "lineStart": 14,
+              "lineEnd": 14
+            },
+            {
+              "kind": "field",
+              "name": "#secret",
+              "signature": "#secret",
+              "exported": false,
+              "visibility": "private",
+              "lineStart": 15,
+              "lineEnd": 15
+            },
+            {
+              "kind": "field",
+              "name": "instances",
+              "signature": "static instances: number",
+              "exported": true,
+              "visibility": "public",
+              "type": "number",
+              "static": true,
+              "lineStart": 16,
+              "lineEnd": 16
+            },
+            {
+              "kind": "constructor",
+              "name": "constructor",
+              "signature": "constructor(protected readonly name: string, public tag: string, plain: number)",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 18,
+              "lineEnd": 18
+            },
+            {
+              "kind": "field",
+              "name": "name",
+              "signature": "protected readonly name: string",
+              "exported": false,
+              "visibility": "protected",
+              "type": "string",
+              "lineStart": 18,
+              "lineEnd": 18
+            },
+            {
+              "kind": "field",
+              "name": "tag",
+              "signature": "public tag: string",
+              "exported": true,
+              "visibility": "public",
+              "type": "string",
+              "lineStart": 18,
+              "lineEnd": 18
+            },
+            {
+              "kind": "getter",
+              "name": "size",
+              "signature": "get size(): number",
+              "exported": true,
+              "visibility": "public",
+              "type": "number",
+              "lineStart": 20,
+              "lineEnd": 22
+            },
+            {
+              "kind": "setter",
+              "name": "label",
+              "signature": "set label(value: string)",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 24,
+              "lineEnd": 24
+            },
+            {
+              "kind": "method",
+              "name": "get",
+              "signature": "abstract get(id: string): T | undefined",
+              "exported": true,
+              "visibility": "public",
+              "type": "T | undefined",
+              "lineStart": 26,
+              "lineEnd": 26
+            },
+            {
+              "kind": "method",
+              "name": "[Symbol.iterator]",
+              "signature": "*[Symbol.iterator](): Iterator<T>",
+              "exported": true,
+              "visibility": "public",
+              "type": "Iterator<T>",
+              "lineStart": 28,
+              "lineEnd": 30
+            },
+            {
+              "kind": "method",
+              "name": "helper",
+              "signature": "private helper(): void",
+              "exported": false,
+              "visibility": "private",
+              "type": "void",
+              "lineStart": 32,
+              "lineEnd": 35
+            }
+          ]
+        },
+        {
+          "name": "VERSION",
+          "exported": true,
+          "visibility": "public",
+          "kind": "variable",
+          "signature": "const VERSION",
+          "lineStart": 38,
+          "lineEnd": 38
+        },
+        {
+          "name": "count",
+          "exported": true,
+          "visibility": "public",
+          "kind": "variable",
+          "signature": "const count: number",
+          "type": "number",
+          "lineStart": 38,
+          "lineEnd": 38
+        },
+        {
+          "name": "internalState",
+          "exported": false,
+          "visibility": "private",
+          "kind": "variable",
+          "signature": "let internalState",
+          "lineStart": 39,
+          "lineEnd": 39
+        },
+        {
+          "kind": "function",
+          "name": "ids",
+          "signature": "function* ids(): Generator<number>",
+          "exported": true,
+          "visibility": "public",
+          "type": "Generator<number>",
+          "lineStart": 40,
+          "lineEnd": 42
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "node:fs",
+          "line": 1,
+          "kind": "builtin"
+        },
+        {
+          "specifier": "../orders/types",
+          "line": 2,
+          "kind": "file",
+          "target": "src/orders/types.ts"
+        }
+      ],
+      "skeleton": "function Dec(): ClassDecorator;\n\ninterface Repo<T> extends Iterable<T> {\n  readonly size: number;\n  get(id: string): T | undefined;\n}\n\nabstract class Store<T> implements Repo<T> {\n  static instances: number;\n  constructor(protected readonly name: string, public tag: string, plain: number);\n  protected readonly name: string;\n  public tag: string;\n  get size(): number;\n  set label(value: string);\n  abstract get(id: string): T | undefined;\n  *[Symbol.iterator](): Iterator<T>;\n}\n\nconst VERSION;\n\nconst count: number;\n\nlet internalState;\n\nfunction* ids(): Generator<number>;",
+      "rawTokens": 248,
+      "skeletonTokens": 152
+    },
+    {
+      "path": "src/index.ts",
+      "language": "typescript",
+      "sizeBytes": 273,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "name": "PORT",
+          "exported": false,
+          "visibility": "private",
+          "kind": "variable",
+          "signature": "const PORT",
+          "lineStart": 4,
+          "lineEnd": 4
+        },
+        {
+          "kind": "function",
+          "name": "main",
+          "signature": "async function main(): Promise<void>",
+          "exported": true,
+          "visibility": "public",
+          "type": "Promise<void>",
+          "lineStart": 6,
+          "lineEnd": 9
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "./app",
+          "line": 1,
+          "kind": "file",
+          "target": "src/app.ts"
+        },
+        {
+          "specifier": "./shared/logger",
+          "line": 2,
+          "kind": "file",
+          "target": "src/shared/logger.ts"
+        }
+      ],
+      "skeleton": "const PORT;\n\nasync function main(): Promise<void>;",
+      "rawTokens": 72,
+      "skeletonTokens": 14
+    },
+    {
+      "path": "src/legacy/csvExport.js",
+      "language": "typescript",
+      "sizeBytes": 280,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "function",
+          "name": "toCsv",
+          "signature": "function toCsv(orders)",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 3,
+          "lineEnd": 8
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "../shared/logger",
+          "line": 1,
+          "kind": "file",
+          "target": "src/shared/logger.ts"
+        }
+      ],
+      "skeleton": "function toCsv(orders);",
+      "rawTokens": 74,
+      "skeletonTokens": 7
+    },
+    {
+      "path": "src/orders/orderEvents.ts",
+      "language": "typescript",
+      "sizeBytes": 290,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "class",
+          "name": "OrderEvents",
+          "signature": "class OrderEvents",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 5,
+          "lineEnd": 9,
+          "members": [
+            {
+              "kind": "method",
+              "name": "placed",
+              "signature": "placed(order: Order, source: OrderService): void",
+              "exported": true,
+              "visibility": "public",
+              "type": "void",
+              "lineStart": 6,
+              "lineEnd": 8
+            }
+          ]
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "./orderService",
+          "line": 1,
+          "typeOnly": true,
+          "kind": "file",
+          "target": "src/orders/orderService.ts"
+        },
+        {
+          "specifier": "./types",
+          "line": 2,
+          "kind": "file",
+          "target": "src/orders/types.ts"
+        },
+        {
+          "specifier": "../shared/logger",
+          "line": 3,
+          "kind": "file",
+          "target": "src/shared/logger.ts"
+        }
+      ],
+      "skeleton": "class OrderEvents {\n  placed(order: Order, source: OrderService): void;\n}",
+      "rawTokens": 77,
+      "skeletonTokens": 20
+    },
+    {
+      "path": "src/orders/orderRepository.ts",
+      "language": "typescript",
+      "sizeBytes": 488,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "interface",
+          "name": "IOrderRepository",
+          "signature": "interface IOrderRepository",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 3,
+          "lineEnd": 6,
+          "members": [
+            {
+              "kind": "method",
+              "name": "findById",
+              "signature": "findById(id: string): Promise<Order | undefined>",
+              "exported": true,
+              "visibility": "public",
+              "type": "Promise<Order | undefined>",
+              "lineStart": 4,
+              "lineEnd": 4
+            },
+            {
+              "kind": "method",
+              "name": "save",
+              "signature": "save(order: Order): Promise<Order>",
+              "exported": true,
+              "visibility": "public",
+              "type": "Promise<Order>",
+              "lineStart": 5,
+              "lineEnd": 5
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "name": "InMemoryOrderRepository",
+          "signature": "class InMemoryOrderRepository implements IOrderRepository",
+          "exported": true,
+          "visibility": "public",
+          "implements": [
+            "IOrderRepository"
+          ],
+          "lineStart": 8,
+          "lineEnd": 19,
+          "members": [
+            {
+              "kind": "field",
+              "name": "orders",
+              "signature": "private readonly orders",
+              "exported": false,
+              "visibility": "private",
+              "lineStart": 9,
+              "lineEnd": 9
+            },
+            {
+              "kind": "method",
+              "name": "findById",
+              "signature": "async findById(id: string): Promise<Order | undefined>",
+              "exported": true,
+              "visibility": "public",
+              "type": "Promise<Order | undefined>",
+              "lineStart": 11,
+              "lineEnd": 13
+            },
+            {
+              "kind": "method",
+              "name": "save",
+              "signature": "async save(order: Order): Promise<Order>",
+              "exported": true,
+              "visibility": "public",
+              "type": "Promise<Order>",
+              "lineStart": 15,
+              "lineEnd": 18
+            }
+          ]
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "./types",
+          "line": 1,
+          "kind": "file",
+          "target": "src/orders/types.ts"
+        }
+      ],
+      "skeleton": "interface IOrderRepository {\n  findById(id: string): Promise<Order | undefined>;\n  save(order: Order): Promise<Order>;\n}\n\nclass InMemoryOrderRepository implements IOrderRepository {\n  async findById(id: string): Promise<Order | undefined>;\n  async save(order: Order): Promise<Order>;\n}",
+      "rawTokens": 129,
+      "skeletonTokens": 75
+    },
+    {
+      "path": "src/orders/orderService.ts",
+      "language": "typescript",
+      "sizeBytes": 982,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "interface",
+          "name": "IOrderService",
+          "signature": "interface IOrderService",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 7,
+          "lineEnd": 10,
+          "members": [
+            {
+              "kind": "method",
+              "name": "find",
+              "signature": "find(id: string): Promise<Order | undefined>",
+              "exported": true,
+              "visibility": "public",
+              "type": "Promise<Order | undefined>",
+              "lineStart": 8,
+              "lineEnd": 8
+            },
+            {
+              "kind": "method",
+              "name": "place",
+              "signature": "place(items: OrderItem[]): Promise<Result<Order>>",
+              "exported": true,
+              "visibility": "public",
+              "type": "Promise<Result<Order>>",
+              "lineStart": 9,
+              "lineEnd": 9
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "name": "OrderService",
+          "signature": "class OrderService implements IOrderService",
+          "exported": true,
+          "visibility": "public",
+          "implements": [
+            "IOrderService"
+          ],
+          "lineStart": 12,
+          "lineEnd": 28,
+          "members": [
+            {
+              "kind": "field",
+              "name": "events",
+              "signature": "private readonly events",
+              "exported": false,
+              "visibility": "private",
+              "lineStart": 13,
+              "lineEnd": 13
+            },
+            {
+              "kind": "constructor",
+              "name": "constructor",
+              "signature": "constructor(private readonly repository: IOrderRepository)",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 15,
+              "lineEnd": 15
+            },
+            {
+              "kind": "field",
+              "name": "repository",
+              "signature": "private readonly repository: IOrderRepository",
+              "exported": false,
+              "visibility": "private",
+              "type": "IOrderRepository",
+              "lineStart": 15,
+              "lineEnd": 15
+            },
+            {
+              "kind": "method",
+              "name": "find",
+              "signature": "async find(id: string): Promise<Order | undefined>",
+              "exported": true,
+              "visibility": "public",
+              "type": "Promise<Order | undefined>",
+              "lineStart": 17,
+              "lineEnd": 19
+            },
+            {
+              "kind": "method",
+              "name": "place",
+              "signature": "async place(items: OrderItem[]): Promise<Result<Order>>",
+              "exported": true,
+              "visibility": "public",
+              "type": "Promise<Result<Order>>",
+              "lineStart": 21,
+              "lineEnd": 27
+            }
+          ]
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "node:crypto",
+          "line": 1,
+          "kind": "builtin"
+        },
+        {
+          "specifier": "./orderRepository",
+          "line": 2,
+          "kind": "file",
+          "target": "src/orders/orderRepository.ts"
+        },
+        {
+          "specifier": "./types",
+          "line": 3,
+          "kind": "file",
+          "target": "src/orders/types.ts"
+        },
+        {
+          "specifier": "./orderEvents",
+          "line": 4,
+          "kind": "file",
+          "target": "src/orders/orderEvents.ts"
+        },
+        {
+          "specifier": "../shared/result",
+          "line": 5,
+          "kind": "file",
+          "target": "src/shared/result.ts"
+        }
+      ],
+      "skeleton": "interface IOrderService {\n  find(id: string): Promise<Order | undefined>;\n  place(items: OrderItem[]): Promise<Result<Order>>;\n}\n\nclass OrderService implements IOrderService {\n  constructor(private readonly repository: IOrderRepository);\n  async find(id: string): Promise<Order | undefined>;\n  async place(items: OrderItem[]): Promise<Result<Order>>;\n}",
+      "rawTokens": 259,
+      "skeletonTokens": 93
+    },
+    {
+      "path": "src/orders/types.ts",
+      "language": "typescript",
+      "sizeBytes": 338,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "type",
+          "name": "OrderStatus",
+          "signature": "type OrderStatus = 'NEW' | 'PAID' | 'SHIPPED'",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 1,
+          "lineEnd": 1
+        },
+        {
+          "kind": "enum",
+          "name": "PaymentMethod",
+          "signature": "enum PaymentMethod",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 3,
+          "lineEnd": 6,
+          "members": [
+            {
+              "kind": "enumMember",
+              "name": "Card",
+              "signature": "Card = 'CARD'",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 4,
+              "lineEnd": 4
+            },
+            {
+              "kind": "enumMember",
+              "name": "Transfer",
+              "signature": "Transfer = 'TRANSFER'",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 5,
+              "lineEnd": 5
+            }
+          ]
+        },
+        {
+          "kind": "interface",
+          "name": "OrderItem",
+          "signature": "interface OrderItem",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 8,
+          "lineEnd": 11,
+          "members": [
+            {
+              "kind": "field",
+              "name": "sku",
+              "signature": "sku: string",
+              "exported": true,
+              "visibility": "public",
+              "type": "string",
+              "lineStart": 9,
+              "lineEnd": 9
+            },
+            {
+              "kind": "field",
+              "name": "quantity",
+              "signature": "quantity: number",
+              "exported": true,
+              "visibility": "public",
+              "type": "number",
+              "lineStart": 10,
+              "lineEnd": 10
+            }
+          ]
+        },
+        {
+          "kind": "interface",
+          "name": "Order",
+          "signature": "interface Order",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 13,
+          "lineEnd": 18,
+          "members": [
+            {
+              "kind": "field",
+              "name": "id",
+              "signature": "id: string",
+              "exported": true,
+              "visibility": "public",
+              "type": "string",
+              "lineStart": 14,
+              "lineEnd": 14
+            },
+            {
+              "kind": "field",
+              "name": "items",
+              "signature": "items: OrderItem[]",
+              "exported": true,
+              "visibility": "public",
+              "type": "OrderItem[]",
+              "lineStart": 15,
+              "lineEnd": 15
+            },
+            {
+              "kind": "field",
+              "name": "status",
+              "signature": "status: OrderStatus",
+              "exported": true,
+              "visibility": "public",
+              "type": "OrderStatus",
+              "lineStart": 16,
+              "lineEnd": 16
+            },
+            {
+              "kind": "field",
+              "name": "payment",
+              "signature": "payment?: PaymentMethod",
+              "exported": true,
+              "visibility": "public",
+              "type": "PaymentMethod",
+              "lineStart": 17,
+              "lineEnd": 17
+            }
+          ]
+        },
+        {
+          "name": "MAX_ITEMS",
+          "exported": true,
+          "visibility": "public",
+          "kind": "variable",
+          "signature": "const MAX_ITEMS",
+          "lineStart": 20,
+          "lineEnd": 20
+        }
+      ],
+      "imports": [],
+      "skeleton": "type OrderStatus = 'NEW' | 'PAID' | 'SHIPPED';\n\nenum PaymentMethod {\n  Card = 'CARD';\n  Transfer = 'TRANSFER';\n}\n\ninterface OrderItem {\n  sku: string;\n  quantity: number;\n}\n\ninterface Order {\n  id: string;\n  items: OrderItem[];\n  status: OrderStatus;\n  payment?: PaymentMethod;\n}\n\nconst MAX_ITEMS;",
+      "rawTokens": 89,
+      "skeletonTokens": 79
+    },
+    {
+      "path": "src/orders/validation.ts",
+      "language": "typescript",
+      "sizeBytes": 479,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "name": "orderSchema",
+          "exported": true,
+          "visibility": "public",
+          "kind": "variable",
+          "signature": "const orderSchema",
+          "lineStart": 4,
+          "lineEnd": 4
+        },
+        {
+          "kind": "type",
+          "name": "Validation",
+          "signature": "type Validation<T> = { ok: true; value: T } | { ok: false; error: string }",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 6,
+          "lineEnd": 6
+        },
+        {
+          "kind": "function",
+          "name": "validateOrder",
+          "signature": "function validateOrder(body: unknown): Validation<OrderItem[]>",
+          "exported": true,
+          "visibility": "public",
+          "type": "Validation<OrderItem[]>",
+          "lineStart": 8,
+          "lineEnd": 11
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "zod",
+          "line": 1,
+          "kind": "package",
+          "package": "zod"
+        },
+        {
+          "specifier": "./types",
+          "line": 2,
+          "kind": "file",
+          "target": "src/orders/types.ts"
+        }
+      ],
+      "skeleton": "const orderSchema;\n\ntype Validation<T> = { ok: true; value: T } | { ok: false; error: string };\n\nfunction validateOrder(body: unknown): Validation<OrderItem[]>;",
+      "rawTokens": 127,
+      "skeletonTokens": 43
+    },
+    {
+      "path": "src/routes/orderRoutes.ts",
+      "language": "typescript",
+      "sizeBytes": 444,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "name": "orderRoutes",
+          "exported": true,
+          "visibility": "public",
+          "kind": "function",
+          "signature": "const orderRoutes = (service: OrderService): Router",
+          "type": "Router",
+          "lineStart": 5,
+          "lineEnd": 11
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "express",
+          "line": 1,
+          "kind": "package",
+          "package": "express"
+        },
+        {
+          "specifier": "../controllers/OrderController",
+          "line": 2,
+          "kind": "file",
+          "target": "src/controllers/OrderController.ts"
+        },
+        {
+          "specifier": "../orders/orderService",
+          "line": 3,
+          "kind": "file",
+          "target": "src/orders/orderService.ts"
+        }
+      ],
+      "skeleton": "const orderRoutes = (service: OrderService): Router;",
+      "rawTokens": 117,
+      "skeletonTokens": 14
+    },
+    {
+      "path": "src/shared/logger.ts",
+      "language": "typescript",
+      "sizeBytes": 370,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "interface",
+          "name": "Logger",
+          "signature": "interface Logger",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 1,
+          "lineEnd": 4,
+          "members": [
+            {
+              "kind": "method",
+              "name": "info",
+              "signature": "info(message: string): void",
+              "exported": true,
+              "visibility": "public",
+              "type": "void",
+              "lineStart": 2,
+              "lineEnd": 2
+            },
+            {
+              "kind": "method",
+              "name": "error",
+              "signature": "error(message: string, cause?: unknown): void",
+              "exported": true,
+              "visibility": "public",
+              "type": "void",
+              "lineStart": 3,
+              "lineEnd": 3
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "createLogger",
+          "signature": "function createLogger(prefix: string): Logger",
+          "exported": true,
+          "visibility": "public",
+          "type": "Logger",
+          "lineStart": 6,
+          "lineEnd": 11
+        },
+        {
+          "name": "logger",
+          "exported": true,
+          "visibility": "public",
+          "kind": "variable",
+          "signature": "const logger",
+          "lineStart": 13,
+          "lineEnd": 13
+        }
+      ],
+      "imports": [],
+      "skeleton": "interface Logger {\n  info(message: string): void;\n  error(message: string, cause?: unknown): void;\n}\n\nfunction createLogger(prefix: string): Logger;\n\nconst logger;",
+      "rawTokens": 98,
+      "skeletonTokens": 43
+    },
+    {
+      "path": "src/shared/result.ts",
+      "language": "typescript",
+      "sizeBytes": 330,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "class",
+          "name": "Result",
+          "signature": "class Result<T>",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 1,
+          "lineEnd": 15,
+          "members": [
+            {
+              "kind": "constructor",
+              "name": "constructor",
+              "signature": "private constructor(readonly value?: T, readonly error?: string)",
+              "exported": false,
+              "visibility": "private",
+              "lineStart": 2,
+              "lineEnd": 2
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "signature": "readonly value?: T",
+              "exported": true,
+              "visibility": "public",
+              "type": "T",
+              "lineStart": 2,
+              "lineEnd": 2
+            },
+            {
+              "kind": "field",
+              "name": "error",
+              "signature": "readonly error?: string",
+              "exported": true,
+              "visibility": "public",
+              "type": "string",
+              "lineStart": 2,
+              "lineEnd": 2
+            },
+            {
+              "kind": "method",
+              "name": "ok",
+              "signature": "static ok<T>(value: T): Result<T>",
+              "exported": true,
+              "visibility": "public",
+              "type": "Result<T>",
+              "static": true,
+              "lineStart": 4,
+              "lineEnd": 6
+            },
+            {
+              "kind": "method",
+              "name": "fail",
+              "signature": "static fail<T>(error: string): Result<T>",
+              "exported": true,
+              "visibility": "public",
+              "type": "Result<T>",
+              "static": true,
+              "lineStart": 8,
+              "lineEnd": 10
+            },
+            {
+              "kind": "getter",
+              "name": "isOk",
+              "signature": "get isOk(): boolean",
+              "exported": true,
+              "visibility": "public",
+              "type": "boolean",
+              "lineStart": 12,
+              "lineEnd": 14
+            }
+          ]
+        }
+      ],
+      "imports": [],
+      "skeleton": "class Result<T> {\n  readonly value?: T;\n  readonly error?: string;\n  static ok<T>(value: T): Result<T>;\n  static fail<T>(error: string): Result<T>;\n  get isOk(): boolean;\n}",
+      "rawTokens": 87,
+      "skeletonTokens": 46
+    },
+    {
+      "path": "src/ui/Counter.tsx",
+      "language": "typescript",
+      "sizeBytes": 451,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "type",
+          "name": "Props",
+          "signature": "type Props = { start: number }",
+          "exported": false,
+          "visibility": "private",
+          "lineStart": 3,
+          "lineEnd": 3
+        },
+        {
+          "kind": "class",
+          "name": "Counter",
+          "signature": "class Counter extends React.Component<Props, { value: number }>",
+          "exported": true,
+          "visibility": "public",
+          "extends": [
+            "React.Component<Props, { value: number }>"
+          ],
+          "lineStart": 5,
+          "lineEnd": 15,
+          "members": [
+            {
+              "kind": "field",
+              "name": "state",
+              "signature": "state",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 6,
+              "lineEnd": 6
+            },
+            {
+              "kind": "method",
+              "name": "componentDidMount",
+              "signature": "componentDidMount(): void",
+              "exported": true,
+              "visibility": "public",
+              "type": "void",
+              "lifecycle": true,
+              "lineStart": 8,
+              "lineEnd": 8
+            },
+            {
+              "kind": "method",
+              "name": "increment",
+              "signature": "increment = (): void",
+              "exported": true,
+              "visibility": "public",
+              "type": "void",
+              "lineStart": 10,
+              "lineEnd": 10
+            },
+            {
+              "kind": "method",
+              "name": "render",
+              "signature": "render()",
+              "exported": true,
+              "visibility": "public",
+              "lifecycle": true,
+              "lineStart": 12,
+              "lineEnd": 14
+            }
+          ]
+        },
+        {
+          "name": "Badge",
+          "exported": true,
+          "visibility": "public",
+          "kind": "function",
+          "signature": "const Badge = ({ label }: { label: string })",
+          "lineStart": 17,
+          "lineEnd": 17
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "react",
+          "line": 1,
+          "kind": "package",
+          "package": "react"
+        }
+      ],
+      "skeleton": "type Props = { start: number };\n\nclass Counter extends React.Component<Props, { value: number }> {\n  state;\n  componentDidMount(): void;\n  increment = (): void;\n  render();\n}\n\nconst Badge = ({ label }: { label: string });",
+      "rawTokens": 119,
+      "skeletonTokens": 59
+    },
+    {
+      "path": "test/orderService.test.ts",
+      "language": "typescript",
+      "sizeBytes": 436,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [
+        {
+          "specifier": "vitest",
+          "line": 1,
+          "kind": "package",
+          "package": "vitest"
+        },
+        {
+          "specifier": "../src/orders/orderService",
+          "line": 2,
+          "kind": "file",
+          "target": "src/orders/orderService.ts"
+        },
+        {
+          "specifier": "../src/orders/orderRepository",
+          "line": 3,
+          "kind": "file",
+          "target": "src/orders/orderRepository.ts"
+        }
+      ],
+      "skeleton": "import { describe, expect, it } from 'vitest';\nimport { OrderService } from '../src/orders/orderService';\nimport { InMemoryOrderRepository } from '../src/orders/orderRepository';\n\ndescribe('OrderService', () => {\n  it('places an order', async () => {\n    const service = new OrderService(new InMemoryOrderRepository());\n    const result = await service.place([{ sku: 'A1', quantity: 1 }]);\n    expect(result.isOk).toBe(true);\n  });\n});\n",
+      "rawTokens": 115,
+      "skeletonTokens": 115
+    },
+    {
+      "path": "tsconfig.json",
+      "language": "json",
+      "sizeBytes": 150,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [],
+      "skeleton": "// JSON shape\n{\n  compilerOptions: {\n    baseUrl: string\n    paths: {\n      @shared/*: [string]\n    }\n  }\n}",
+      "rawTokens": 40,
+      "skeletonTokens": 29
+    }
+  ],
+  "audit": [
+    {
+      "name": "express",
+      "manifest": "package.json",
+      "version": "4.21.2",
+      "dev": false,
+      "dormant": false,
+      "importCount": 4,
+      "files": [
+        "src/app.ts",
+        "src/controllers/BaseController.ts",
+        "src/controllers/OrderController.ts",
+        "src/routes/orderRoutes.ts"
+      ]
+    },
+    {
+      "name": "lodash",
+      "manifest": "package.json",
+      "version": "4.17.21",
+      "dev": false,
+      "dormant": true,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "zod",
+      "manifest": "package.json",
+      "version": "3.24.1",
+      "dev": false,
+      "dormant": false,
+      "importCount": 1,
+      "files": [
+        "src/orders/validation.ts"
+      ]
+    },
+    {
+      "name": "react",
+      "manifest": "package.json",
+      "version": "18.3.1",
+      "dev": false,
+      "dormant": false,
+      "importCount": 1,
+      "files": [
+        "src/ui/Counter.tsx"
+      ]
+    },
+    {
+      "name": "@types/express",
+      "manifest": "package.json",
+      "version": "5.0.0",
+      "dev": true,
+      "dormant": false,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "@types/node",
+      "manifest": "package.json",
+      "version": "22.10.2",
+      "dev": true,
+      "dormant": false,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "typescript",
+      "manifest": "package.json",
+      "version": "5.8.3",
+      "dev": true,
+      "dormant": false,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "vitest",
+      "manifest": "package.json",
+      "version": "2.1.8",
+      "dev": true,
+      "dormant": false,
+      "importCount": 1,
+      "files": [
+        "test/orderService.test.ts"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1660 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "",
+  "generatedAt": "",
+  "rootName": "project",
+  "summary": {
+    "files": 15,
+    "parsed": 0,
+    "reused": 0,
+    "failed": [],
+    "unsupported": {},
+    "languages": {
+      "dart": 14,
+      "yaml": 1
+    },
+    "symbols": 112,
+    "rawTokens": 2024,
+    "skeletonTokens": 902,
+    "durationMs": 0
+  },
+  "files": [
+    {
+      "path": "lib/app/router.dart",
+      "language": "dart",
+      "sizeBytes": 502,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "class",
+          "signature": "class AppRouter",
+          "name": "AppRouter",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 6,
+          "lineEnd": 18,
+          "members": [
+            {
+              "kind": "field",
+              "signature": "static const String home",
+              "type": "String",
+              "name": "home",
+              "exported": true,
+              "visibility": "public",
+              "static": true,
+              "lineStart": 7,
+              "lineEnd": 7
+            },
+            {
+              "kind": "field",
+              "signature": "static const String settings",
+              "type": "String",
+              "name": "settings",
+              "exported": true,
+              "visibility": "public",
+              "static": true,
+              "lineStart": 8,
+              "lineEnd": 8
+            },
+            {
+              "kind": "method",
+              "signature": "static Route<dynamic> onGenerateRoute(RouteSettings route)",
+              "type": "Route<dynamic>",
+              "name": "onGenerateRoute",
+              "exported": true,
+              "visibility": "public",
+              "static": true,
+              "lineStart": 10,
+              "lineEnd": 17
+            }
+          ]
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "package:flutter/material.dart",
+          "line": 1,
+          "kind": "package",
+          "package": "flutter"
+        },
+        {
+          "specifier": "../screens/home_screen.dart",
+          "line": 3,
+          "kind": "file",
+          "target": "lib/screens/home_screen.dart"
+        },
+        {
+          "specifier": "../screens/settings_screen.dart",
+          "line": 4,
+          "kind": "file",
+          "target": "lib/screens/settings_screen.dart"
+        }
+      ],
+      "skeleton": "class AppRouter {\n  static const String home;\n  static const String settings;\n  static Route<dynamic> onGenerateRoute(RouteSettings route);\n}",
+      "rawTokens": 133,
+      "skeletonTokens": 38
+    },
+    {
+      "path": "lib/edge/library.dart",
+      "language": "dart",
+      "sizeBytes": 1423,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "type",
+          "signature": "typedef Mapper<T> = T Function(Product product)",
+          "name": "Mapper",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 11,
+          "lineEnd": 11
+        },
+        {
+          "kind": "variable",
+          "signature": "final int retries",
+          "type": "int",
+          "name": "retries",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 13,
+          "lineEnd": 13
+        },
+        {
+          "kind": "variable",
+          "signature": "const kTimeout",
+          "name": "kTimeout",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 14,
+          "lineEnd": 14
+        },
+        {
+          "kind": "variable",
+          "signature": "late String sessionId",
+          "type": "String",
+          "name": "sessionId",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 15,
+          "lineEnd": 15
+        },
+        {
+          "kind": "variable",
+          "signature": "int _hidden",
+          "type": "int",
+          "name": "_hidden",
+          "exported": false,
+          "visibility": "private",
+          "lineStart": 16,
+          "lineEnd": 16
+        },
+        {
+          "kind": "function",
+          "signature": "String get appName",
+          "type": "String",
+          "name": "appName",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 18,
+          "lineEnd": 18
+        },
+        {
+          "kind": "class",
+          "signature": "abstract class Repository<T>",
+          "name": "Repository",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 20,
+          "lineEnd": 23,
+          "members": [
+            {
+              "kind": "method",
+              "signature": "Future<T?> find(String id)",
+              "type": "Future<T?>",
+              "name": "find",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 21,
+              "lineEnd": 21
+            },
+            {
+              "kind": "getter",
+              "signature": "int get count",
+              "type": "int",
+              "name": "count",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 22,
+              "lineEnd": 22
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "signature": "class CachedRepository<T> extends Repository<T> implements Disposable",
+          "name": "CachedRepository",
+          "exported": true,
+          "visibility": "public",
+          "extends": [
+            "Repository<T>"
+          ],
+          "implements": [
+            "Disposable"
+          ],
+          "lineStart": 25,
+          "lineEnd": 51,
+          "members": [
+            {
+              "kind": "field",
+              "signature": "final Map<String, T> _cache",
+              "type": "Map<String, T>",
+              "name": "_cache",
+              "exported": false,
+              "visibility": "private",
+              "lineStart": 26,
+              "lineEnd": 26
+            },
+            {
+              "kind": "field",
+              "signature": "static const int maxSize",
+              "type": "int",
+              "name": "maxSize",
+              "exported": true,
+              "visibility": "public",
+              "static": true,
+              "lineStart": 27,
+              "lineEnd": 27
+            },
+            {
+              "kind": "field",
+              "signature": "static const int minSize",
+              "type": "int",
+              "name": "minSize",
+              "exported": true,
+              "visibility": "public",
+              "static": true,
+              "lineStart": 27,
+              "lineEnd": 27
+            },
+            {
+              "kind": "field",
+              "signature": "cart.Cart? lastCart",
+              "type": "cart.Cart?",
+              "name": "lastCart",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 28,
+              "lineEnd": 28
+            },
+            {
+              "kind": "constructor",
+              "signature": "CachedRepository()",
+              "name": "CachedRepository",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 30,
+              "lineEnd": 30
+            },
+            {
+              "kind": "constructor",
+              "signature": "CachedRepository.named({this.lastCart})",
+              "name": "CachedRepository.named",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 31,
+              "lineEnd": 31
+            },
+            {
+              "kind": "method",
+              "signature": "Future<T?> find(String id)",
+              "type": "Future<T?>",
+              "name": "find",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 34,
+              "lineEnd": 34
+            },
+            {
+              "kind": "getter",
+              "signature": "int get count",
+              "type": "int",
+              "name": "count",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 37,
+              "lineEnd": 37
+            },
+            {
+              "kind": "setter",
+              "signature": "set limit(int value)",
+              "name": "limit",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 39,
+              "lineEnd": 39
+            },
+            {
+              "kind": "method",
+              "signature": "bool operator ==(Object other)",
+              "name": "operator ==",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 41,
+              "lineEnd": 41
+            },
+            {
+              "kind": "method",
+              "signature": "void dispose()",
+              "type": "void",
+              "name": "dispose",
+              "exported": true,
+              "visibility": "public",
+              "lifecycle": true,
+              "lineStart": 44,
+              "lineEnd": 48
+            },
+            {
+              "kind": "method",
+              "signature": "void _evict()",
+              "type": "void",
+              "name": "_evict",
+              "exported": false,
+              "visibility": "private",
+              "lineStart": 50,
+              "lineEnd": 50
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "signature": "abstract interface class Disposable",
+          "name": "Disposable",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 53,
+          "lineEnd": 55,
+          "members": [
+            {
+              "kind": "method",
+              "signature": "void dispose()",
+              "type": "void",
+              "name": "dispose",
+              "exported": true,
+              "visibility": "public",
+              "lifecycle": true,
+              "lineStart": 54,
+              "lineEnd": 54
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "signature": "mixin class Tracked",
+          "name": "Tracked",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 57,
+          "lineEnd": 59,
+          "members": [
+            {
+              "kind": "field",
+              "signature": "int hits",
+              "type": "int",
+              "name": "hits",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 58,
+              "lineEnd": 58
+            }
+          ]
+        },
+        {
+          "kind": "enum",
+          "signature": "enum Status",
+          "name": "Status",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 61,
+          "lineEnd": 67,
+          "members": [
+            {
+              "kind": "enumMember",
+              "signature": "active('A')",
+              "name": "active",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 62,
+              "lineEnd": 62
+            },
+            {
+              "kind": "enumMember",
+              "signature": "inactive('I')",
+              "name": "inactive",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 63,
+              "lineEnd": 63
+            },
+            {
+              "kind": "field",
+              "signature": "final String code",
+              "type": "String",
+              "name": "code",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 65,
+              "lineEnd": 65
+            },
+            {
+              "kind": "constructor",
+              "signature": "const Status(this.code)",
+              "name": "Status",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 66,
+              "lineEnd": 66
+            }
+          ]
+        },
+        {
+          "kind": "extension",
+          "signature": "extension on int",
+          "name": "",
+          "exported": false,
+          "visibility": "private",
+          "lineStart": 69,
+          "lineEnd": 71,
+          "members": [
+            {
+              "kind": "getter",
+              "signature": "int get doubled",
+              "type": "int",
+              "name": "doubled",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 70,
+              "lineEnd": 70
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "signature": "Future<void> warmUp(Repository<Product> repo, {int times = 1})",
+          "type": "Future<void>",
+          "name": "warmUp",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 73,
+          "lineEnd": 77
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "dart:async",
+          "line": 3,
+          "kind": "builtin"
+        },
+        {
+          "specifier": "package:shop_app/models/product.dart",
+          "line": 4,
+          "kind": "file",
+          "target": "lib/models/product.dart"
+        },
+        {
+          "specifier": "../models/cart.dart",
+          "line": 5,
+          "kind": "file",
+          "target": "lib/models/cart.dart"
+        },
+        {
+          "specifier": "src/vector.dart",
+          "line": 7,
+          "kind": "file",
+          "target": "lib/edge/src/vector.dart"
+        },
+        {
+          "specifier": "parts/money.dart",
+          "line": 9,
+          "kind": "file",
+          "target": "lib/edge/parts/money.dart"
+        }
+      ],
+      "skeleton": "typedef Mapper<T> = T Function(Product product);\n\nfinal int retries;\n\nconst kTimeout;\n\nlate String sessionId;\n\nint _hidden;\n\nString get appName;\n\nabstract class Repository<T> {\n  Future<T?> find(String id);\n  int get count;\n}\n\nclass CachedRepository<T> extends Repository<T> implements Disposable {\n  static const int maxSize;\n  static const int minSize;\n  cart.Cart? lastCart;\n  CachedRepository();\n  CachedRepository.named({this.lastCart});\n  Future<T?> find(String id);\n  int get count;\n  set limit(int value);\n  bool operator ==(Object other);\n  void dispose();\n}\n\nabstract interface class Disposable {\n  void dispose();\n}\n\nmixin class Tracked {\n  int hits;\n}\n\nenum Status {\n  active('A');\n  inactive('I');\n  final String code;\n  const Status(this.code);\n}\n\nextension on int {\n  int get doubled;\n}\n\nFuture<void> warmUp(Repository<Product> repo, {int times = 1});",
+      "rawTokens": 375,
+      "skeletonTokens": 228
+    },
+    {
+      "path": "lib/edge/parts/money.dart",
+      "language": "dart",
+      "sizeBytes": 71,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "class",
+          "signature": "class Money",
+          "name": "Money",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 3,
+          "lineEnd": 6,
+          "members": [
+            {
+              "kind": "field",
+              "signature": "final int cents",
+              "type": "int",
+              "name": "cents",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 4,
+              "lineEnd": 4
+            },
+            {
+              "kind": "constructor",
+              "signature": "Money(this.cents)",
+              "name": "Money",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 5,
+              "lineEnd": 5
+            }
+          ]
+        }
+      ],
+      "imports": [],
+      "skeleton": "class Money {\n  final int cents;\n  Money(this.cents);\n}",
+      "rawTokens": 19,
+      "skeletonTokens": 15
+    },
+    {
+      "path": "lib/edge/src/vector.dart",
+      "language": "dart",
+      "sizeBytes": 129,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "class",
+          "signature": "class Vector",
+          "name": "Vector",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 1,
+          "lineEnd": 5,
+          "members": [
+            {
+              "kind": "field",
+              "signature": "final double x",
+              "type": "double",
+              "name": "x",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 2,
+              "lineEnd": 2
+            },
+            {
+              "kind": "field",
+              "signature": "final double y",
+              "type": "double",
+              "name": "y",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 2,
+              "lineEnd": 2
+            },
+            {
+              "kind": "constructor",
+              "signature": "const Vector(this.x, this.y)",
+              "name": "Vector",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 3,
+              "lineEnd": 3
+            },
+            {
+              "kind": "method",
+              "signature": "Vector operator +(Vector o)",
+              "name": "operator +",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 4,
+              "lineEnd": 4
+            }
+          ]
+        }
+      ],
+      "imports": [],
+      "skeleton": "class Vector {\n  final double x;\n  final double y;\n  const Vector(this.x, this.y);\n  Vector operator +(Vector o);\n}",
+      "rawTokens": 34,
+      "skeletonTokens": 31
+    },
+    {
+      "path": "lib/main.dart",
+      "language": "dart",
+      "sizeBytes": 481,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "function",
+          "signature": "void main()",
+          "type": "void",
+          "name": "main",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 7,
+          "lineEnd": 9
+        },
+        {
+          "kind": "class",
+          "signature": "class ShopApp extends StatelessWidget",
+          "name": "ShopApp",
+          "exported": true,
+          "visibility": "public",
+          "extends": [
+            "StatelessWidget"
+          ],
+          "lineStart": 11,
+          "lineEnd": 21,
+          "members": [
+            {
+              "kind": "constructor",
+              "signature": "const ShopApp({super.key})",
+              "name": "ShopApp",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 12,
+              "lineEnd": 12
+            },
+            {
+              "kind": "method",
+              "signature": "Widget build(BuildContext context)",
+              "type": "Widget",
+              "name": "build",
+              "exported": true,
+              "visibility": "public",
+              "lifecycle": true,
+              "lineStart": 15,
+              "lineEnd": 20
+            }
+          ]
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "package:flutter/material.dart",
+          "line": 1,
+          "kind": "package",
+          "package": "flutter"
+        },
+        {
+          "specifier": "package:provider/provider.dart",
+          "line": 2,
+          "kind": "package",
+          "package": "provider"
+        },
+        {
+          "specifier": "app/router.dart",
+          "line": 4,
+          "kind": "file",
+          "target": "lib/app/router.dart"
+        },
+        {
+          "specifier": "services/settings_service.dart",
+          "line": 5,
+          "kind": "file",
+          "target": "lib/services/settings_service.dart"
+        }
+      ],
+      "skeleton": "void main();\n\nclass ShopApp extends StatelessWidget {\n  const ShopApp({super.key});\n  Widget build(BuildContext context);\n}",
+      "rawTokens": 127,
+      "skeletonTokens": 33
+    },
+    {
+      "path": "lib/mixins/loggable.dart",
+      "language": "dart",
+      "sizeBytes": 181,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "mixin",
+          "signature": "mixin Loggable",
+          "name": "Loggable",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 3,
+          "lineEnd": 9,
+          "members": [
+            {
+              "kind": "getter",
+              "signature": "String get logTag",
+              "type": "String",
+              "name": "logTag",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 4,
+              "lineEnd": 4
+            },
+            {
+              "kind": "method",
+              "signature": "void log(String message)",
+              "type": "void",
+              "name": "log",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 6,
+              "lineEnd": 8
+            }
+          ]
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "package:flutter/foundation.dart",
+          "line": 1,
+          "kind": "package",
+          "package": "flutter"
+        }
+      ],
+      "skeleton": "mixin Loggable {\n  String get logTag;\n  void log(String message);\n}",
+      "rawTokens": 48,
+      "skeletonTokens": 18
+    },
+    {
+      "path": "lib/models/cart.dart",
+      "language": "dart",
+      "sizeBytes": 398,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "class",
+          "signature": "sealed class CartEvent",
+          "name": "CartEvent",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 3,
+          "lineEnd": 3,
+          "members": []
+        },
+        {
+          "kind": "class",
+          "signature": "class ItemAdded extends CartEvent",
+          "name": "ItemAdded",
+          "exported": true,
+          "visibility": "public",
+          "extends": [
+            "CartEvent"
+          ],
+          "lineStart": 5,
+          "lineEnd": 8,
+          "members": [
+            {
+              "kind": "field",
+              "signature": "final Product product",
+              "type": "Product",
+              "name": "product",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 6,
+              "lineEnd": 6
+            },
+            {
+              "kind": "constructor",
+              "signature": "ItemAdded(this.product)",
+              "name": "ItemAdded",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 7,
+              "lineEnd": 7
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "signature": "class Cart",
+          "name": "Cart",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 10,
+          "lineEnd": 19,
+          "members": [
+            {
+              "kind": "field",
+              "signature": "final List<Product> items",
+              "type": "List<Product>",
+              "name": "items",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 11,
+              "lineEnd": 11
+            },
+            {
+              "kind": "getter",
+              "signature": "double get total",
+              "type": "double",
+              "name": "total",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 13,
+              "lineEnd": 13
+            },
+            {
+              "kind": "method",
+              "signature": "void add(Product product)",
+              "type": "void",
+              "name": "add",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 15,
+              "lineEnd": 18
+            }
+          ]
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "product.dart",
+          "line": 1,
+          "kind": "file",
+          "target": "lib/models/product.dart"
+        }
+      ],
+      "skeleton": "sealed class CartEvent {}\n\nclass ItemAdded extends CartEvent {\n  final Product product;\n  ItemAdded(this.product);\n}\n\nclass Cart {\n  final List<Product> items;\n  double get total;\n  void add(Product product);\n}",
+      "rawTokens": 105,
+      "skeletonTokens": 56
+    },
+    {
+      "path": "lib/models/product.dart",
+      "language": "dart",
+      "sizeBytes": 514,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "enum",
+          "signature": "enum Category",
+          "name": "Category",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 1,
+          "lineEnd": 1,
+          "members": [
+            {
+              "kind": "enumMember",
+              "signature": "food",
+              "name": "food",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 1,
+              "lineEnd": 1
+            },
+            {
+              "kind": "enumMember",
+              "signature": "clothing",
+              "name": "clothing",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 1,
+              "lineEnd": 1
+            },
+            {
+              "kind": "enumMember",
+              "signature": "toys",
+              "name": "toys",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 1,
+              "lineEnd": 1
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "signature": "class Product",
+          "name": "Product",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 3,
+          "lineEnd": 16,
+          "members": [
+            {
+              "kind": "field",
+              "signature": "final String id",
+              "type": "String",
+              "name": "id",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 4,
+              "lineEnd": 4
+            },
+            {
+              "kind": "field",
+              "signature": "final String name",
+              "type": "String",
+              "name": "name",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 5,
+              "lineEnd": 5
+            },
+            {
+              "kind": "field",
+              "signature": "final double price",
+              "type": "double",
+              "name": "price",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 6,
+              "lineEnd": 6
+            },
+            {
+              "kind": "field",
+              "signature": "final Category category",
+              "type": "Category",
+              "name": "category",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 7,
+              "lineEnd": 7
+            },
+            {
+              "kind": "constructor",
+              "signature": "const Product({required this.id, required this.name, required this.price, this.category = Category.food})",
+              "name": "Product",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 9,
+              "lineEnd": 9
+            },
+            {
+              "kind": "constructor",
+              "signature": "factory Product.fromJson(Map<String, dynamic> json)",
+              "name": "Product.fromJson",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 11,
+              "lineEnd": 13
+            },
+            {
+              "kind": "method",
+              "signature": "Map<String, dynamic> toJson()",
+              "type": "Map<String, dynamic>",
+              "name": "toJson",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 15,
+              "lineEnd": 15
+            }
+          ]
+        }
+      ],
+      "imports": [],
+      "skeleton": "enum Category {\n  food;\n  clothing;\n  toys;\n}\n\nclass Product {\n  final String id;\n  final String name;\n  final double price;\n  final Category category;\n  const Product({required this.id, required this.name, required this.price, this.category = Category.food});\n  factory Product.fromJson(Map<String, dynamic> json);\n  Map<String, dynamic> toJson();\n}",
+      "rawTokens": 136,
+      "skeletonTokens": 93
+    },
+    {
+      "path": "lib/screens/home_screen.dart",
+      "language": "dart",
+      "sizeBytes": 1147,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "class",
+          "signature": "class HomeScreen extends StatefulWidget",
+          "name": "HomeScreen",
+          "exported": true,
+          "visibility": "public",
+          "extends": [
+            "StatefulWidget"
+          ],
+          "lineStart": 7,
+          "lineEnd": 12,
+          "members": [
+            {
+              "kind": "constructor",
+              "signature": "const HomeScreen({super.key})",
+              "name": "HomeScreen",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 8,
+              "lineEnd": 8
+            },
+            {
+              "kind": "method",
+              "signature": "State<HomeScreen> createState()",
+              "type": "State<HomeScreen>",
+              "name": "createState",
+              "exported": true,
+              "visibility": "public",
+              "lifecycle": true,
+              "lineStart": 11,
+              "lineEnd": 11
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "signature": "class _HomeScreenState extends State<HomeScreen>",
+          "name": "_HomeScreenState",
+          "exported": false,
+          "visibility": "private",
+          "extends": [
+            "State<HomeScreen>"
+          ],
+          "lineStart": 14,
+          "lineEnd": 42,
+          "members": [
+            {
+              "kind": "field",
+              "signature": "final ApiClient _client",
+              "type": "ApiClient",
+              "name": "_client",
+              "exported": false,
+              "visibility": "private",
+              "lineStart": 15,
+              "lineEnd": 15
+            },
+            {
+              "kind": "field",
+              "signature": "List<Product> products",
+              "type": "List<Product>",
+              "name": "products",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 16,
+              "lineEnd": 16
+            },
+            {
+              "kind": "field",
+              "signature": "bool isLoading",
+              "type": "bool",
+              "name": "isLoading",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 17,
+              "lineEnd": 17
+            },
+            {
+              "kind": "method",
+              "signature": "void initState()",
+              "type": "void",
+              "name": "initState",
+              "exported": true,
+              "visibility": "public",
+              "lifecycle": true,
+              "lineStart": 20,
+              "lineEnd": 23
+            },
+            {
+              "kind": "method",
+              "signature": "Future<void> loadProducts()",
+              "type": "Future<void>",
+              "name": "loadProducts",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 25,
+              "lineEnd": 33
+            },
+            {
+              "kind": "method",
+              "signature": "Widget build(BuildContext context)",
+              "type": "Widget",
+              "name": "build",
+              "exported": true,
+              "visibility": "public",
+              "lifecycle": true,
+              "lineStart": 36,
+              "lineEnd": 41
+            }
+          ]
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "package:flutter/material.dart",
+          "line": 1,
+          "kind": "package",
+          "package": "flutter"
+        },
+        {
+          "specifier": "../models/product.dart",
+          "line": 3,
+          "kind": "file",
+          "target": "lib/models/product.dart"
+        },
+        {
+          "specifier": "../services/api_client.dart",
+          "line": 4,
+          "kind": "file",
+          "target": "lib/services/api_client.dart"
+        },
+        {
+          "specifier": "../utils/formatters.dart",
+          "line": 5,
+          "kind": "file",
+          "target": "lib/utils/formatters.dart"
+        }
+      ],
+      "skeleton": "class HomeScreen extends StatefulWidget {\n  const HomeScreen({super.key});\n  State<HomeScreen> createState();\n}\n\nclass _HomeScreenState extends State<HomeScreen> {\n  List<Product> products;\n  bool isLoading;\n  void initState();\n  Future<void> loadProducts();\n  Widget build(BuildContext context);\n}",
+      "rawTokens": 302,
+      "skeletonTokens": 79
+    },
+    {
+      "path": "lib/screens/settings_screen.dart",
+      "language": "dart",
+      "sizeBytes": 467,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "class",
+          "signature": "class SettingsScreen extends StatelessWidget",
+          "name": "SettingsScreen",
+          "exported": true,
+          "visibility": "public",
+          "extends": [
+            "StatelessWidget"
+          ],
+          "lineStart": 6,
+          "lineEnd": 18,
+          "members": [
+            {
+              "kind": "constructor",
+              "signature": "const SettingsScreen({super.key})",
+              "name": "SettingsScreen",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 7,
+              "lineEnd": 7
+            },
+            {
+              "kind": "method",
+              "signature": "Widget build(BuildContext context)",
+              "type": "Widget",
+              "name": "build",
+              "exported": true,
+              "visibility": "public",
+              "lifecycle": true,
+              "lineStart": 10,
+              "lineEnd": 17
+            }
+          ]
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "package:flutter/material.dart",
+          "line": 1,
+          "kind": "package",
+          "package": "flutter"
+        },
+        {
+          "specifier": "package:provider/provider.dart",
+          "line": 2,
+          "kind": "package",
+          "package": "provider"
+        },
+        {
+          "specifier": "../services/settings_service.dart",
+          "line": 4,
+          "kind": "file",
+          "target": "lib/services/settings_service.dart"
+        }
+      ],
+      "skeleton": "class SettingsScreen extends StatelessWidget {\n  const SettingsScreen({super.key});\n  Widget build(BuildContext context);\n}",
+      "rawTokens": 123,
+      "skeletonTokens": 33
+    },
+    {
+      "path": "lib/services/api_client.dart",
+      "language": "dart",
+      "sizeBytes": 867,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "class",
+          "signature": "class ApiException implements Exception",
+          "name": "ApiException",
+          "exported": true,
+          "visibility": "public",
+          "implements": [
+            "Exception"
+          ],
+          "lineStart": 7,
+          "lineEnd": 12,
+          "members": [
+            {
+              "kind": "field",
+              "signature": "final int statusCode",
+              "type": "int",
+              "name": "statusCode",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 8,
+              "lineEnd": 8
+            },
+            {
+              "kind": "field",
+              "signature": "final String message",
+              "type": "String",
+              "name": "message",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 9,
+              "lineEnd": 9
+            },
+            {
+              "kind": "constructor",
+              "signature": "ApiException(this.statusCode, this.message)",
+              "name": "ApiException",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 11,
+              "lineEnd": 11
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "signature": "class ApiClient with Loggable",
+          "name": "ApiClient",
+          "exported": true,
+          "visibility": "public",
+          "mixins": [
+            "Loggable"
+          ],
+          "lineStart": 14,
+          "lineEnd": 34,
+          "members": [
+            {
+              "kind": "field",
+              "signature": "final String baseUrl",
+              "type": "String",
+              "name": "baseUrl",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 15,
+              "lineEnd": 15
+            },
+            {
+              "kind": "field",
+              "signature": "final http.Client _http",
+              "type": "http.Client",
+              "name": "_http",
+              "exported": false,
+              "visibility": "private",
+              "lineStart": 16,
+              "lineEnd": 16
+            },
+            {
+              "kind": "field",
+              "signature": "int requestCount",
+              "type": "int",
+              "name": "requestCount",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 17,
+              "lineEnd": 17
+            },
+            {
+              "kind": "constructor",
+              "signature": "ApiClient({required this.baseUrl, http.Client? client})",
+              "name": "ApiClient",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 19,
+              "lineEnd": 19
+            },
+            {
+              "kind": "getter",
+              "signature": "String get host",
+              "type": "String",
+              "name": "host",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 21,
+              "lineEnd": 21
+            },
+            {
+              "kind": "method",
+              "signature": "Future<Map<String, dynamic>> getJson(String path)",
+              "type": "Future<Map<String, dynamic>>",
+              "name": "getJson",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 23,
+              "lineEnd": 31
+            },
+            {
+              "kind": "method",
+              "signature": "void close()",
+              "type": "void",
+              "name": "close",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 33,
+              "lineEnd": 33
+            }
+          ]
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "dart:convert",
+          "line": 1,
+          "kind": "builtin"
+        },
+        {
+          "specifier": "package:http/http.dart",
+          "line": 3,
+          "kind": "package",
+          "package": "http"
+        },
+        {
+          "specifier": "../mixins/loggable.dart",
+          "line": 5,
+          "kind": "file",
+          "target": "lib/mixins/loggable.dart"
+        }
+      ],
+      "skeleton": "class ApiException implements Exception {\n  final int statusCode;\n  final String message;\n  ApiException(this.statusCode, this.message);\n}\n\nclass ApiClient with Loggable {\n  final String baseUrl;\n  int requestCount;\n  ApiClient({required this.baseUrl, http.Client? client});\n  String get host;\n  Future<Map<String, dynamic>> getJson(String path);\n  void close();\n}",
+      "rawTokens": 229,
+      "skeletonTokens": 96
+    },
+    {
+      "path": "lib/services/settings_service.dart",
+      "language": "dart",
+      "sizeBytes": 694,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "class",
+          "signature": "class SettingsService extends ChangeNotifier",
+          "name": "SettingsService",
+          "exported": true,
+          "visibility": "public",
+          "extends": [
+            "ChangeNotifier"
+          ],
+          "lineStart": 4,
+          "lineEnd": 26,
+          "members": [
+            {
+              "kind": "constructor",
+              "signature": "SettingsService._()",
+              "name": "SettingsService._",
+              "exported": false,
+              "visibility": "private",
+              "lineStart": 5,
+              "lineEnd": 5
+            },
+            {
+              "kind": "field",
+              "signature": "static final SettingsService _instance",
+              "type": "SettingsService",
+              "name": "_instance",
+              "exported": false,
+              "visibility": "private",
+              "static": true,
+              "lineStart": 7,
+              "lineEnd": 7
+            },
+            {
+              "kind": "getter",
+              "signature": "static SettingsService get instance",
+              "type": "SettingsService",
+              "name": "instance",
+              "exported": true,
+              "visibility": "public",
+              "static": true,
+              "lineStart": 8,
+              "lineEnd": 8
+            },
+            {
+              "kind": "field",
+              "signature": "late SharedPreferences _prefs",
+              "type": "SharedPreferences",
+              "name": "_prefs",
+              "exported": false,
+              "visibility": "private",
+              "lineStart": 10,
+              "lineEnd": 10
+            },
+            {
+              "kind": "field",
+              "signature": "bool _darkMode",
+              "type": "bool",
+              "name": "_darkMode",
+              "exported": false,
+              "visibility": "private",
+              "lineStart": 11,
+              "lineEnd": 11
+            },
+            {
+              "kind": "getter",
+              "signature": "bool get darkMode",
+              "type": "bool",
+              "name": "darkMode",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 13,
+              "lineEnd": 13
+            },
+            {
+              "kind": "method",
+              "signature": "Future<void> load()",
+              "type": "Future<void>",
+              "name": "load",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 15,
+              "lineEnd": 19
+            },
+            {
+              "kind": "method",
+              "signature": "Future<void> setDarkMode(bool value)",
+              "type": "Future<void>",
+              "name": "setDarkMode",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 21,
+              "lineEnd": 25
+            }
+          ]
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "package:flutter/foundation.dart",
+          "line": 1,
+          "kind": "package",
+          "package": "flutter"
+        },
+        {
+          "specifier": "package:shared_preferences/shared_preferences.dart",
+          "line": 2,
+          "kind": "package",
+          "package": "shared_preferences"
+        }
+      ],
+      "skeleton": "class SettingsService extends ChangeNotifier {\n  static SettingsService get instance;\n  bool get darkMode;\n  Future<void> load();\n  Future<void> setDarkMode(bool value);\n}",
+      "rawTokens": 183,
+      "skeletonTokens": 45
+    },
+    {
+      "path": "lib/utils/formatters.dart",
+      "language": "dart",
+      "sizeBytes": 296,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "extension",
+          "signature": "extension StringCasing on String",
+          "name": "StringCasing",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 1,
+          "lineEnd": 3,
+          "members": [
+            {
+              "kind": "getter",
+              "signature": "String get capitalized",
+              "type": "String",
+              "name": "capitalized",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 2,
+              "lineEnd": 2
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "signature": "String formatPrice(double value)",
+          "type": "String",
+          "name": "formatPrice",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 5,
+          "lineEnd": 7
+        },
+        {
+          "kind": "function",
+          "signature": "String initials(String name)",
+          "type": "String",
+          "name": "initials",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 9,
+          "lineEnd": 9
+        }
+      ],
+      "imports": [],
+      "skeleton": "extension StringCasing on String {\n  String get capitalized;\n}\n\nString formatPrice(double value);\n\nString initials(String name);",
+      "rawTokens": 78,
+      "skeletonTokens": 34
+    },
+    {
+      "path": "pubspec.yaml",
+      "language": "yaml",
+      "sizeBytes": 311,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [],
+      "skeleton": "// YAML shape\n{\n  name: string\n  description: string\n  publish_to: string\n  version: string\n  environment: {\n    sdk: string\n  }\n  dependencies: {\n    flutter: {\n      sdk: string\n    }\n    http: string\n    intl: string\n    provider: string\n    shared_preferences: string\n  }\n  dev_dependencies: {\n    flutter_test: {\n      sdk: string\n    }\n    flutter_lints: string\n  }\n}",
+      "rawTokens": 82,
+      "skeletonTokens": 99,
+      "declares": [
+        {
+          "name": "flutter",
+          "version": "sdk: flutter",
+          "dev": false,
+          "sdk": true
+        },
+        {
+          "name": "http",
+          "version": "1.2.2",
+          "dev": false
+        },
+        {
+          "name": "intl",
+          "version": "0.19.0",
+          "dev": false
+        },
+        {
+          "name": "provider",
+          "version": "6.1.2",
+          "dev": false
+        },
+        {
+          "name": "shared_preferences",
+          "version": "2.3.3",
+          "dev": false
+        },
+        {
+          "name": "flutter_test",
+          "version": "sdk: flutter",
+          "dev": true,
+          "sdk": true
+        },
+        {
+          "name": "flutter_lints",
+          "version": "4.0.0",
+          "dev": true
+        }
+      ]
+    },
+    {
+      "path": "test/widget_test.dart",
+      "language": "dart",
+      "sizeBytes": 190,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "function",
+          "signature": "void main()",
+          "type": "void",
+          "name": "main",
+          "exported": true,
+          "visibility": "public",
+          "lineStart": 4,
+          "lineEnd": 8
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "package:flutter_test/flutter_test.dart",
+          "line": 1,
+          "kind": "package",
+          "package": "flutter_test"
+        },
+        {
+          "specifier": "package:shop_app/utils/formatters.dart",
+          "line": 2,
+          "kind": "file",
+          "target": "lib/utils/formatters.dart"
+        }
+      ],
+      "skeleton": "void main();",
+      "rawTokens": 50,
+      "skeletonTokens": 4
+    }
+  ],
+  "audit": [
+    {
+      "name": "flutter",
+      "manifest": "pubspec.yaml",
+      "version": "sdk: flutter",
+      "dev": false,
+      "dormant": false,
+      "importCount": 6,
+      "files": [
+        "lib/app/router.dart",
+        "lib/main.dart",
+        "lib/mixins/loggable.dart",
+        "lib/screens/home_screen.dart",
+        "lib/screens/settings_screen.dart",
+        "lib/services/settings_service.dart"
+      ]
+    },
+    {
+      "name": "http",
+      "manifest": "pubspec.yaml",
+      "version": "1.2.2",
+      "dev": false,
+      "dormant": false,
+      "importCount": 1,
+      "files": [
+        "lib/services/api_client.dart"
+      ]
+    },
+    {
+      "name": "intl",
+      "manifest": "pubspec.yaml",
+      "version": "0.19.0",
+      "dev": false,
+      "dormant": true,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "provider",
+      "manifest": "pubspec.yaml",
+      "version": "6.1.2",
+      "dev": false,
+      "dormant": false,
+      "importCount": 2,
+      "files": [
+        "lib/main.dart",
+        "lib/screens/settings_screen.dart"
+      ]
+    },
+    {
+      "name": "shared_preferences",
+      "manifest": "pubspec.yaml",
+      "version": "2.3.3",
+      "dev": false,
+      "dormant": false,
+      "importCount": 1,
+      "files": [
+        "lib/services/settings_service.dart"
+      ]
+    },
+    {
+      "name": "flutter_test",
+      "manifest": "pubspec.yaml",
+      "version": "sdk: flutter",
+      "dev": true,
+      "dormant": false,
+      "importCount": 1,
+      "files": [
+        "test/widget_test.dart"
+      ]
+    },
+    {
+      "name": "flutter_lints",
+      "manifest": "pubspec.yaml",
+      "version": "4.0.0",
+      "dev": true,
+      "dormant": false,
+      "importCount": 0,
+      "files": []
+    }
+  ]
+}

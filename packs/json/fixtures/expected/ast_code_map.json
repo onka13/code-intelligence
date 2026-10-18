@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "",
+  "generatedAt": "",
+  "rootName": "project",
+  "summary": {
+    "files": 4,
+    "parsed": 0,
+    "reused": 0,
+    "failed": [
+      {
+        "path": "config/broken.json",
+        "error": "Invalid JSON: Expected ',' or ']' after array element in JSON at position 18 (line 1 column 19)"
+      }
+    ],
+    "unsupported": {},
+    "languages": {
+      "json": 4
+    },
+    "symbols": 0,
+    "rawTokens": 164,
+    "skeletonTokens": 136,
+    "durationMs": 0
+  },
+  "files": [
+    {
+      "path": "config/broken.json",
+      "language": "json",
+      "sizeBytes": 20,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [],
+      "skeleton": "",
+      "rawTokens": 6,
+      "skeletonTokens": 0,
+      "error": "Invalid JSON: Expected ',' or ']' after array element in JSON at position 18 (line 1 column 19)"
+    },
+    {
+      "path": "config/settings.json",
+      "language": "json",
+      "sizeBytes": 184,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [],
+      "skeleton": "// JSON shape\n{\n  service: {\n    url: string\n    retries: number\n    tags: [string]\n  }\n  features: [\n    {\n      name: string\n      enabled: boolean\n      rollout: null\n    }\n  ]\n  empty: {}\n  list: []\n}",
+      "rawTokens": 49,
+      "skeletonTokens": 54
+    },
+    {
+      "path": "package.json",
+      "language": "json",
+      "sizeBytes": 211,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [],
+      "skeleton": "// JSON shape\n{\n  name: string\n  version: string\n  dependencies: {\n    left-pad: string\n  }\n  peerDependencies: {\n    react: string\n  }\n  devDependencies: {\n    @types/node: string\n    eslint: string\n  }\n}",
+      "rawTokens": 56,
+      "skeletonTokens": 54,
+      "declares": [
+        {
+          "name": "left-pad",
+          "version": "1.3.0",
+          "dev": false
+        },
+        {
+          "name": "react",
+          "version": "^18.0.0",
+          "dev": false
+        },
+        {
+          "name": "@types/node",
+          "version": "22.10.2",
+          "dev": true
+        },
+        {
+          "name": "eslint",
+          "version": "9.17.0",
+          "dev": true
+        }
+      ]
+    },
+    {
+      "path": "tsconfig.json",
+      "language": "json",
+      "sizeBytes": 201,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [],
+      "skeleton": "// JSON shape\n{\n  compilerOptions: {\n    strict: boolean\n    paths: {\n      @app/*: [string]\n    }\n  }\n}",
+      "rawTokens": 53,
+      "skeletonTokens": 28
+    }
+  ],
+  "audit": [
+    {
+      "name": "left-pad",
+      "manifest": "package.json",
+      "version": "1.3.0",
+      "dev": false,
+      "dormant": true,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "react",
+      "manifest": "package.json",
+      "version": "^18.0.0",
+      "dev": false,
+      "dormant": true,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "@types/node",
+      "manifest": "package.json",
+      "version": "22.10.2",
+      "dev": true,
+      "dormant": false,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "eslint",
+      "manifest": "package.json",
+      "version": "9.17.0",
+      "dev": true,
+      "dormant": false,
+      "importCount": 0,
+      "files": []
+    }
+  ]
+}

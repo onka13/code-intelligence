@@ -1,0 +1,987 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "",
+  "generatedAt": "",
+  "summary": {
+    "totalFiles": 17,
+    "totalSymbols": 28,
+    "totalNodes": 45,
+    "totalEdges": 57,
+    "density": 0.02879,
+    "circularDependencies": [
+      {
+        "cycle": [
+          "src/orders/orderEvents.ts",
+          "src/orders/orderService.ts",
+          "src/orders/orderEvents.ts"
+        ]
+      }
+    ],
+    "clusters": [
+      {
+        "name": "src/orders",
+        "nodeCount": 16
+      },
+      {
+        "name": "src/edge",
+        "nodeCount": 7
+      },
+      {
+        "name": "src/shared",
+        "nodeCount": 5
+      },
+      {
+        "name": "src",
+        "nodeCount": 4
+      },
+      {
+        "name": "src/controllers",
+        "nodeCount": 4
+      },
+      {
+        "name": "src/ui",
+        "nodeCount": 4
+      },
+      {
+        "name": "src/legacy",
+        "nodeCount": 2
+      },
+      {
+        "name": "src/routes",
+        "nodeCount": 2
+      },
+      {
+        "name": "test",
+        "nodeCount": 1
+      }
+    ],
+    "topHubs": [
+      {
+        "id": "file:src/orders/orderService.ts",
+        "path": "src/orders/orderService.ts",
+        "inDegree": 5,
+        "outDegree": 4,
+        "centralityScore": 14,
+        "pageRank": 0.102784
+      },
+      {
+        "id": "file:src/orders/types.ts",
+        "path": "src/orders/types.ts",
+        "inDegree": 6,
+        "outDegree": 0,
+        "centralityScore": 12,
+        "pageRank": 0.209998
+      },
+      {
+        "id": "file:src/shared/logger.ts",
+        "path": "src/shared/logger.ts",
+        "inDegree": 4,
+        "outDegree": 0,
+        "centralityScore": 8,
+        "pageRank": 0.097353
+      },
+      {
+        "id": "file:src/orders/orderRepository.ts",
+        "path": "src/orders/orderRepository.ts",
+        "inDegree": 3,
+        "outDegree": 1,
+        "centralityScore": 7,
+        "pageRank": 0.077725
+      },
+      {
+        "id": "file:src/orders/orderEvents.ts",
+        "path": "src/orders/orderEvents.ts",
+        "inDegree": 1,
+        "outDegree": 3,
+        "centralityScore": 5,
+        "pageRank": 0.0524
+      },
+      {
+        "id": "file:src/controllers/OrderController.ts",
+        "path": "src/controllers/OrderController.ts",
+        "inDegree": 1,
+        "outDegree": 3,
+        "centralityScore": 5,
+        "pageRank": 0.048789
+      },
+      {
+        "id": "file:src/app.ts",
+        "path": "src/app.ts",
+        "inDegree": 1,
+        "outDegree": 3,
+        "centralityScore": 5,
+        "pageRank": 0.043545
+      },
+      {
+        "id": "file:src/routes/orderRoutes.ts",
+        "path": "src/routes/orderRoutes.ts",
+        "inDegree": 1,
+        "outDegree": 2,
+        "centralityScore": 4,
+        "pageRank": 0.042896
+      },
+      {
+        "id": "file:src/orders/validation.ts",
+        "path": "src/orders/validation.ts",
+        "inDegree": 1,
+        "outDegree": 1,
+        "centralityScore": 3,
+        "pageRank": 0.044382
+      },
+      {
+        "id": "file:src/shared/result.ts",
+        "path": "src/shared/result.ts",
+        "inDegree": 1,
+        "outDegree": 0,
+        "centralityScore": 2,
+        "pageRank": 0.0524
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "file:src/app.ts",
+      "label": "app.ts",
+      "path": "src/app.ts",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 130,
+      "inDegree": 1,
+      "outDegree": 3,
+      "centralityScore": 5,
+      "pageRank": 0.043545,
+      "cluster": "src"
+    },
+    {
+      "id": "symbol:src/app.ts#createApp",
+      "label": "createApp",
+      "path": "src/app.ts",
+      "type": "function",
+      "line": 7,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src"
+    },
+    {
+      "id": "file:src/controllers/BaseController.ts",
+      "label": "BaseController.ts",
+      "path": "src/controllers/BaseController.ts",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 108,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0.044382,
+      "cluster": "src/controllers"
+    },
+    {
+      "id": "symbol:src/controllers/BaseController.ts#BaseController",
+      "label": "BaseController",
+      "path": "src/controllers/BaseController.ts",
+      "type": "class",
+      "line": 3,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0,
+      "cluster": "src/controllers"
+    },
+    {
+      "id": "file:src/controllers/OrderController.ts",
+      "label": "OrderController.ts",
+      "path": "src/controllers/OrderController.ts",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 242,
+      "inDegree": 1,
+      "outDegree": 3,
+      "centralityScore": 5,
+      "pageRank": 0.048789,
+      "cluster": "src/controllers"
+    },
+    {
+      "id": "symbol:src/controllers/OrderController.ts#OrderController",
+      "label": "OrderController",
+      "path": "src/controllers/OrderController.ts",
+      "type": "class",
+      "line": 6,
+      "inDegree": 0,
+      "outDegree": 1,
+      "centralityScore": 1,
+      "pageRank": 0,
+      "cluster": "src/controllers"
+    },
+    {
+      "id": "file:src/edge/aliasUser.ts",
+      "label": "aliasUser.ts",
+      "path": "src/edge/aliasUser.ts",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 48,
+      "inDegree": 0,
+      "outDegree": 2,
+      "centralityScore": 2,
+      "pageRank": 0.030558,
+      "cluster": "src/edge"
+    },
+    {
+      "id": "symbol:src/edge/aliasUser.ts#describe",
+      "label": "describe",
+      "path": "src/edge/aliasUser.ts",
+      "type": "function",
+      "line": 4,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/edge"
+    },
+    {
+      "id": "file:src/edge/declarations.ts",
+      "label": "declarations.ts",
+      "path": "src/edge/declarations.ts",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 248,
+      "inDegree": 0,
+      "outDegree": 1,
+      "centralityScore": 1,
+      "pageRank": 0.030558,
+      "cluster": "src/edge"
+    },
+    {
+      "id": "symbol:src/edge/declarations.ts#Dec",
+      "label": "Dec",
+      "path": "src/edge/declarations.ts",
+      "type": "function",
+      "line": 4,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/edge"
+    },
+    {
+      "id": "symbol:src/edge/declarations.ts#Repo",
+      "label": "Repo",
+      "path": "src/edge/declarations.ts",
+      "type": "interface",
+      "line": 8,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0,
+      "cluster": "src/edge"
+    },
+    {
+      "id": "symbol:src/edge/declarations.ts#Store",
+      "label": "Store",
+      "path": "src/edge/declarations.ts",
+      "type": "class",
+      "line": 13,
+      "inDegree": 0,
+      "outDegree": 1,
+      "centralityScore": 1,
+      "pageRank": 0,
+      "cluster": "src/edge"
+    },
+    {
+      "id": "symbol:src/edge/declarations.ts#ids",
+      "label": "ids",
+      "path": "src/edge/declarations.ts",
+      "type": "function",
+      "line": 40,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/edge"
+    },
+    {
+      "id": "file:src/index.ts",
+      "label": "index.ts",
+      "path": "src/index.ts",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 72,
+      "inDegree": 0,
+      "outDegree": 2,
+      "centralityScore": 2,
+      "pageRank": 0.030558,
+      "cluster": "src"
+    },
+    {
+      "id": "symbol:src/index.ts#main",
+      "label": "main",
+      "path": "src/index.ts",
+      "type": "function",
+      "line": 6,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src"
+    },
+    {
+      "id": "file:src/legacy/csvExport.js",
+      "label": "csvExport.js",
+      "path": "src/legacy/csvExport.js",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 74,
+      "inDegree": 0,
+      "outDegree": 1,
+      "centralityScore": 1,
+      "pageRank": 0.030558,
+      "cluster": "src/legacy"
+    },
+    {
+      "id": "symbol:src/legacy/csvExport.js#toCsv",
+      "label": "toCsv",
+      "path": "src/legacy/csvExport.js",
+      "type": "function",
+      "line": 3,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/legacy"
+    },
+    {
+      "id": "file:src/orders/orderEvents.ts",
+      "label": "orderEvents.ts",
+      "path": "src/orders/orderEvents.ts",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 77,
+      "inDegree": 1,
+      "outDegree": 3,
+      "centralityScore": 5,
+      "pageRank": 0.0524,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "symbol:src/orders/orderEvents.ts#OrderEvents",
+      "label": "OrderEvents",
+      "path": "src/orders/orderEvents.ts",
+      "type": "class",
+      "line": 5,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "file:src/orders/orderRepository.ts",
+      "label": "orderRepository.ts",
+      "path": "src/orders/orderRepository.ts",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 129,
+      "inDegree": 3,
+      "outDegree": 1,
+      "centralityScore": 7,
+      "pageRank": 0.077725,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "symbol:src/orders/orderRepository.ts#IOrderRepository",
+      "label": "IOrderRepository",
+      "path": "src/orders/orderRepository.ts",
+      "type": "interface",
+      "line": 3,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "symbol:src/orders/orderRepository.ts#InMemoryOrderRepository",
+      "label": "InMemoryOrderRepository",
+      "path": "src/orders/orderRepository.ts",
+      "type": "class",
+      "line": 8,
+      "inDegree": 0,
+      "outDegree": 1,
+      "centralityScore": 1,
+      "pageRank": 0,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "file:src/orders/orderService.ts",
+      "label": "orderService.ts",
+      "path": "src/orders/orderService.ts",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 259,
+      "inDegree": 5,
+      "outDegree": 4,
+      "centralityScore": 14,
+      "pageRank": 0.102784,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "symbol:src/orders/orderService.ts#IOrderService",
+      "label": "IOrderService",
+      "path": "src/orders/orderService.ts",
+      "type": "interface",
+      "line": 7,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "symbol:src/orders/orderService.ts#OrderService",
+      "label": "OrderService",
+      "path": "src/orders/orderService.ts",
+      "type": "class",
+      "line": 12,
+      "inDegree": 0,
+      "outDegree": 1,
+      "centralityScore": 1,
+      "pageRank": 0,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "file:src/orders/types.ts",
+      "label": "types.ts",
+      "path": "src/orders/types.ts",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 89,
+      "inDegree": 6,
+      "outDegree": 0,
+      "centralityScore": 12,
+      "pageRank": 0.209998,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "symbol:src/orders/types.ts#OrderStatus",
+      "label": "OrderStatus",
+      "path": "src/orders/types.ts",
+      "type": "type",
+      "line": 1,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "symbol:src/orders/types.ts#PaymentMethod",
+      "label": "PaymentMethod",
+      "path": "src/orders/types.ts",
+      "type": "enum",
+      "line": 3,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "symbol:src/orders/types.ts#OrderItem",
+      "label": "OrderItem",
+      "path": "src/orders/types.ts",
+      "type": "interface",
+      "line": 8,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "symbol:src/orders/types.ts#Order",
+      "label": "Order",
+      "path": "src/orders/types.ts",
+      "type": "interface",
+      "line": 13,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "file:src/orders/validation.ts",
+      "label": "validation.ts",
+      "path": "src/orders/validation.ts",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 127,
+      "inDegree": 1,
+      "outDegree": 1,
+      "centralityScore": 3,
+      "pageRank": 0.044382,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "symbol:src/orders/validation.ts#Validation",
+      "label": "Validation",
+      "path": "src/orders/validation.ts",
+      "type": "type",
+      "line": 6,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "symbol:src/orders/validation.ts#validateOrder",
+      "label": "validateOrder",
+      "path": "src/orders/validation.ts",
+      "type": "function",
+      "line": 8,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/orders"
+    },
+    {
+      "id": "file:src/routes/orderRoutes.ts",
+      "label": "orderRoutes.ts",
+      "path": "src/routes/orderRoutes.ts",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 117,
+      "inDegree": 1,
+      "outDegree": 2,
+      "centralityScore": 4,
+      "pageRank": 0.042896,
+      "cluster": "src/routes"
+    },
+    {
+      "id": "symbol:src/routes/orderRoutes.ts#orderRoutes",
+      "label": "orderRoutes",
+      "path": "src/routes/orderRoutes.ts",
+      "type": "function",
+      "line": 5,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/routes"
+    },
+    {
+      "id": "file:src/shared/logger.ts",
+      "label": "logger.ts",
+      "path": "src/shared/logger.ts",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 98,
+      "inDegree": 4,
+      "outDegree": 0,
+      "centralityScore": 8,
+      "pageRank": 0.097353,
+      "cluster": "src/shared"
+    },
+    {
+      "id": "symbol:src/shared/logger.ts#Logger",
+      "label": "Logger",
+      "path": "src/shared/logger.ts",
+      "type": "interface",
+      "line": 1,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/shared"
+    },
+    {
+      "id": "symbol:src/shared/logger.ts#createLogger",
+      "label": "createLogger",
+      "path": "src/shared/logger.ts",
+      "type": "function",
+      "line": 6,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/shared"
+    },
+    {
+      "id": "file:src/shared/result.ts",
+      "label": "result.ts",
+      "path": "src/shared/result.ts",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 87,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0.0524,
+      "cluster": "src/shared"
+    },
+    {
+      "id": "symbol:src/shared/result.ts#Result",
+      "label": "Result",
+      "path": "src/shared/result.ts",
+      "type": "class",
+      "line": 1,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/shared"
+    },
+    {
+      "id": "file:src/ui/Counter.tsx",
+      "label": "Counter.tsx",
+      "path": "src/ui/Counter.tsx",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 119,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0.030558,
+      "cluster": "src/ui"
+    },
+    {
+      "id": "symbol:src/ui/Counter.tsx#Props",
+      "label": "Props",
+      "path": "src/ui/Counter.tsx",
+      "type": "type",
+      "line": 3,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/ui"
+    },
+    {
+      "id": "symbol:src/ui/Counter.tsx#Counter",
+      "label": "Counter",
+      "path": "src/ui/Counter.tsx",
+      "type": "class",
+      "line": 5,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/ui"
+    },
+    {
+      "id": "symbol:src/ui/Counter.tsx#Badge",
+      "label": "Badge",
+      "path": "src/ui/Counter.tsx",
+      "type": "function",
+      "line": 17,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/ui"
+    },
+    {
+      "id": "file:test/orderService.test.ts",
+      "label": "orderService.test.ts",
+      "path": "test/orderService.test.ts",
+      "type": "file",
+      "language": "typescript",
+      "tokenEstimate": 115,
+      "inDegree": 0,
+      "outDegree": 2,
+      "centralityScore": 2,
+      "pageRank": 0.030558,
+      "cluster": "test"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/orders/orderRepository.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/orders/orderService.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "file:src/routes/orderRoutes.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/app.ts",
+      "target": "symbol:src/app.ts#createApp",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/controllers/BaseController.ts",
+      "target": "symbol:src/controllers/BaseController.ts#BaseController",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/controllers/OrderController.ts",
+      "target": "file:src/controllers/BaseController.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/controllers/OrderController.ts",
+      "target": "file:src/orders/orderService.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/controllers/OrderController.ts",
+      "target": "file:src/orders/validation.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/controllers/OrderController.ts",
+      "target": "symbol:src/controllers/OrderController.ts#OrderController",
+      "type": "defines"
+    },
+    {
+      "source": "symbol:src/controllers/OrderController.ts#OrderController",
+      "target": "symbol:src/controllers/BaseController.ts#BaseController",
+      "type": "extends"
+    },
+    {
+      "source": "file:src/edge/aliasUser.ts",
+      "target": "file:src/orders/types.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/edge/aliasUser.ts",
+      "target": "file:src/shared/logger.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/edge/aliasUser.ts",
+      "target": "symbol:src/edge/aliasUser.ts#describe",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/edge/declarations.ts",
+      "target": "file:src/orders/types.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/edge/declarations.ts",
+      "target": "symbol:src/edge/declarations.ts#Dec",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/edge/declarations.ts",
+      "target": "symbol:src/edge/declarations.ts#Repo",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/edge/declarations.ts",
+      "target": "symbol:src/edge/declarations.ts#Store",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/edge/declarations.ts",
+      "target": "symbol:src/edge/declarations.ts#ids",
+      "type": "defines"
+    },
+    {
+      "source": "symbol:src/edge/declarations.ts#Store",
+      "target": "symbol:src/edge/declarations.ts#Repo",
+      "type": "implements"
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "file:src/app.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "file:src/shared/logger.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/index.ts",
+      "target": "symbol:src/index.ts#main",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/legacy/csvExport.js",
+      "target": "file:src/shared/logger.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/legacy/csvExport.js",
+      "target": "symbol:src/legacy/csvExport.js#toCsv",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/orders/orderEvents.ts",
+      "target": "file:src/orders/orderService.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/orders/orderEvents.ts",
+      "target": "file:src/orders/types.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/orders/orderEvents.ts",
+      "target": "file:src/shared/logger.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/orders/orderEvents.ts",
+      "target": "symbol:src/orders/orderEvents.ts#OrderEvents",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/orders/orderRepository.ts",
+      "target": "file:src/orders/types.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/orders/orderRepository.ts",
+      "target": "symbol:src/orders/orderRepository.ts#IOrderRepository",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/orders/orderRepository.ts",
+      "target": "symbol:src/orders/orderRepository.ts#InMemoryOrderRepository",
+      "type": "defines"
+    },
+    {
+      "source": "symbol:src/orders/orderRepository.ts#InMemoryOrderRepository",
+      "target": "symbol:src/orders/orderRepository.ts#IOrderRepository",
+      "type": "implements"
+    },
+    {
+      "source": "file:src/orders/orderService.ts",
+      "target": "file:src/orders/orderEvents.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/orders/orderService.ts",
+      "target": "file:src/orders/orderRepository.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/orders/orderService.ts",
+      "target": "file:src/orders/types.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/orders/orderService.ts",
+      "target": "file:src/shared/result.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/orders/orderService.ts",
+      "target": "symbol:src/orders/orderService.ts#IOrderService",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/orders/orderService.ts",
+      "target": "symbol:src/orders/orderService.ts#OrderService",
+      "type": "defines"
+    },
+    {
+      "source": "symbol:src/orders/orderService.ts#OrderService",
+      "target": "symbol:src/orders/orderService.ts#IOrderService",
+      "type": "implements"
+    },
+    {
+      "source": "file:src/orders/types.ts",
+      "target": "symbol:src/orders/types.ts#OrderStatus",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/orders/types.ts",
+      "target": "symbol:src/orders/types.ts#PaymentMethod",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/orders/types.ts",
+      "target": "symbol:src/orders/types.ts#OrderItem",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/orders/types.ts",
+      "target": "symbol:src/orders/types.ts#Order",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/orders/validation.ts",
+      "target": "file:src/orders/types.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/orders/validation.ts",
+      "target": "symbol:src/orders/validation.ts#Validation",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/orders/validation.ts",
+      "target": "symbol:src/orders/validation.ts#validateOrder",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/routes/orderRoutes.ts",
+      "target": "file:src/controllers/OrderController.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/routes/orderRoutes.ts",
+      "target": "file:src/orders/orderService.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/routes/orderRoutes.ts",
+      "target": "symbol:src/routes/orderRoutes.ts#orderRoutes",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/shared/logger.ts",
+      "target": "symbol:src/shared/logger.ts#Logger",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/shared/logger.ts",
+      "target": "symbol:src/shared/logger.ts#createLogger",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/shared/result.ts",
+      "target": "symbol:src/shared/result.ts#Result",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/ui/Counter.tsx",
+      "target": "symbol:src/ui/Counter.tsx#Props",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/ui/Counter.tsx",
+      "target": "symbol:src/ui/Counter.tsx#Counter",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/ui/Counter.tsx",
+      "target": "symbol:src/ui/Counter.tsx#Badge",
+      "type": "defines"
+    },
+    {
+      "source": "file:test/orderService.test.ts",
+      "target": "file:src/orders/orderRepository.ts",
+      "type": "imports"
+    },
+    {
+      "source": "file:test/orderService.test.ts",
+      "target": "file:src/orders/orderService.ts",
+      "type": "imports"
+    }
+  ]
+}

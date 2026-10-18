@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "",
+  "generatedAt": "",
+  "summary": {
+    "totalFiles": 0,
+    "totalSymbols": 0,
+    "totalNodes": 0,
+    "totalEdges": 0,
+    "density": 0,
+    "circularDependencies": [],
+    "clusters": [],
+    "topHubs": []
+  },
+  "nodes": [],
+  "edges": []
+}

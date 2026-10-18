@@ -1,0 +1,58 @@
+📁 project/
+├── 📁 lib/
+│   ├── 📁 app/
+│   │   └── 📄 router.dart
+│   │         class AppRouter { static const String home; static const String settings; static Route<dynamic> onGenerateRoute(RouteSettings route); }
+│   ├── 📁 edge/
+│   │   ├── 📁 parts/
+│   │   │   └── 📄 money.dart
+│   │   │         class Money { final int cents; }
+│   │   ├── 📁 src/
+│   │   │   └── 📄 vector.dart
+│   │   │         class Vector { final double x; final double y; Vector operator +(Vector o); }
+│   │   └── 📄 library.dart
+│   │         typedef Mapper<T> = T Function(Product product);
+│   │         final int retries;
+│   │         const kTimeout;
+│   │         late String sessionId;
+│   │         String get appName;
+│   │         abstract class Repository<T> { Future<T?> find(String id); int get count; }
+│   │         class CachedRepository<T> extends Repository<T> implements Disposable { static const int maxSize; static const int minSize; cart.Cart? lastCart; Future<T?> find(String id); int get count; set limit(int value); bool operator ==(Object other); void dispose(); }
+│   │         abstract interface class Disposable { void dispose(); }
+│   │         mixin class Tracked { int hits; }
+│   │         enum Status { active, inactive; final String code; }
+│   │         Future<void> warmUp(Repository<Product> repo, {int times = 1});
+│   ├── 📁 mixins/
+│   │   └── 📄 loggable.dart
+│   │         mixin Loggable { String get logTag; void log(String message); }
+│   ├── 📁 models/
+│   │   ├── 📄 cart.dart
+│   │   │     sealed class CartEvent {}
+│   │   │     class ItemAdded extends CartEvent { final Product product; }
+│   │   │     class Cart { final List<Product> items; double get total; void add(Product product); }
+│   │   └── 📄 product.dart
+│   │         enum Category { food, clothing, toys }
+│   │         class Product { final String id; final String name; final double price; final Category category; Map<String, dynamic> toJson(); }
+│   ├── 📁 screens/
+│   │   ├── 📄 home_screen.dart
+│   │   │     class HomeScreen extends StatefulWidget { State<HomeScreen> createState(); }
+│   │   └── 📄 settings_screen.dart
+│   │         class SettingsScreen extends StatelessWidget { Widget build(BuildContext context); }
+│   ├── 📁 services/
+│   │   ├── 📄 api_client.dart
+│   │   │     class ApiException implements Exception { final int statusCode; final String message; }
+│   │   │     class ApiClient with Loggable { final String baseUrl; int requestCount; String get host; Future<Map<String, dynamic>> getJson(String path); void close(); }
+│   │   └── 📄 settings_service.dart
+│   │         class SettingsService extends ChangeNotifier { static SettingsService get instance; bool get darkMode; Future<void> load(); Future<void> setDarkMode(bool value); }
+│   ├── 📁 utils/
+│   │   └── 📄 formatters.dart
+│   │         extension StringCasing on String { String get capitalized; }
+│   │         String formatPrice(double value);
+│   │         String initials(String name);
+│   └── 📄 main.dart
+│         void main();
+│         class ShopApp extends StatelessWidget { Widget build(BuildContext context); }
+├── 📁 test/
+│   └── 📄 widget_test.dart
+│         void main();
+└── 📄 pubspec.yaml

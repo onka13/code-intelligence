@@ -1,0 +1,7 @@
+{
+  // Path aliases resolve like the compiler does.
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "@shared/*": ["src/shared/*"] },
+  },
+}

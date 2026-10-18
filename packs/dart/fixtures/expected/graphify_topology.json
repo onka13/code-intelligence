@@ -1,0 +1,924 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "",
+  "generatedAt": "",
+  "summary": {
+    "totalFiles": 14,
+    "totalSymbols": 30,
+    "totalNodes": 44,
+    "totalEdges": 49,
+    "density": 0.0259,
+    "circularDependencies": [],
+    "clusters": [
+      {
+        "name": "lib/edge",
+        "nodeCount": 14
+      },
+      {
+        "name": "lib/models",
+        "nodeCount": 7
+      },
+      {
+        "name": "lib/screens",
+        "nodeCount": 5
+      },
+      {
+        "name": "lib/services",
+        "nodeCount": 5
+      },
+      {
+        "name": "lib/utils",
+        "nodeCount": 4
+      },
+      {
+        "name": "lib",
+        "nodeCount": 3
+      },
+      {
+        "name": "lib/app",
+        "nodeCount": 2
+      },
+      {
+        "name": "lib/mixins",
+        "nodeCount": 2
+      },
+      {
+        "name": "test",
+        "nodeCount": 2
+      }
+    ],
+    "topHubs": [
+      {
+        "id": "file:lib/models/product.dart",
+        "path": "lib/models/product.dart",
+        "inDegree": 3,
+        "outDegree": 0,
+        "centralityScore": 6,
+        "pageRank": 0.118553
+      },
+      {
+        "id": "file:lib/screens/home_screen.dart",
+        "path": "lib/screens/home_screen.dart",
+        "inDegree": 1,
+        "outDegree": 3,
+        "centralityScore": 5,
+        "pageRank": 0.070552
+      },
+      {
+        "id": "file:lib/services/settings_service.dart",
+        "path": "lib/services/settings_service.dart",
+        "inDegree": 2,
+        "outDegree": 0,
+        "centralityScore": 4,
+        "pageRank": 0.122584
+      },
+      {
+        "id": "file:lib/utils/formatters.dart",
+        "path": "lib/utils/formatters.dart",
+        "inDegree": 2,
+        "outDegree": 0,
+        "centralityScore": 4,
+        "pageRank": 0.101279
+      },
+      {
+        "id": "file:lib/app/router.dart",
+        "path": "lib/app/router.dart",
+        "inDegree": 1,
+        "outDegree": 2,
+        "centralityScore": 4,
+        "pageRank": 0.062615
+      },
+      {
+        "id": "file:lib/edge/library.dart",
+        "path": "lib/edge/library.dart",
+        "inDegree": 0,
+        "outDegree": 4,
+        "centralityScore": 4,
+        "pageRank": 0.04394
+      },
+      {
+        "id": "file:lib/screens/settings_screen.dart",
+        "path": "lib/screens/settings_screen.dart",
+        "inDegree": 1,
+        "outDegree": 1,
+        "centralityScore": 3,
+        "pageRank": 0.070552
+      },
+      {
+        "id": "file:lib/services/api_client.dart",
+        "path": "lib/services/api_client.dart",
+        "inDegree": 1,
+        "outDegree": 1,
+        "centralityScore": 3,
+        "pageRank": 0.06393
+      },
+      {
+        "id": "file:lib/models/cart.dart",
+        "path": "lib/models/cart.dart",
+        "inDegree": 1,
+        "outDegree": 1,
+        "centralityScore": 3,
+        "pageRank": 0.053278
+      },
+      {
+        "id": "file:lib/mixins/loggable.dart",
+        "path": "lib/mixins/loggable.dart",
+        "inDegree": 1,
+        "outDegree": 0,
+        "centralityScore": 2,
+        "pageRank": 0.098281
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "file:lib/app/router.dart",
+      "label": "router.dart",
+      "path": "lib/app/router.dart",
+      "type": "file",
+      "language": "dart",
+      "tokenEstimate": 133,
+      "inDegree": 1,
+      "outDegree": 2,
+      "centralityScore": 4,
+      "pageRank": 0.062615,
+      "cluster": "lib/app"
+    },
+    {
+      "id": "symbol:lib/app/router.dart#AppRouter",
+      "label": "AppRouter",
+      "path": "lib/app/router.dart",
+      "type": "class",
+      "line": 6,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/app"
+    },
+    {
+      "id": "file:lib/edge/library.dart",
+      "label": "library.dart",
+      "path": "lib/edge/library.dart",
+      "type": "file",
+      "language": "dart",
+      "tokenEstimate": 375,
+      "inDegree": 0,
+      "outDegree": 4,
+      "centralityScore": 4,
+      "pageRank": 0.04394,
+      "cluster": "lib/edge"
+    },
+    {
+      "id": "symbol:lib/edge/library.dart#Mapper",
+      "label": "Mapper",
+      "path": "lib/edge/library.dart",
+      "type": "type",
+      "line": 11,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/edge"
+    },
+    {
+      "id": "symbol:lib/edge/library.dart#appName",
+      "label": "appName",
+      "path": "lib/edge/library.dart",
+      "type": "function",
+      "line": 18,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/edge"
+    },
+    {
+      "id": "symbol:lib/edge/library.dart#Repository",
+      "label": "Repository",
+      "path": "lib/edge/library.dart",
+      "type": "class",
+      "line": 20,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0,
+      "cluster": "lib/edge"
+    },
+    {
+      "id": "symbol:lib/edge/library.dart#CachedRepository",
+      "label": "CachedRepository",
+      "path": "lib/edge/library.dart",
+      "type": "class",
+      "line": 25,
+      "inDegree": 0,
+      "outDegree": 2,
+      "centralityScore": 2,
+      "pageRank": 0,
+      "cluster": "lib/edge"
+    },
+    {
+      "id": "symbol:lib/edge/library.dart#Disposable",
+      "label": "Disposable",
+      "path": "lib/edge/library.dart",
+      "type": "class",
+      "line": 53,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0,
+      "cluster": "lib/edge"
+    },
+    {
+      "id": "symbol:lib/edge/library.dart#Tracked",
+      "label": "Tracked",
+      "path": "lib/edge/library.dart",
+      "type": "class",
+      "line": 57,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/edge"
+    },
+    {
+      "id": "symbol:lib/edge/library.dart#Status",
+      "label": "Status",
+      "path": "lib/edge/library.dart",
+      "type": "enum",
+      "line": 61,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/edge"
+    },
+    {
+      "id": "symbol:lib/edge/library.dart#",
+      "label": "",
+      "path": "lib/edge/library.dart",
+      "type": "extension",
+      "line": 69,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/edge"
+    },
+    {
+      "id": "symbol:lib/edge/library.dart#warmUp",
+      "label": "warmUp",
+      "path": "lib/edge/library.dart",
+      "type": "function",
+      "line": 73,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/edge"
+    },
+    {
+      "id": "file:lib/edge/parts/money.dart",
+      "label": "money.dart",
+      "path": "lib/edge/parts/money.dart",
+      "type": "file",
+      "language": "dart",
+      "tokenEstimate": 19,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0.053278,
+      "cluster": "lib/edge"
+    },
+    {
+      "id": "symbol:lib/edge/parts/money.dart#Money",
+      "label": "Money",
+      "path": "lib/edge/parts/money.dart",
+      "type": "class",
+      "line": 3,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/edge"
+    },
+    {
+      "id": "file:lib/edge/src/vector.dart",
+      "label": "vector.dart",
+      "path": "lib/edge/src/vector.dart",
+      "type": "file",
+      "language": "dart",
+      "tokenEstimate": 34,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0.053278,
+      "cluster": "lib/edge"
+    },
+    {
+      "id": "symbol:lib/edge/src/vector.dart#Vector",
+      "label": "Vector",
+      "path": "lib/edge/src/vector.dart",
+      "type": "class",
+      "line": 1,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/edge"
+    },
+    {
+      "id": "file:lib/main.dart",
+      "label": "main.dart",
+      "path": "lib/main.dart",
+      "type": "file",
+      "language": "dart",
+      "tokenEstimate": 127,
+      "inDegree": 0,
+      "outDegree": 2,
+      "centralityScore": 2,
+      "pageRank": 0.04394,
+      "cluster": "lib"
+    },
+    {
+      "id": "symbol:lib/main.dart#main",
+      "label": "main",
+      "path": "lib/main.dart",
+      "type": "function",
+      "line": 7,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib"
+    },
+    {
+      "id": "symbol:lib/main.dart#ShopApp",
+      "label": "ShopApp",
+      "path": "lib/main.dart",
+      "type": "class",
+      "line": 11,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib"
+    },
+    {
+      "id": "file:lib/mixins/loggable.dart",
+      "label": "loggable.dart",
+      "path": "lib/mixins/loggable.dart",
+      "type": "file",
+      "language": "dart",
+      "tokenEstimate": 48,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0.098281,
+      "cluster": "lib/mixins"
+    },
+    {
+      "id": "symbol:lib/mixins/loggable.dart#Loggable",
+      "label": "Loggable",
+      "path": "lib/mixins/loggable.dart",
+      "type": "mixin",
+      "line": 3,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0,
+      "cluster": "lib/mixins"
+    },
+    {
+      "id": "file:lib/models/cart.dart",
+      "label": "cart.dart",
+      "path": "lib/models/cart.dart",
+      "type": "file",
+      "language": "dart",
+      "tokenEstimate": 105,
+      "inDegree": 1,
+      "outDegree": 1,
+      "centralityScore": 3,
+      "pageRank": 0.053278,
+      "cluster": "lib/models"
+    },
+    {
+      "id": "symbol:lib/models/cart.dart#CartEvent",
+      "label": "CartEvent",
+      "path": "lib/models/cart.dart",
+      "type": "class",
+      "line": 3,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0,
+      "cluster": "lib/models"
+    },
+    {
+      "id": "symbol:lib/models/cart.dart#ItemAdded",
+      "label": "ItemAdded",
+      "path": "lib/models/cart.dart",
+      "type": "class",
+      "line": 5,
+      "inDegree": 0,
+      "outDegree": 1,
+      "centralityScore": 1,
+      "pageRank": 0,
+      "cluster": "lib/models"
+    },
+    {
+      "id": "symbol:lib/models/cart.dart#Cart",
+      "label": "Cart",
+      "path": "lib/models/cart.dart",
+      "type": "class",
+      "line": 10,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/models"
+    },
+    {
+      "id": "file:lib/models/product.dart",
+      "label": "product.dart",
+      "path": "lib/models/product.dart",
+      "type": "file",
+      "language": "dart",
+      "tokenEstimate": 136,
+      "inDegree": 3,
+      "outDegree": 0,
+      "centralityScore": 6,
+      "pageRank": 0.118553,
+      "cluster": "lib/models"
+    },
+    {
+      "id": "symbol:lib/models/product.dart#Category",
+      "label": "Category",
+      "path": "lib/models/product.dart",
+      "type": "enum",
+      "line": 1,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/models"
+    },
+    {
+      "id": "symbol:lib/models/product.dart#Product",
+      "label": "Product",
+      "path": "lib/models/product.dart",
+      "type": "class",
+      "line": 3,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/models"
+    },
+    {
+      "id": "file:lib/screens/home_screen.dart",
+      "label": "home_screen.dart",
+      "path": "lib/screens/home_screen.dart",
+      "type": "file",
+      "language": "dart",
+      "tokenEstimate": 302,
+      "inDegree": 1,
+      "outDegree": 3,
+      "centralityScore": 5,
+      "pageRank": 0.070552,
+      "cluster": "lib/screens"
+    },
+    {
+      "id": "symbol:lib/screens/home_screen.dart#HomeScreen",
+      "label": "HomeScreen",
+      "path": "lib/screens/home_screen.dart",
+      "type": "class",
+      "line": 7,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/screens"
+    },
+    {
+      "id": "symbol:lib/screens/home_screen.dart#_HomeScreenState",
+      "label": "_HomeScreenState",
+      "path": "lib/screens/home_screen.dart",
+      "type": "class",
+      "line": 14,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/screens"
+    },
+    {
+      "id": "file:lib/screens/settings_screen.dart",
+      "label": "settings_screen.dart",
+      "path": "lib/screens/settings_screen.dart",
+      "type": "file",
+      "language": "dart",
+      "tokenEstimate": 123,
+      "inDegree": 1,
+      "outDegree": 1,
+      "centralityScore": 3,
+      "pageRank": 0.070552,
+      "cluster": "lib/screens"
+    },
+    {
+      "id": "symbol:lib/screens/settings_screen.dart#SettingsScreen",
+      "label": "SettingsScreen",
+      "path": "lib/screens/settings_screen.dart",
+      "type": "class",
+      "line": 6,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/screens"
+    },
+    {
+      "id": "file:lib/services/api_client.dart",
+      "label": "api_client.dart",
+      "path": "lib/services/api_client.dart",
+      "type": "file",
+      "language": "dart",
+      "tokenEstimate": 229,
+      "inDegree": 1,
+      "outDegree": 1,
+      "centralityScore": 3,
+      "pageRank": 0.06393,
+      "cluster": "lib/services"
+    },
+    {
+      "id": "symbol:lib/services/api_client.dart#ApiException",
+      "label": "ApiException",
+      "path": "lib/services/api_client.dart",
+      "type": "class",
+      "line": 7,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/services"
+    },
+    {
+      "id": "symbol:lib/services/api_client.dart#ApiClient",
+      "label": "ApiClient",
+      "path": "lib/services/api_client.dart",
+      "type": "class",
+      "line": 14,
+      "inDegree": 0,
+      "outDegree": 1,
+      "centralityScore": 1,
+      "pageRank": 0,
+      "cluster": "lib/services"
+    },
+    {
+      "id": "file:lib/services/settings_service.dart",
+      "label": "settings_service.dart",
+      "path": "lib/services/settings_service.dart",
+      "type": "file",
+      "language": "dart",
+      "tokenEstimate": 183,
+      "inDegree": 2,
+      "outDegree": 0,
+      "centralityScore": 4,
+      "pageRank": 0.122584,
+      "cluster": "lib/services"
+    },
+    {
+      "id": "symbol:lib/services/settings_service.dart#SettingsService",
+      "label": "SettingsService",
+      "path": "lib/services/settings_service.dart",
+      "type": "class",
+      "line": 4,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/services"
+    },
+    {
+      "id": "file:lib/utils/formatters.dart",
+      "label": "formatters.dart",
+      "path": "lib/utils/formatters.dart",
+      "type": "file",
+      "language": "dart",
+      "tokenEstimate": 78,
+      "inDegree": 2,
+      "outDegree": 0,
+      "centralityScore": 4,
+      "pageRank": 0.101279,
+      "cluster": "lib/utils"
+    },
+    {
+      "id": "symbol:lib/utils/formatters.dart#StringCasing",
+      "label": "StringCasing",
+      "path": "lib/utils/formatters.dart",
+      "type": "extension",
+      "line": 1,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/utils"
+    },
+    {
+      "id": "symbol:lib/utils/formatters.dart#formatPrice",
+      "label": "formatPrice",
+      "path": "lib/utils/formatters.dart",
+      "type": "function",
+      "line": 5,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/utils"
+    },
+    {
+      "id": "symbol:lib/utils/formatters.dart#initials",
+      "label": "initials",
+      "path": "lib/utils/formatters.dart",
+      "type": "function",
+      "line": 9,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "lib/utils"
+    },
+    {
+      "id": "file:test/widget_test.dart",
+      "label": "widget_test.dart",
+      "path": "test/widget_test.dart",
+      "type": "file",
+      "language": "dart",
+      "tokenEstimate": 50,
+      "inDegree": 0,
+      "outDegree": 1,
+      "centralityScore": 1,
+      "pageRank": 0.04394,
+      "cluster": "test"
+    },
+    {
+      "id": "symbol:test/widget_test.dart#main",
+      "label": "main",
+      "path": "test/widget_test.dart",
+      "type": "function",
+      "line": 4,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "test"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:lib/app/router.dart",
+      "target": "file:lib/screens/home_screen.dart",
+      "type": "imports"
+    },
+    {
+      "source": "file:lib/app/router.dart",
+      "target": "file:lib/screens/settings_screen.dart",
+      "type": "imports"
+    },
+    {
+      "source": "file:lib/app/router.dart",
+      "target": "symbol:lib/app/router.dart#AppRouter",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/edge/library.dart",
+      "target": "file:lib/edge/parts/money.dart",
+      "type": "imports"
+    },
+    {
+      "source": "file:lib/edge/library.dart",
+      "target": "file:lib/edge/src/vector.dart",
+      "type": "imports"
+    },
+    {
+      "source": "file:lib/edge/library.dart",
+      "target": "file:lib/models/cart.dart",
+      "type": "imports"
+    },
+    {
+      "source": "file:lib/edge/library.dart",
+      "target": "file:lib/models/product.dart",
+      "type": "imports"
+    },
+    {
+      "source": "file:lib/edge/library.dart",
+      "target": "symbol:lib/edge/library.dart#Mapper",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/edge/library.dart",
+      "target": "symbol:lib/edge/library.dart#appName",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/edge/library.dart",
+      "target": "symbol:lib/edge/library.dart#Repository",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/edge/library.dart",
+      "target": "symbol:lib/edge/library.dart#CachedRepository",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/edge/library.dart",
+      "target": "symbol:lib/edge/library.dart#Disposable",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/edge/library.dart",
+      "target": "symbol:lib/edge/library.dart#Tracked",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/edge/library.dart",
+      "target": "symbol:lib/edge/library.dart#Status",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/edge/library.dart",
+      "target": "symbol:lib/edge/library.dart#",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/edge/library.dart",
+      "target": "symbol:lib/edge/library.dart#warmUp",
+      "type": "defines"
+    },
+    {
+      "source": "symbol:lib/edge/library.dart#CachedRepository",
+      "target": "symbol:lib/edge/library.dart#Repository",
+      "type": "extends"
+    },
+    {
+      "source": "symbol:lib/edge/library.dart#CachedRepository",
+      "target": "symbol:lib/edge/library.dart#Disposable",
+      "type": "implements"
+    },
+    {
+      "source": "file:lib/edge/parts/money.dart",
+      "target": "symbol:lib/edge/parts/money.dart#Money",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/edge/src/vector.dart",
+      "target": "symbol:lib/edge/src/vector.dart#Vector",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/main.dart",
+      "target": "file:lib/app/router.dart",
+      "type": "imports"
+    },
+    {
+      "source": "file:lib/main.dart",
+      "target": "file:lib/services/settings_service.dart",
+      "type": "imports"
+    },
+    {
+      "source": "file:lib/main.dart",
+      "target": "symbol:lib/main.dart#main",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/main.dart",
+      "target": "symbol:lib/main.dart#ShopApp",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/mixins/loggable.dart",
+      "target": "symbol:lib/mixins/loggable.dart#Loggable",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/models/cart.dart",
+      "target": "file:lib/models/product.dart",
+      "type": "imports"
+    },
+    {
+      "source": "file:lib/models/cart.dart",
+      "target": "symbol:lib/models/cart.dart#CartEvent",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/models/cart.dart",
+      "target": "symbol:lib/models/cart.dart#ItemAdded",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/models/cart.dart",
+      "target": "symbol:lib/models/cart.dart#Cart",
+      "type": "defines"
+    },
+    {
+      "source": "symbol:lib/models/cart.dart#ItemAdded",
+      "target": "symbol:lib/models/cart.dart#CartEvent",
+      "type": "extends"
+    },
+    {
+      "source": "file:lib/models/product.dart",
+      "target": "symbol:lib/models/product.dart#Category",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/models/product.dart",
+      "target": "symbol:lib/models/product.dart#Product",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/screens/home_screen.dart",
+      "target": "file:lib/models/product.dart",
+      "type": "imports"
+    },
+    {
+      "source": "file:lib/screens/home_screen.dart",
+      "target": "file:lib/services/api_client.dart",
+      "type": "imports"
+    },
+    {
+      "source": "file:lib/screens/home_screen.dart",
+      "target": "file:lib/utils/formatters.dart",
+      "type": "imports"
+    },
+    {
+      "source": "file:lib/screens/home_screen.dart",
+      "target": "symbol:lib/screens/home_screen.dart#HomeScreen",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/screens/home_screen.dart",
+      "target": "symbol:lib/screens/home_screen.dart#_HomeScreenState",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/screens/settings_screen.dart",
+      "target": "file:lib/services/settings_service.dart",
+      "type": "imports"
+    },
+    {
+      "source": "file:lib/screens/settings_screen.dart",
+      "target": "symbol:lib/screens/settings_screen.dart#SettingsScreen",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/services/api_client.dart",
+      "target": "file:lib/mixins/loggable.dart",
+      "type": "imports"
+    },
+    {
+      "source": "file:lib/services/api_client.dart",
+      "target": "symbol:lib/services/api_client.dart#ApiException",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/services/api_client.dart",
+      "target": "symbol:lib/services/api_client.dart#ApiClient",
+      "type": "defines"
+    },
+    {
+      "source": "symbol:lib/services/api_client.dart#ApiClient",
+      "target": "symbol:lib/mixins/loggable.dart#Loggable",
+      "type": "extends"
+    },
+    {
+      "source": "file:lib/services/settings_service.dart",
+      "target": "symbol:lib/services/settings_service.dart#SettingsService",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/utils/formatters.dart",
+      "target": "symbol:lib/utils/formatters.dart#StringCasing",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/utils/formatters.dart",
+      "target": "symbol:lib/utils/formatters.dart#formatPrice",
+      "type": "defines"
+    },
+    {
+      "source": "file:lib/utils/formatters.dart",
+      "target": "symbol:lib/utils/formatters.dart#initials",
+      "type": "defines"
+    },
+    {
+      "source": "file:test/widget_test.dart",
+      "target": "file:lib/utils/formatters.dart",
+      "type": "imports"
+    },
+    {
+      "source": "file:test/widget_test.dart",
+      "target": "symbol:test/widget_test.dart#main",
+      "type": "defines"
+    }
+  ]
+}

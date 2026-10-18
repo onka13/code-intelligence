@@ -1,0 +1,29 @@
+{
+  "name": "code-intelligence",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A symbol map, dependency graph and token-budgeted context for any codebase, with one Tree-sitter language pack per language.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": { "codeintel": "dist/src/cli.js" },
+  "exports": { ".": "./dist/src/index.js" },
+  "files": ["dist/src", "dist/packs", "packs/*/*.scm", "schema"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test \"dist/test/*.test.js\"",
+    "golden:update": "npm run build && node dist/test/updateGolden.js",
+    "codeintel": "node dist/src/cli.js"
+  },
+  "dependencies": {
+    "ignore": "7.0.12",
+    "tree-sitter-wasms": "0.1.13",
+    "web-tree-sitter": "0.25.10",
+    "yaml": "2.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.2",
+    "ajv": "8.17.1",
+    "typescript": "5.8.3"
+  }
+}

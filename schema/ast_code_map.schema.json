@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ast_code_map.json",
+  "description": "Every scanned file with its declarations, imports, skeleton and token estimates, plus the dependency audit.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "generatorVersion", "generatedAt", "rootName", "summary", "files", "audit"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "generatorVersion": { "type": "string" },
+    "generatedAt": { "type": "string" },
+    "rootName": { "type": "string" },
+    "summary": { "$ref": "#/$defs/summary" },
+    "files": { "type": "array", "items": { "$ref": "#/$defs/file" } },
+    "audit": { "type": "array", "items": { "$ref": "#/$defs/auditEntry" } }
+  },
+  "$defs": {
+    "count": { "type": "integer", "minimum": 0 },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["files", "parsed", "reused", "failed", "unsupported", "languages", "symbols", "rawTokens", "skeletonTokens", "durationMs"],
+      "properties": {
+        "files": { "$ref": "#/$defs/count" },
+        "parsed": { "$ref": "#/$defs/count" },
+        "reused": { "$ref": "#/$defs/count" },
+        "failed": {
+          "type": "array",
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["path", "error"],
+            "properties": { "path": { "type": "string" }, "error": { "type": "string" } }
+          }
+        },
+        "unsupported": { "type": "object", "additionalProperties": { "$ref": "#/$defs/count" } },
+        "languages": { "type": "object", "additionalProperties": { "$ref": "#/$defs/count" } },
+        "symbols": { "$ref": "#/$defs/count" },
+        "rawTokens": { "$ref": "#/$defs/count" },
+        "skeletonTokens": { "$ref": "#/$defs/count" },
+        "durationMs": { "type": "number", "minimum": 0 }
+      }
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "language", "sizeBytes", "mtimeMs", "symbols", "imports", "skeleton", "rawTokens", "skeletonTokens"],
+      "properties": {
+        "path": { "type": "string", "description": "Relative to the scanned folder, with forward slashes." },
+        "language": { "type": "string", "description": "The pack's id, or other when no pack claims the file." },
+        "sizeBytes": { "$ref": "#/$defs/count" },
+        "mtimeMs": { "type": "number" },
+        "symbols": { "type": "array", "items": { "$ref": "#/$defs/symbol" } },
+        "imports": { "type": "array", "items": { "$ref": "#/$defs/import" } },
+        "skeleton": { "type": "string" },
+        "rawTokens": { "$ref": "#/$defs/count" },
+        "skeletonTokens": { "$ref": "#/$defs/count" },
+        "error": { "type": "string", "description": "The parse error; the file then has no declarations." },
+        "skipped": { "type": "string", "description": "Why the file was not parsed." },
+        "declares": { "type": "array", "items": { "$ref": "#/$defs/declared" } }
+      }
+    },
+    "symbol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "name", "signature", "lineStart", "lineEnd", "exported", "visibility"],
+      "properties": {
+        "kind": { "enum": ["class", "interface", "enum", "mixin", "extension", "type", "function", "variable", "method", "constructor", "field", "getter", "setter", "enumMember"] },
+        "name": { "type": "string" },
+        "signature": { "type": "string" },
+        "type": { "type": "string" },
+        "lineStart": { "type": "integer", "minimum": 1 },
+        "lineEnd": { "type": "integer", "minimum": 1 },
+        "exported": { "type": "boolean" },
+        "visibility": { "enum": ["public", "protected", "private"] },
+        "static": { "const": true },
+        "lifecycle": { "const": true },
+        "extends": { "type": "array", "items": { "type": "string" } },
+        "implements": { "type": "array", "items": { "type": "string" } },
+        "mixins": { "type": "array", "items": { "type": "string" } },
+        "members": { "type": "array", "items": { "$ref": "#/$defs/symbol" } }
+      }
+    },
+    "import": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["specifier", "line", "kind"],
+      "properties": {
+        "specifier": { "type": "string" },
+        "line": { "type": "integer", "minimum": 1 },
+        "typeOnly": { "const": true },
+        "kind": { "enum": ["file", "package", "builtin", "unresolved"] },
+        "target": { "type": "string" },
+        "package": { "type": "string" }
+      }
+    },
+    "declared": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "dev"],
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "string" },
+        "dev": { "type": "boolean" },
+        "sdk": { "const": true }
+      }
+    },
+    "auditEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "manifest", "version", "dev", "dormant", "importCount", "files"],
+      "properties": {
+        "name": { "type": "string" },
+        "manifest": { "type": "string" },
+        "version": { "type": "string" },
+        "dev": { "type": "boolean" },
+        "dormant": { "type": "boolean" },
+        "importCount": { "$ref": "#/$defs/count" },
+        "files": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}
