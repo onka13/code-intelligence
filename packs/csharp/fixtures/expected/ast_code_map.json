@@ -1,0 +1,463 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "",
+  "generatedAt": "",
+  "rootName": "project",
+  "summary": {
+    "files": 6,
+    "parsed": 0,
+    "reused": 0,
+    "failed": [],
+    "unsupported": {},
+    "languages": {
+      "msbuild": 3,
+      "csharp": 3
+    },
+    "symbols": 27,
+    "rawTokens": 776,
+    "skeletonTokens": 325,
+    "durationMs": 0
+  },
+  "files": [
+    {
+      "path": "Shop.sln",
+      "language": "msbuild",
+      "sizeBytes": 507,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [
+        {
+          "specifier": "src\\Api\\Api.csproj",
+          "line": 3,
+          "kind": "file",
+          "target": "src/Api/Api.csproj"
+        },
+        {
+          "specifier": "src\\Domain\\Domain.csproj",
+          "line": 5,
+          "kind": "file",
+          "target": "src/Domain/Domain.csproj"
+        }
+      ],
+      "skeleton": "// Solution\nProject src\\Api\\Api.csproj\nProject src\\Domain\\Domain.csproj",
+      "rawTokens": 134,
+      "skeletonTokens": 19
+    },
+    {
+      "path": "src/Api/Api.csproj",
+      "language": "msbuild",
+      "sizeBytes": 309,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [
+        {
+          "specifier": "..\\Domain\\Domain.csproj",
+          "line": 9,
+          "kind": "file",
+          "target": "src/Domain/Domain.csproj"
+        }
+      ],
+      "skeleton": "// .NET project (Microsoft.NET.Sdk.Web)\nPackageReference Serilog 4.2.0\nProjectReference ..\\Domain\\Domain.csproj",
+      "rawTokens": 82,
+      "skeletonTokens": 30,
+      "declares": [
+        {
+          "name": "Serilog",
+          "version": "4.2.0",
+          "dev": false
+        }
+      ]
+    },
+    {
+      "path": "src/Api/Services/OrderService.cs",
+      "language": "csharp",
+      "sizeBytes": 810,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "class",
+          "name": "OrderService",
+          "signature": "public sealed class OrderService(IOrderRepository repository, ILogger logger) : IOrderService",
+          "visibility": "public",
+          "exported": true,
+          "implements": [
+            "IOrderService"
+          ],
+          "lineStart": 9,
+          "lineEnd": 22,
+          "members": [
+            {
+              "kind": "method",
+              "name": "DescribeAsync",
+              "signature": "public async Task<string> DescribeAsync(string id, CancellationToken cancellationToken)",
+              "type": "Task<string>",
+              "visibility": "public",
+              "exported": true,
+              "lineStart": 11,
+              "lineEnd": 16
+            },
+            {
+              "kind": "class",
+              "name": "Cache",
+              "signature": "private sealed class Cache",
+              "visibility": "private",
+              "exported": false,
+              "lineStart": 18,
+              "lineEnd": 21,
+              "members": [
+                {
+                  "kind": "field",
+                  "name": "Size",
+                  "signature": "public int Size { get; set; }",
+                  "type": "int",
+                  "visibility": "public",
+                  "exported": true,
+                  "lineStart": 20,
+                  "lineEnd": 20
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "kind": "interface",
+          "name": "IOrderService",
+          "signature": "public interface IOrderService",
+          "visibility": "public",
+          "exported": true,
+          "lineStart": 24,
+          "lineEnd": 27,
+          "members": [
+            {
+              "kind": "method",
+              "name": "DescribeAsync",
+              "signature": "Task<string> DescribeAsync(string id, CancellationToken cancellationToken)",
+              "type": "Task<string>",
+              "visibility": "public",
+              "exported": true,
+              "lineStart": 26,
+              "lineEnd": 26
+            }
+          ]
+        }
+      ],
+      "imports": [
+        {
+          "specifier": "System.Text",
+          "line": 1,
+          "kind": "package",
+          "package": "System.Text"
+        },
+        {
+          "specifier": "Serilog",
+          "line": 2,
+          "kind": "package",
+          "package": "Serilog"
+        },
+        {
+          "specifier": "Shop.Domain",
+          "line": 3,
+          "kind": "file",
+          "target": "src/Domain/Order.cs"
+        },
+        {
+          "specifier": "Shop.Domain",
+          "line": 3,
+          "kind": "file",
+          "target": "src/Domain/OrderStatus.cs"
+        },
+        {
+          "specifier": "System.Math",
+          "line": 4,
+          "kind": "package",
+          "package": "System.Math"
+        },
+        {
+          "specifier": "System.TimeProvider",
+          "line": 5,
+          "kind": "package",
+          "package": "System.TimeProvider"
+        }
+      ],
+      "skeleton": "public sealed class OrderService(IOrderRepository repository, ILogger logger) : IOrderService {\n  public async Task<string> DescribeAsync(string id, CancellationToken cancellationToken);\n}\n\npublic interface IOrderService {\n  Task<string> DescribeAsync(string id, CancellationToken cancellationToken);\n}",
+      "rawTokens": 214,
+      "skeletonTokens": 80
+    },
+    {
+      "path": "src/Domain/Domain.csproj",
+      "language": "msbuild",
+      "sizeBytes": 129,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [],
+      "skeleton": "// .NET project (Microsoft.NET.Sdk)",
+      "rawTokens": 34,
+      "skeletonTokens": 10
+    },
+    {
+      "path": "src/Domain/Order.cs",
+      "language": "csharp",
+      "sizeBytes": 1029,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "class",
+          "name": "Order",
+          "signature": "public sealed class Order : Entity, IComparable<Order>",
+          "visibility": "public",
+          "exported": true,
+          "extends": [
+            "Entity"
+          ],
+          "implements": [
+            "IComparable<Order>"
+          ],
+          "lineStart": 4,
+          "lineEnd": 32,
+          "members": [
+            {
+              "kind": "field",
+              "name": "_lines",
+              "signature": "private readonly List<decimal> _lines",
+              "type": "List<decimal>",
+              "visibility": "private",
+              "exported": false,
+              "lineStart": 7,
+              "lineEnd": 7
+            },
+            {
+              "kind": "field",
+              "name": "MaxLines",
+              "signature": "internal const int MaxLines",
+              "type": "int",
+              "visibility": "public",
+              "exported": true,
+              "lineStart": 8,
+              "lineEnd": 8
+            },
+            {
+              "kind": "constructor",
+              "name": "Order",
+              "signature": "public Order(string id)",
+              "visibility": "public",
+              "exported": true,
+              "lineStart": 10,
+              "lineEnd": 13
+            },
+            {
+              "kind": "field",
+              "name": "Id",
+              "signature": "public string Id { get; }",
+              "type": "string",
+              "visibility": "public",
+              "exported": true,
+              "lineStart": 15,
+              "lineEnd": 15
+            },
+            {
+              "kind": "field",
+              "name": "Status",
+              "signature": "public OrderStatus Status { get; private set; }",
+              "type": "OrderStatus",
+              "visibility": "public",
+              "exported": true,
+              "lineStart": 17,
+              "lineEnd": 17
+            },
+            {
+              "kind": "field",
+              "name": "Total",
+              "signature": "public decimal Total { get; }",
+              "type": "decimal",
+              "visibility": "public",
+              "exported": true,
+              "lineStart": 19,
+              "lineEnd": 19
+            },
+            {
+              "kind": "method",
+              "name": "AddLine",
+              "signature": "public void AddLine(decimal amount)",
+              "type": "void",
+              "visibility": "public",
+              "exported": true,
+              "lineStart": 21,
+              "lineEnd": 25
+            },
+            {
+              "kind": "method",
+              "name": "CompareTo",
+              "signature": "public int CompareTo(Order? other)",
+              "type": "int",
+              "visibility": "public",
+              "exported": true,
+              "lineStart": 27,
+              "lineEnd": 27
+            },
+            {
+              "kind": "method",
+              "name": "OnPlaced",
+              "signature": "protected virtual void OnPlaced()",
+              "type": "void",
+              "visibility": "protected",
+              "exported": true,
+              "lineStart": 29,
+              "lineEnd": 29
+            },
+            {
+              "kind": "method",
+              "name": "IsValid",
+              "signature": "private static bool IsValid(decimal amount)",
+              "type": "bool",
+              "visibility": "private",
+              "exported": false,
+              "static": true,
+              "lineStart": 31,
+              "lineEnd": 31
+            }
+          ]
+        },
+        {
+          "kind": "class",
+          "name": "Entity",
+          "signature": "public abstract class Entity",
+          "visibility": "public",
+          "exported": true,
+          "lineStart": 34,
+          "lineEnd": 34,
+          "members": []
+        },
+        {
+          "kind": "class",
+          "name": "Money",
+          "signature": "public record Money(decimal Amount, string Currency)",
+          "visibility": "public",
+          "exported": true,
+          "lineStart": 36,
+          "lineEnd": 36,
+          "members": [
+            {
+              "kind": "field",
+              "name": "Amount",
+              "signature": "decimal Amount",
+              "type": "decimal",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 36,
+              "lineEnd": 36
+            },
+            {
+              "kind": "field",
+              "name": "Currency",
+              "signature": "string Currency",
+              "type": "string",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 36,
+              "lineEnd": 36
+            }
+          ]
+        },
+        {
+          "kind": "interface",
+          "name": "IOrderRepository",
+          "signature": "public interface IOrderRepository",
+          "visibility": "public",
+          "exported": true,
+          "lineStart": 38,
+          "lineEnd": 43,
+          "members": [
+            {
+              "kind": "method",
+              "name": "FindAsync",
+              "signature": "Task<Order?> FindAsync(string id, CancellationToken cancellationToken)",
+              "type": "Task<Order?>",
+              "visibility": "public",
+              "exported": true,
+              "lineStart": 40,
+              "lineEnd": 40
+            },
+            {
+              "kind": "field",
+              "name": "Count",
+              "signature": "int Count { get; }",
+              "type": "int",
+              "visibility": "public",
+              "exported": true,
+              "lineStart": 42,
+              "lineEnd": 42
+            }
+          ]
+        }
+      ],
+      "imports": [],
+      "skeleton": "public sealed class Order : Entity, IComparable<Order> {\n  internal const int MaxLines;\n  public Order(string id);\n  public string Id { get; };\n  public OrderStatus Status { get; private set; };\n  public decimal Total { get; };\n  public void AddLine(decimal amount);\n  public int CompareTo(Order? other);\n  protected virtual void OnPlaced();\n}\n\npublic abstract class Entity {}\n\npublic record Money(decimal Amount, string Currency) {\n  decimal Amount;\n  string Currency;\n}\n\npublic interface IOrderRepository {\n  Task<Order?> FindAsync(string id, CancellationToken cancellationToken);\n  int Count { get; };\n}",
+      "rawTokens": 271,
+      "skeletonTokens": 160
+    },
+    {
+      "path": "src/Domain/OrderStatus.cs",
+      "language": "csharp",
+      "sizeBytes": 153,
+      "mtimeMs": 0,
+      "symbols": [
+        {
+          "kind": "enum",
+          "name": "OrderStatus",
+          "signature": "public enum OrderStatus",
+          "visibility": "public",
+          "exported": true,
+          "lineStart": 3,
+          "lineEnd": 7,
+          "members": [
+            {
+              "kind": "enumMember",
+              "name": "Draft",
+              "signature": "Draft",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 5,
+              "lineEnd": 5
+            },
+            {
+              "kind": "enumMember",
+              "name": "Placed",
+              "signature": "Placed = 2",
+              "exported": true,
+              "visibility": "public",
+              "lineStart": 6,
+              "lineEnd": 6
+            }
+          ]
+        },
+        {
+          "kind": "type",
+          "name": "OrderPlaced",
+          "signature": "public delegate void OrderPlaced(Order order)",
+          "type": "void",
+          "visibility": "public",
+          "exported": true,
+          "lineStart": 9,
+          "lineEnd": 9
+        }
+      ],
+      "imports": [],
+      "skeleton": "public enum OrderStatus {\n  Draft;\n  Placed = 2;\n}\n\npublic delegate void OrderPlaced(Order order);",
+      "rawTokens": 41,
+      "skeletonTokens": 26
+    }
+  ],
+  "audit": [
+    {
+      "name": "Serilog",
+      "manifest": "src/Api/Api.csproj",
+      "version": "4.2.0",
+      "dev": false,
+      "dormant": false,
+      "importCount": 1,
+      "files": [
+        "src/Api/Services/OrderService.cs"
+      ]
+    }
+  ]
+}

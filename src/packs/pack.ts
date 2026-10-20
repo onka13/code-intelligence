@@ -10,9 +10,11 @@ export interface LanguagePack {
   id: string;
   /** Whether the pack reads this file (a path relative to the scan root). */
   claims(path: string): boolean;
+  /** A data format (JSON, YAML) rather than code: code health leaves its files out. */
+  data?: boolean;
   parse(input: ParseInput): Promise<ParsedFile>;
-  /** Where an import points; packs without imports leave it out. */
-  resolve?(input: ResolveInput): Resolution;
+  /** Where an import points; packs without imports leave it out. A C# `using` can point at several files (one namespace, many files). */
+  resolve?(input: ResolveInput): Resolution | Resolution[];
 }
 
 export interface ParseInput {
@@ -38,6 +40,8 @@ export interface ParsedFile {
 export interface ProjectView {
   has(path: string): boolean;
   read(path: string): string | undefined;
+  /** Every path of the scan, sorted. */
+  paths(): readonly string[];
 }
 
 export interface ResolveInput {

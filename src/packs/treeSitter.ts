@@ -11,7 +11,15 @@ const parsers = new Map<string, Promise<{ parser: Parser; language: Language }>>
 /** Compiled queries per grammar: node ids differ between grammars, so a query never crosses languages. */
 const queries = new WeakMap<Language, Map<string, Query>>();
 
+/**
+ * Grammars that `tree-sitter-wasms` ships too old for current code come from the grammar's own package, pinned in
+ * package.json (C#: tree-sitter-wasms has 0.20, which predates C# 12).
+ */
+const OWN_PACKAGE: Record<string, string> = { c_sharp: 'tree-sitter-c-sharp' };
+
 function grammarFile(grammar: string): string {
+  const own = OWN_PACKAGE[grammar];
+  if (own) return path.join(path.dirname(require.resolve(`${own}/package.json`)), `tree-sitter-${grammar}.wasm`);
   return path.join(path.dirname(require.resolve('tree-sitter-wasms/package.json')), 'out', `tree-sitter-${grammar}.wasm`);
 }
 

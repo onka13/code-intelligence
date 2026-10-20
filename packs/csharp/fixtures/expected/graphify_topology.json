@@ -1,0 +1,330 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "",
+  "generatedAt": "",
+  "summary": {
+    "totalFiles": 6,
+    "totalSymbols": 8,
+    "totalNodes": 14,
+    "totalEdges": 15,
+    "density": 0.08242,
+    "circularDependencies": [],
+    "clusters": [
+      {
+        "name": "src/Domain",
+        "nodeCount": 9
+      },
+      {
+        "name": "src/Api",
+        "nodeCount": 4
+      },
+      {
+        "name": ".",
+        "nodeCount": 1
+      }
+    ],
+    "topHubs": [
+      {
+        "id": "file:src/Domain/Domain.csproj",
+        "path": "src/Domain/Domain.csproj",
+        "inDegree": 2,
+        "outDegree": 0,
+        "centralityScore": 4,
+        "pageRank": 0.295834
+      },
+      {
+        "id": "file:src/Api/Api.csproj",
+        "path": "src/Api/Api.csproj",
+        "inDegree": 1,
+        "outDegree": 1,
+        "centralityScore": 3,
+        "pageRank": 0.15991
+      },
+      {
+        "id": "file:src/Domain/Order.cs",
+        "path": "src/Domain/Order.cs",
+        "inDegree": 1,
+        "outDegree": 0,
+        "centralityScore": 2,
+        "pageRank": 0.15991
+      },
+      {
+        "id": "file:src/Domain/OrderStatus.cs",
+        "path": "src/Domain/OrderStatus.cs",
+        "inDegree": 1,
+        "outDegree": 0,
+        "centralityScore": 2,
+        "pageRank": 0.15991
+      },
+      {
+        "id": "file:Shop.sln",
+        "path": "Shop.sln",
+        "inDegree": 0,
+        "outDegree": 2,
+        "centralityScore": 2,
+        "pageRank": 0.112218
+      },
+      {
+        "id": "file:src/Api/Services/OrderService.cs",
+        "path": "src/Api/Services/OrderService.cs",
+        "inDegree": 0,
+        "outDegree": 2,
+        "centralityScore": 2,
+        "pageRank": 0.112218
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "file:Shop.sln",
+      "label": "Shop.sln",
+      "path": "Shop.sln",
+      "type": "file",
+      "language": "msbuild",
+      "tokenEstimate": 134,
+      "inDegree": 0,
+      "outDegree": 2,
+      "centralityScore": 2,
+      "pageRank": 0.112218,
+      "cluster": "."
+    },
+    {
+      "id": "file:src/Api/Api.csproj",
+      "label": "Api.csproj",
+      "path": "src/Api/Api.csproj",
+      "type": "file",
+      "language": "msbuild",
+      "tokenEstimate": 82,
+      "inDegree": 1,
+      "outDegree": 1,
+      "centralityScore": 3,
+      "pageRank": 0.15991,
+      "cluster": "src/Api"
+    },
+    {
+      "id": "file:src/Api/Services/OrderService.cs",
+      "label": "OrderService.cs",
+      "path": "src/Api/Services/OrderService.cs",
+      "type": "file",
+      "language": "csharp",
+      "tokenEstimate": 214,
+      "inDegree": 0,
+      "outDegree": 2,
+      "centralityScore": 2,
+      "pageRank": 0.112218,
+      "cluster": "src/Api"
+    },
+    {
+      "id": "symbol:src/Api/Services/OrderService.cs#OrderService",
+      "label": "OrderService",
+      "path": "src/Api/Services/OrderService.cs",
+      "type": "class",
+      "line": 9,
+      "inDegree": 0,
+      "outDegree": 1,
+      "centralityScore": 1,
+      "pageRank": 0,
+      "cluster": "src/Api"
+    },
+    {
+      "id": "symbol:src/Api/Services/OrderService.cs#IOrderService",
+      "label": "IOrderService",
+      "path": "src/Api/Services/OrderService.cs",
+      "type": "interface",
+      "line": 24,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0,
+      "cluster": "src/Api"
+    },
+    {
+      "id": "file:src/Domain/Domain.csproj",
+      "label": "Domain.csproj",
+      "path": "src/Domain/Domain.csproj",
+      "type": "file",
+      "language": "msbuild",
+      "tokenEstimate": 34,
+      "inDegree": 2,
+      "outDegree": 0,
+      "centralityScore": 4,
+      "pageRank": 0.295834,
+      "cluster": "src/Domain"
+    },
+    {
+      "id": "file:src/Domain/Order.cs",
+      "label": "Order.cs",
+      "path": "src/Domain/Order.cs",
+      "type": "file",
+      "language": "csharp",
+      "tokenEstimate": 271,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0.15991,
+      "cluster": "src/Domain"
+    },
+    {
+      "id": "symbol:src/Domain/Order.cs#Order",
+      "label": "Order",
+      "path": "src/Domain/Order.cs",
+      "type": "class",
+      "line": 4,
+      "inDegree": 0,
+      "outDegree": 1,
+      "centralityScore": 1,
+      "pageRank": 0,
+      "cluster": "src/Domain"
+    },
+    {
+      "id": "symbol:src/Domain/Order.cs#Entity",
+      "label": "Entity",
+      "path": "src/Domain/Order.cs",
+      "type": "class",
+      "line": 34,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0,
+      "cluster": "src/Domain"
+    },
+    {
+      "id": "symbol:src/Domain/Order.cs#Money",
+      "label": "Money",
+      "path": "src/Domain/Order.cs",
+      "type": "class",
+      "line": 36,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/Domain"
+    },
+    {
+      "id": "symbol:src/Domain/Order.cs#IOrderRepository",
+      "label": "IOrderRepository",
+      "path": "src/Domain/Order.cs",
+      "type": "interface",
+      "line": 38,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/Domain"
+    },
+    {
+      "id": "file:src/Domain/OrderStatus.cs",
+      "label": "OrderStatus.cs",
+      "path": "src/Domain/OrderStatus.cs",
+      "type": "file",
+      "language": "csharp",
+      "tokenEstimate": 41,
+      "inDegree": 1,
+      "outDegree": 0,
+      "centralityScore": 2,
+      "pageRank": 0.15991,
+      "cluster": "src/Domain"
+    },
+    {
+      "id": "symbol:src/Domain/OrderStatus.cs#OrderStatus",
+      "label": "OrderStatus",
+      "path": "src/Domain/OrderStatus.cs",
+      "type": "enum",
+      "line": 3,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/Domain"
+    },
+    {
+      "id": "symbol:src/Domain/OrderStatus.cs#OrderPlaced",
+      "label": "OrderPlaced",
+      "path": "src/Domain/OrderStatus.cs",
+      "type": "type",
+      "line": 9,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0,
+      "cluster": "src/Domain"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:Shop.sln",
+      "target": "file:src/Api/Api.csproj",
+      "type": "imports"
+    },
+    {
+      "source": "file:Shop.sln",
+      "target": "file:src/Domain/Domain.csproj",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/Api/Api.csproj",
+      "target": "file:src/Domain/Domain.csproj",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/Api/Services/OrderService.cs",
+      "target": "file:src/Domain/Order.cs",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/Api/Services/OrderService.cs",
+      "target": "file:src/Domain/OrderStatus.cs",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/Api/Services/OrderService.cs",
+      "target": "symbol:src/Api/Services/OrderService.cs#OrderService",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/Api/Services/OrderService.cs",
+      "target": "symbol:src/Api/Services/OrderService.cs#IOrderService",
+      "type": "defines"
+    },
+    {
+      "source": "symbol:src/Api/Services/OrderService.cs#OrderService",
+      "target": "symbol:src/Api/Services/OrderService.cs#IOrderService",
+      "type": "implements"
+    },
+    {
+      "source": "file:src/Domain/Order.cs",
+      "target": "symbol:src/Domain/Order.cs#Order",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/Domain/Order.cs",
+      "target": "symbol:src/Domain/Order.cs#Entity",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/Domain/Order.cs",
+      "target": "symbol:src/Domain/Order.cs#Money",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/Domain/Order.cs",
+      "target": "symbol:src/Domain/Order.cs#IOrderRepository",
+      "type": "defines"
+    },
+    {
+      "source": "symbol:src/Domain/Order.cs#Order",
+      "target": "symbol:src/Domain/Order.cs#Entity",
+      "type": "extends"
+    },
+    {
+      "source": "file:src/Domain/OrderStatus.cs",
+      "target": "symbol:src/Domain/OrderStatus.cs#OrderStatus",
+      "type": "defines"
+    },
+    {
+      "source": "file:src/Domain/OrderStatus.cs",
+      "target": "symbol:src/Domain/OrderStatus.cs#OrderPlaced",
+      "type": "defines"
+    }
+  ]
+}

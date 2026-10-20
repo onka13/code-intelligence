@@ -16,6 +16,7 @@ function packageDependencies(json: any): DeclaredDependency[] {
 
 export const jsonPack: LanguagePack = {
   id: 'json',
+  data: true,
   claims: (file) => file.endsWith('.json'),
   parse: async ({ path: file, content }) => {
     let parsed: unknown;

@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "",
+  "generatedAt": "",
+  "rootName": "project",
+  "summary": {
+    "files": 5,
+    "parsed": 0,
+    "reused": 0,
+    "failed": [
+      {
+        "path": "src/Broken/Broken.csproj",
+        "error": "Invalid XML at line 4: </ItemGroup> closes <PackageReference>"
+      }
+    ],
+    "unsupported": {},
+    "languages": {
+      "msbuild": 5
+    },
+    "symbols": 0,
+    "rawTokens": 305,
+    "skeletonTokens": 107,
+    "durationMs": 0
+  },
+  "files": [
+    {
+      "path": "App.slnx",
+      "language": "msbuild",
+      "sizeBytes": 143,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [
+        {
+          "specifier": "src/App/App.csproj",
+          "line": 3,
+          "kind": "file",
+          "target": "src/App/App.csproj"
+        },
+        {
+          "specifier": "src/Lib/Lib.csproj",
+          "line": 4,
+          "kind": "file",
+          "target": "src/Lib/Lib.csproj"
+        }
+      ],
+      "skeleton": "// Solution\nProject src/App/App.csproj\nProject src/Lib/Lib.csproj",
+      "rawTokens": 38,
+      "skeletonTokens": 18
+    },
+    {
+      "path": "Directory.Build.props",
+      "language": "msbuild",
+      "sizeBytes": 229,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [],
+      "skeleton": "// .NET project\nPackageReference Microsoft.CodeAnalysis.NetAnalyzers 10.0.100",
+      "rawTokens": 61,
+      "skeletonTokens": 21,
+      "declares": [
+        {
+          "name": "Microsoft.CodeAnalysis.NetAnalyzers",
+          "version": "10.0.100",
+          "dev": true
+        }
+      ]
+    },
+    {
+      "path": "src/App/App.csproj",
+      "language": "msbuild",
+      "sizeBytes": 608,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [
+        {
+          "specifier": "..\\Lib\\Lib.csproj",
+          "line": 10,
+          "kind": "file",
+          "target": "src/Lib/Lib.csproj"
+        },
+        {
+          "specifier": "..\\Missing\\Missing.csproj",
+          "line": 11,
+          "kind": "unresolved"
+        }
+      ],
+      "skeleton": "// .NET project (Microsoft.NET.Sdk)\nPackageReference Polly 8.5.0\nPackageReference StyleCop.Analyzers 1.1.118\nPackageReference Newtonsoft.Json\nProjectReference ..\\Lib\\Lib.csproj\nProjectReference ..\\Missing\\Missing.csproj",
+      "rawTokens": 160,
+      "skeletonTokens": 58,
+      "declares": [
+        {
+          "name": "Polly",
+          "version": "8.5.0",
+          "dev": false
+        },
+        {
+          "name": "StyleCop.Analyzers",
+          "version": "1.1.118",
+          "dev": true
+        },
+        {
+          "name": "Newtonsoft.Json",
+          "version": "",
+          "dev": false
+        }
+      ]
+    },
+    {
+      "path": "src/Broken/Broken.csproj",
+      "language": "msbuild",
+      "sizeBytes": 129,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [],
+      "skeleton": "",
+      "rawTokens": 34,
+      "skeletonTokens": 0,
+      "error": "Invalid XML at line 4: </ItemGroup> closes <PackageReference>"
+    },
+    {
+      "path": "src/Lib/Lib.csproj",
+      "language": "msbuild",
+      "sizeBytes": 45,
+      "mtimeMs": 0,
+      "symbols": [],
+      "imports": [],
+      "skeleton": "// .NET project (Microsoft.NET.Sdk)",
+      "rawTokens": 12,
+      "skeletonTokens": 10
+    }
+  ],
+  "audit": [
+    {
+      "name": "Microsoft.CodeAnalysis.NetAnalyzers",
+      "manifest": "Directory.Build.props",
+      "version": "10.0.100",
+      "dev": true,
+      "dormant": false,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "Polly",
+      "manifest": "src/App/App.csproj",
+      "version": "8.5.0",
+      "dev": false,
+      "dormant": true,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "StyleCop.Analyzers",
+      "manifest": "src/App/App.csproj",
+      "version": "1.1.118",
+      "dev": true,
+      "dormant": false,
+      "importCount": 0,
+      "files": []
+    },
+    {
+      "name": "Newtonsoft.Json",
+      "manifest": "src/App/App.csproj",
+      "version": "",
+      "dev": false,
+      "dormant": true,
+      "importCount": 0,
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+📁 project/
+├── 📁 src/
+│   ├── 📁 App/
+│   │   └── 📄 App.csproj
+│   ├── 📁 Broken/
+│   │   └── 📄 Broken.csproj
+│   └── 📁 Lib/
+│       └── 📄 Lib.csproj
+├── 📄 App.slnx
+└── 📄 Directory.Build.props

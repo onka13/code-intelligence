@@ -23,6 +23,7 @@ function pubspecDependencies(doc: any): DeclaredDependency[] {
 
 export const yamlPack: LanguagePack = {
   id: 'yaml',
+  data: true,
   claims: (file) => file.endsWith('.yaml') || file.endsWith('.yml'),
   parse: async ({ path: file, content }) => {
     let parsed: unknown;

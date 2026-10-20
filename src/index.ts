@@ -5,6 +5,10 @@ export { neighborhood, UnknownFileError, type Neighborhood, type NeighborhoodEnt
 export { rankHubs as hubs } from './graph/topology.js';
 export { readCodeMap, readTopology, OutputMissingError, OutputVersionError } from './outputs.js';
 export { PACKS } from '../packs/index.js';
+export { health, checkLimits } from './health/health.js';
+export { compareHealth } from './health/compare.js';
+export { HealthLimitsError } from './health/types.js';
+export type * from './health/types.js';
 export type { LanguagePack, ParsedFile, ParseInput, RawImport, ResolveInput, Resolution, ProjectView } from './packs/pack.js';
 export { ParseError } from './packs/pack.js';
 export { GENERATOR_VERSION, SCHEMA_VERSION, OUTPUT_FILES } from './version.js';

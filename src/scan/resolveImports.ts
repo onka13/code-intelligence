@@ -11,9 +11,11 @@ import { packFor } from './records.js';
 
 function projectView(root: string, records: FileRecord[]): ProjectView {
   const paths = new Set(records.map((r) => r.path));
+  const sorted = [...paths].sort();
   const texts = new Map<string, string | undefined>();
   return {
     has: (p) => paths.has(p),
+    paths: () => sorted,
     read: (p) => {
       if (!texts.has(p)) texts.set(p, paths.has(p) ? fs.readFileSync(path.join(root, p), 'utf8') : undefined);
       return texts.get(p);
@@ -21,10 +23,22 @@ function projectView(root: string, records: FileRecord[]): ProjectView {
   };
 }
 
-function resolved(imp: ImportRef, from: string, pack: LanguagePack | undefined, project: ProjectView): ImportRef {
+/** A reused record holds resolved imports, one per target; each import statement is resolved once again. */
+function rawImports(imports: ImportRef[]): ImportRef[] {
+  const seen = new Set<string>();
+  return imports.filter((i) => {
+    const key = `${i.line}\u0000${i.specifier}`;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+/** One import, or one per target when it points at several files. */
+function resolved(imp: ImportRef, from: string, pack: LanguagePack | undefined, project: ProjectView): ImportRef[] {
   const { specifier, line, typeOnly } = imp;
   const resolution = pack?.resolve?.({ from, raw: { specifier, line, typeOnly }, project }) ?? { kind: 'unresolved' as const };
-  return { specifier, line, ...(typeOnly ? { typeOnly } : {}), ...resolution };
+  return (Array.isArray(resolution) ? resolution : [resolution]).map((r) => ({ specifier, line, ...(typeOnly ? { typeOnly } : {}), ...r }));
 }
 
 export function resolveImports(root: string, records: FileRecord[], packs: LanguagePack[]): FileRecord[] {
@@ -32,6 +46,6 @@ export function resolveImports(root: string, records: FileRecord[], packs: Langu
   return records.map((r) => {
     if (r.imports.length === 0) return r;
     const pack = packFor(r.path, packs);
-    return { ...r, imports: r.imports.map((i) => resolved(i, r.path, pack, project)) };
+    return { ...r, imports: rawImports(r.imports).flatMap((i) => resolved(i, r.path, pack, project)) };
   });
 }

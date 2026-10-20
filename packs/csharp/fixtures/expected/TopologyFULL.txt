@@ -1,0 +1,19 @@
+📁 project/
+├── 📁 src/
+│   ├── 📁 Api/
+│   │   ├── 📁 Services/
+│   │   │   └── 📄 OrderService.cs
+│   │   │         public sealed class OrderService(IOrderRepository repository, ILogger logger) : IOrderService { public async Task<string> DescribeAsync(string id, CancellationToken cancellationToken); }
+│   │   │         public interface IOrderService { Task<string> DescribeAsync(string id, CancellationToken cancellationToken); }
+│   │   └── 📄 Api.csproj
+│   └── 📁 Domain/
+│       ├── 📄 Domain.csproj
+│       ├── 📄 Order.cs
+│       │     public sealed class Order : Entity, IComparable<Order> { internal const int MaxLines; public string Id { get; }; public OrderStatus Status { get; private set; }; public decimal Total { get; }; public void AddLine(decimal amount); public int CompareTo(Order? other); protected virtual void OnPlaced(); }
+│       │     public abstract class Entity {}
+│       │     public record Money(decimal Amount, string Currency) { decimal Amount; string Currency; }
+│       │     public interface IOrderRepository { Task<Order?> FindAsync(string id, CancellationToken cancellationToken); int Count { get; }; }
+│       └── 📄 OrderStatus.cs
+│             public enum OrderStatus { Draft, Placed }
+│             public delegate void OrderPlaced(Order order);
+└── 📄 Shop.sln

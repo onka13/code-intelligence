@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "",
+  "generatedAt": "",
+  "summary": {
+    "totalFiles": 5,
+    "totalSymbols": 0,
+    "totalNodes": 5,
+    "totalEdges": 3,
+    "density": 0.15,
+    "circularDependencies": [],
+    "clusters": [
+      {
+        "name": ".",
+        "nodeCount": 2
+      },
+      {
+        "name": "src/App",
+        "nodeCount": 1
+      },
+      {
+        "name": "src/Broken",
+        "nodeCount": 1
+      },
+      {
+        "name": "src/Lib",
+        "nodeCount": 1
+      }
+    ],
+    "topHubs": [
+      {
+        "id": "file:src/Lib/Lib.csproj",
+        "path": "src/Lib/Lib.csproj",
+        "inDegree": 2,
+        "outDegree": 0,
+        "centralityScore": 4,
+        "pageRank": 0.37334
+      },
+      {
+        "id": "file:src/App/App.csproj",
+        "path": "src/App/App.csproj",
+        "inDegree": 1,
+        "outDegree": 1,
+        "centralityScore": 3,
+        "pageRank": 0.201806
+      },
+      {
+        "id": "file:App.slnx",
+        "path": "App.slnx",
+        "inDegree": 0,
+        "outDegree": 2,
+        "centralityScore": 2,
+        "pageRank": 0.141618
+      },
+      {
+        "id": "file:Directory.Build.props",
+        "path": "Directory.Build.props",
+        "inDegree": 0,
+        "outDegree": 0,
+        "centralityScore": 0,
+        "pageRank": 0.141618
+      },
+      {
+        "id": "file:src/Broken/Broken.csproj",
+        "path": "src/Broken/Broken.csproj",
+        "inDegree": 0,
+        "outDegree": 0,
+        "centralityScore": 0,
+        "pageRank": 0.141618
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "file:App.slnx",
+      "label": "App.slnx",
+      "path": "App.slnx",
+      "type": "file",
+      "language": "msbuild",
+      "tokenEstimate": 38,
+      "inDegree": 0,
+      "outDegree": 2,
+      "centralityScore": 2,
+      "pageRank": 0.141618,
+      "cluster": "."
+    },
+    {
+      "id": "file:Directory.Build.props",
+      "label": "Directory.Build.props",
+      "path": "Directory.Build.props",
+      "type": "file",
+      "language": "msbuild",
+      "tokenEstimate": 61,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0.141618,
+      "cluster": "."
+    },
+    {
+      "id": "file:src/App/App.csproj",
+      "label": "App.csproj",
+      "path": "src/App/App.csproj",
+      "type": "file",
+      "language": "msbuild",
+      "tokenEstimate": 160,
+      "inDegree": 1,
+      "outDegree": 1,
+      "centralityScore": 3,
+      "pageRank": 0.201806,
+      "cluster": "src/App"
+    },
+    {
+      "id": "file:src/Broken/Broken.csproj",
+      "label": "Broken.csproj",
+      "path": "src/Broken/Broken.csproj",
+      "type": "file",
+      "language": "msbuild",
+      "tokenEstimate": 34,
+      "inDegree": 0,
+      "outDegree": 0,
+      "centralityScore": 0,
+      "pageRank": 0.141618,
+      "cluster": "src/Broken"
+    },
+    {
+      "id": "file:src/Lib/Lib.csproj",
+      "label": "Lib.csproj",
+      "path": "src/Lib/Lib.csproj",
+      "type": "file",
+      "language": "msbuild",
+      "tokenEstimate": 12,
+      "inDegree": 2,
+      "outDegree": 0,
+      "centralityScore": 4,
+      "pageRank": 0.37334,
+      "cluster": "src/Lib"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:App.slnx",
+      "target": "file:src/App/App.csproj",
+      "type": "imports"
+    },
+    {
+      "source": "file:App.slnx",
+      "target": "file:src/Lib/Lib.csproj",
+      "type": "imports"
+    },
+    {
+      "source": "file:src/App/App.csproj",
+      "target": "file:src/Lib/Lib.csproj",
+      "type": "imports"
+    }
+  ]
+}
