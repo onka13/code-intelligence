@@ -1,6 +1,6 @@
 import type { Language, Node } from 'web-tree-sitter';
 import type { LanguagePack, ParsedFile, RawImport } from '../../src/packs/pack.js';
-import { nest, type Declared } from '../../src/packs/symbols.js';
+import { nest, withNesting, type Declared } from '../../src/packs/symbols.js';
 import { query, withTree } from '../../src/packs/treeSitter.js';
 import { readPackFile } from '../../src/packs/packFiles.js';
 import { describeTopLevel } from './declarations.js';
@@ -10,6 +10,8 @@ import { resolveDart } from './resolve.js';
 /** Dart and Flutter (Tree-sitter grammar `dart`). */
 
 const QUERIES = { symbols: readPackFile(import.meta.url, 'symbols.scm'), imports: readPackFile(import.meta.url, 'imports.scm') };
+/** The statements and expressions that open a nesting level (code health, FR-07). */
+const BLOCKS = new Set(['if_statement', 'for_statement', 'while_statement', 'do_statement', 'switch_statement', 'switch_expression', 'try_statement']);
 const MEMBER_PARENTS = new Set(['class_body', 'extension_body', 'enum_body']);
 
 function captured(language: Language, key: keyof typeof QUERIES, root: Node): Node[] {
@@ -29,7 +31,7 @@ function symbols(language: Language, root: Node, source: string) {
       if (top) found.push(top);
     }
   }
-  return nest(found);
+  return nest(withNesting(found, root, BLOCKS));
 }
 
 export const dartPack: LanguagePack = {

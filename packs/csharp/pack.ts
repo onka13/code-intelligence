@@ -1,6 +1,6 @@
 import type { Language, Node } from 'web-tree-sitter';
 import type { LanguagePack, ParsedFile, RawImport } from '../../src/packs/pack.js';
-import { nest } from '../../src/packs/symbols.js';
+import { nest, withNesting } from '../../src/packs/symbols.js';
 import { query, withTree } from '../../src/packs/treeSitter.js';
 import { readPackFile } from '../../src/packs/packFiles.js';
 import { describe } from './declarations.js';
@@ -9,6 +9,11 @@ import { resolveCSharp } from './resolve.js';
 /** C# (Tree-sitter grammar `c_sharp`, from the pinned tree-sitter-c-sharp package). */
 
 const QUERIES = { symbols: readPackFile(import.meta.url, 'symbols.scm'), imports: readPackFile(import.meta.url, 'imports.scm') };
+/** The statements and expressions that open a nesting level (code health, FR-07). */
+const BLOCKS = new Set([
+  'if_statement', 'for_statement', 'foreach_statement', 'while_statement', 'do_statement', 'switch_statement', 'switch_expression',
+  'try_statement', 'using_statement', 'lock_statement',
+]);
 /** The name a using directive imports: its last name node that is not the alias. */
 const NAME_TYPES = new Set(['identifier', 'qualified_name', 'generic_name', 'alias_qualified_name']);
 
@@ -29,7 +34,7 @@ export const csharpPack: LanguagePack = {
   claims: (file) => file.endsWith('.cs'),
   parse: ({ content }) =>
     withTree('c_sharp', content, (root, language): ParsedFile => ({
-      symbols: nest(captured(language, 'symbols', root).flatMap((node) => describe(node, content))),
+      symbols: nest(withNesting(captured(language, 'symbols', root).flatMap((node) => describe(node, content)), root, BLOCKS)),
       imports: imports(language, root),
     })),
   resolve: resolveCSharp,

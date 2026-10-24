@@ -6,6 +6,8 @@ import { oneLine } from '../tokens.js';
 
 export const CONTAINER_KINDS = new Set<SymbolKind>(['class', 'interface', 'enum', 'mixin', 'extension']);
 const MEMBER_KINDS = new Set<SymbolKind>(['method', 'constructor', 'field', 'getter', 'setter', 'enumMember']);
+/** Declarations with a body of statements: code health measures their length and nesting. */
+export const FUNCTION_KINDS = new Set<SymbolKind>(['function', 'method', 'constructor', 'getter', 'setter']);
 
 /** A declaration with its source range, before nesting. */
 export interface Declared extends Omit<SymbolNode, 'members'> {
@@ -42,6 +44,24 @@ export function nest(items: Declared[]): SymbolNode[] {
     open.push({ item, node });
   }
   return top;
+}
+
+/**
+ * The deepest nesting inside `start`..`end` of `root`: how many of the pack's `blocks` (if, loops, switch, try) sit
+ * inside each other. An `else if` stays on the level of its `if`; a lambda adds no level, but its statements count.
+ */
+export function nestingDepth(root: Node, start: number, end: number, blocks: ReadonlySet<string>): number {
+  const walk = (node: Node, level: number): number => node.children.reduce((deepest, child) => {
+    if (!child || child.endIndex <= start || child.startIndex >= end) return deepest;
+    const opens = blocks.has(child.type) && child.startIndex >= start && child.previousSibling?.type !== 'else';
+    return Math.max(deepest, walk(child, opens ? level + 1 : level));
+  }, level);
+  return walk(root, 0);
+}
+
+/** Every function-like declaration with its nesting depth (FR-07), measured in the file's tree. */
+export function withNesting(items: Declared[], root: Node, blocks: ReadonlySet<string>): Declared[] {
+  return items.map((d) => (FUNCTION_KINDS.has(d.kind) ? { ...d, nesting: nestingDepth(root, d.start, d.end, blocks) } : d));
 }
 
 function toNode(item: Declared): SymbolNode {

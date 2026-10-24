@@ -52,7 +52,7 @@ test('CIN-17 a malformed .csproj is recorded with its error and the scan goes on
 test('CIN-17 C# methods are measured by code health and the manifests are not', async () => {
   const root = fixturePaths('csharp').project;
   const { map, topology } = await scan({ root, out: path.join(tempDir(), 'out'), packs: PACKS });
-  const report = health(map, topology, root, { maxFileLines: 30, maxFunctionLines: 4, hardFunctionLines: 40, minDuplicateLines: 6 }, PACKS);
+  const report = health(map, topology, root, { maxFileLines: 30, maxFunctionLines: 4, hardFunctionLines: 40, maxNestingDepth: 4, minDuplicateLines: 6 }, PACKS);
   assert.deepEqual(report.files.map((f) => f.path), ['src/Domain/Order.cs']);
   assert.deepEqual(report.functions.map((f) => `${f.path} ${f.name}`), ['src/Api/Services/OrderService.cs OrderService.DescribeAsync', 'src/Domain/Order.cs Order.AddLine']);
   assert.deepEqual(report.notMeasured, []);

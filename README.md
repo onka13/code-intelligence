@@ -33,13 +33,13 @@ What the scan leaves out: dot folders and files, a default list of dependency, b
 ## Code health
 
 ```bash
-node dist/src/cli.js health path/to/project --max-file-lines 300 --max-function-lines 25 --hard-function-lines 40 --min-duplicate-lines 6 --json > after.json
+node dist/src/cli.js health path/to/project --max-file-lines 300 --max-function-lines 25 --hard-function-lines 40 --max-nesting-depth 4 --min-duplicate-lines 6 --json > after.json
 node dist/src/cli.js health-compare before.json after.json --json
 ```
 
-`health` reads the scan's outputs (`--out`, default `<folder>/.codeintel`) and the files, and reports files over the line limit, functions, methods, constructors, getters and setters over the soft and hard limits (with their line ranges), duplicated blocks (the same run of significant lines, at least `--min-duplicate-lines` long, in two places; blank lines and bracket-only lines do not count, whitespace is collapsed), import cycles, and the totals. Every limit is required: the command names a missing one and assumes none. Data files (JSON, YAML) are left out; files no pack reads, too large or with a syntax error are listed as not measured, never as healthy.
+`health` reads the scan's outputs (`--out`, default `<folder>/.codeintel`) and the files, and reports files over the line limit, functions, methods, constructors, getters and setters over the soft and hard limits (with their line ranges), those nested deeper than `--max-nesting-depth` (the most if, loop, switch and try blocks inside each other; an `else if` stays on its `if`'s level and a lambda adds no level, its statements count; the code map records each function's `nesting`), duplicated blocks (the same run of significant lines, at least `--min-duplicate-lines` long, in two places; blank lines and bracket-only lines do not count, whitespace is collapsed), import cycles, and the totals (with the deepest nesting). Every limit is required: the command names a missing one and assumes none. Data files (JSON, YAML) are left out; files no pack reads, too large or with a syntax error are listed as not measured, never as healthy.
 
-`health-compare` takes two reports made with the same limits (for example of a change's base commit and of its result) and lists what the change did: files and functions that crossed a limit, new duplicated blocks, new import cycles, changed files that could not be measured, and the totals before and after.
+`health-compare` takes two reports made with the same limits (for example of a change's base commit and of its result) and lists what the change did: files and functions that crossed a limit (length or nesting), new duplicated blocks, new import cycles, changed files that could not be measured, and the totals before and after.
 
 ## Languages
 

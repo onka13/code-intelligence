@@ -94,7 +94,8 @@
               "visibility": "public",
               "exported": true,
               "lineStart": 11,
-              "lineEnd": 16
+              "lineEnd": 16,
+              "nesting": 0
             },
             {
               "kind": "class",
@@ -136,7 +137,8 @@
               "visibility": "public",
               "exported": true,
               "lineStart": 26,
-              "lineEnd": 26
+              "lineEnd": 26,
+              "nesting": 0
             }
           ]
         }
@@ -242,7 +244,8 @@
               "visibility": "public",
               "exported": true,
               "lineStart": 10,
-              "lineEnd": 13
+              "lineEnd": 13,
+              "nesting": 0
             },
             {
               "kind": "field",
@@ -282,7 +285,8 @@
               "visibility": "public",
               "exported": true,
               "lineStart": 21,
-              "lineEnd": 25
+              "lineEnd": 25,
+              "nesting": 1
             },
             {
               "kind": "method",
@@ -292,7 +296,8 @@
               "visibility": "public",
               "exported": true,
               "lineStart": 27,
-              "lineEnd": 27
+              "lineEnd": 27,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -302,7 +307,8 @@
               "visibility": "protected",
               "exported": true,
               "lineStart": 29,
-              "lineEnd": 29
+              "lineEnd": 29,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -313,7 +319,8 @@
               "exported": false,
               "static": true,
               "lineStart": 31,
-              "lineEnd": 31
+              "lineEnd": 31,
+              "nesting": 0
             }
           ]
         },
@@ -375,7 +382,8 @@
               "visibility": "public",
               "exported": true,
               "lineStart": 40,
-              "lineEnd": 40
+              "lineEnd": 40,
+              "nesting": 0
             },
             {
               "kind": "field",

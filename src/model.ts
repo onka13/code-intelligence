@@ -17,6 +17,8 @@ export interface SymbolNode {
   type?: string;
   lineStart: number;
   lineEnd: number;
+  /** A function, method, constructor, getter or setter: its deepest nesting of control-flow blocks (FR-07). */
+  nesting?: number;
   /** Top level: exported from the file. Members: visible outside the class (public). */
   exported: boolean;
   visibility: Visibility;

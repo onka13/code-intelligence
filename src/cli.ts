@@ -25,8 +25,8 @@ const USAGE = `Usage: codeintel <command> [options]
   hubs [--top <n>] [--out <dir>] [--json]
         The most connected files.
   health <folder> --max-file-lines <n> --max-function-lines <n> --hard-function-lines <n>
-         --min-duplicate-lines <n> [--out <dir>] [--json]
-        Files and functions over the limits, duplicated blocks and import cycles of the scanned folder
+         --max-nesting-depth <n> --min-duplicate-lines <n> [--out <dir>] [--json]
+        Files and functions over the limits (length and nesting depth), duplicated blocks and import cycles of the scanned folder
         (--out defaults to <folder>/.codeintel). Every limit is required; none is assumed.
   health-compare <before.json> <after.json> [--json]
         What changed between two health reports made with the same limits: limits crossed, new
@@ -35,7 +35,10 @@ const USAGE = `Usage: codeintel <command> [options]
 Queries read the outputs in --out (default ./.codeintel) and never parse again.
 `;
 
-const LIMIT_FLAGS = { maxFileLines: 'max-file-lines', maxFunctionLines: 'max-function-lines', hardFunctionLines: 'hard-function-lines', minDuplicateLines: 'min-duplicate-lines' } as const;
+const LIMIT_FLAGS = {
+  maxFileLines: 'max-file-lines', maxFunctionLines: 'max-function-lines', hardFunctionLines: 'hard-function-lines',
+  maxNestingDepth: 'max-nesting-depth', minDuplicateLines: 'min-duplicate-lines',
+} as const;
 const VALUE_FLAGS = new Set(['out', 'exclude', 'depth', 'budget', 'top', ...Object.values(LIMIT_FLAGS)]);
 
 interface Args {
@@ -102,7 +105,7 @@ function runHealth(args: Args): number {
   const report = health(readCodeMap(out), readTopology(out), path.resolve(folder), limits, PACKS);
   if (args.flags.has('json')) { console.log(JSON.stringify(report, null, 2)); return 0; }
   const t = report.totals;
-  console.log(`${t.files} files, ${t.lines} lines; ${t.filesOverLimit} files over ${limits.maxFileLines} lines; ${t.functionsOverSoft} functions over ${limits.maxFunctionLines} and ${t.functionsOverHard} over ${limits.hardFunctionLines} lines; ${t.duplicateBlocks} duplicated blocks; ${t.cycles} import cycles; ${t.notMeasured} files not measured.`);
+  console.log(`${t.files} files, ${t.lines} lines; ${t.filesOverLimit} files over ${limits.maxFileLines} lines; ${t.functionsOverSoft} functions over ${limits.maxFunctionLines} and ${t.functionsOverHard} over ${limits.hardFunctionLines} lines; ${t.functionsOverNesting} functions nested deeper than ${limits.maxNestingDepth}; ${t.duplicateBlocks} duplicated blocks; ${t.cycles} import cycles; ${t.notMeasured} files not measured.`);
   return 0;
 }
 
@@ -112,7 +115,7 @@ function runHealthCompare(args: Args): number {
   const readReport = (file: string) => JSON.parse(fs.readFileSync(file, 'utf8')) as HealthReport;
   const result = compareHealth(readReport(before), readReport(after));
   if (args.flags.has('json')) { console.log(JSON.stringify(result, null, 2)); return 0; }
-  console.log(`${result.files.length} files and ${result.functions.length} functions crossed a limit; ${result.duplicates.length} new duplicated blocks; ${result.cycles.length} new import cycles; ${result.notMeasured.length} changed files not measured.`);
+  console.log(`${result.files.length} files and ${result.functions.length} functions crossed a length limit; ${result.nesting.length} functions crossed the nesting limit; ${result.duplicates.length} new duplicated blocks; ${result.cycles.length} new import cycles; ${result.notMeasured.length} changed files not measured.`);
   return 0;
 }
 

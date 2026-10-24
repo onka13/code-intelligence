@@ -86,7 +86,8 @@
           "visibility": "public",
           "type": "Express",
           "lineStart": 7,
-          "lineEnd": 13
+          "lineEnd": 13,
+          "nesting": 0
         }
       ],
       "imports": [
@@ -151,7 +152,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 6,
-              "lineEnd": 8
+              "lineEnd": 8,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -161,7 +163,8 @@
               "visibility": "protected",
               "type": "void",
               "lineStart": 10,
-              "lineEnd": 12
+              "lineEnd": 12,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -171,7 +174,8 @@
               "visibility": "protected",
               "type": "void",
               "lineStart": 14,
-              "lineEnd": 16
+              "lineEnd": 16,
+              "nesting": 0
             }
           ]
         }
@@ -232,7 +236,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 10,
-              "lineEnd": 13
+              "lineEnd": 13,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -242,7 +247,8 @@
               "visibility": "public",
               "type": "Promise<void>",
               "lineStart": 15,
-              "lineEnd": 20
+              "lineEnd": 20,
+              "nesting": 1
             },
             {
               "kind": "method",
@@ -252,7 +258,8 @@
               "visibility": "public",
               "type": "Promise<void>",
               "lineStart": 22,
-              "lineEnd": 27
+              "lineEnd": 27,
+              "nesting": 1
             }
           ]
         }
@@ -301,7 +308,8 @@
           "signature": "const describe = (order: Order): string",
           "type": "string",
           "lineStart": 4,
-          "lineEnd": 4
+          "lineEnd": 4,
+          "nesting": 0
         }
       ],
       "imports": [
@@ -337,7 +345,8 @@
           "visibility": "private",
           "type": "ClassDecorator",
           "lineStart": 4,
-          "lineEnd": 6
+          "lineEnd": 6,
+          "nesting": 0
         },
         {
           "kind": "interface",
@@ -369,7 +378,8 @@
               "visibility": "public",
               "type": "T | undefined",
               "lineStart": 10,
-              "lineEnd": 10
+              "lineEnd": 10,
+              "nesting": 0
             }
           ]
         },
@@ -421,7 +431,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 18,
-              "lineEnd": 18
+              "lineEnd": 18,
+              "nesting": 0
             },
             {
               "kind": "field",
@@ -451,7 +462,8 @@
               "visibility": "public",
               "type": "number",
               "lineStart": 20,
-              "lineEnd": 22
+              "lineEnd": 22,
+              "nesting": 0
             },
             {
               "kind": "setter",
@@ -460,7 +472,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 24,
-              "lineEnd": 24
+              "lineEnd": 24,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -470,7 +483,8 @@
               "visibility": "public",
               "type": "T | undefined",
               "lineStart": 26,
-              "lineEnd": 26
+              "lineEnd": 26,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -480,7 +494,8 @@
               "visibility": "public",
               "type": "Iterator<T>",
               "lineStart": 28,
-              "lineEnd": 30
+              "lineEnd": 30,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -490,7 +505,8 @@
               "visibility": "private",
               "type": "void",
               "lineStart": 32,
-              "lineEnd": 35
+              "lineEnd": 35,
+              "nesting": 0
             }
           ]
         },
@@ -530,7 +546,8 @@
           "visibility": "public",
           "type": "Generator<number>",
           "lineStart": 40,
-          "lineEnd": 42
+          "lineEnd": 42,
+          "nesting": 0
         }
       ],
       "imports": [
@@ -573,7 +590,8 @@
           "visibility": "public",
           "type": "Promise<void>",
           "lineStart": 6,
-          "lineEnd": 9
+          "lineEnd": 9,
+          "nesting": 0
         }
       ],
       "imports": [
@@ -607,7 +625,8 @@
           "exported": true,
           "visibility": "public",
           "lineStart": 3,
-          "lineEnd": 8
+          "lineEnd": 8,
+          "nesting": 0
         }
       ],
       "imports": [
@@ -645,7 +664,8 @@
               "visibility": "public",
               "type": "void",
               "lineStart": 6,
-              "lineEnd": 8
+              "lineEnd": 8,
+              "nesting": 0
             }
           ]
         }
@@ -698,7 +718,8 @@
               "visibility": "public",
               "type": "Promise<Order | undefined>",
               "lineStart": 4,
-              "lineEnd": 4
+              "lineEnd": 4,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -708,7 +729,8 @@
               "visibility": "public",
               "type": "Promise<Order>",
               "lineStart": 5,
-              "lineEnd": 5
+              "lineEnd": 5,
+              "nesting": 0
             }
           ]
         },
@@ -741,7 +763,8 @@
               "visibility": "public",
               "type": "Promise<Order | undefined>",
               "lineStart": 11,
-              "lineEnd": 13
+              "lineEnd": 13,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -751,7 +774,8 @@
               "visibility": "public",
               "type": "Promise<Order>",
               "lineStart": 15,
-              "lineEnd": 18
+              "lineEnd": 18,
+              "nesting": 0
             }
           ]
         }
@@ -791,7 +815,8 @@
               "visibility": "public",
               "type": "Promise<Order | undefined>",
               "lineStart": 8,
-              "lineEnd": 8
+              "lineEnd": 8,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -801,7 +826,8 @@
               "visibility": "public",
               "type": "Promise<Result<Order>>",
               "lineStart": 9,
-              "lineEnd": 9
+              "lineEnd": 9,
+              "nesting": 0
             }
           ]
         },
@@ -833,7 +859,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 15,
-              "lineEnd": 15
+              "lineEnd": 15,
+              "nesting": 0
             },
             {
               "kind": "field",
@@ -853,7 +880,8 @@
               "visibility": "public",
               "type": "Promise<Order | undefined>",
               "lineStart": 17,
-              "lineEnd": 19
+              "lineEnd": 19,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -863,7 +891,8 @@
               "visibility": "public",
               "type": "Promise<Result<Order>>",
               "lineStart": 21,
-              "lineEnd": 27
+              "lineEnd": 27,
+              "nesting": 1
             }
           ]
         }
@@ -1076,7 +1105,8 @@
           "visibility": "public",
           "type": "Validation<OrderItem[]>",
           "lineStart": 8,
-          "lineEnd": 11
+          "lineEnd": 11,
+          "nesting": 0
         }
       ],
       "imports": [
@@ -1111,7 +1141,8 @@
           "signature": "const orderRoutes = (service: OrderService): Router",
           "type": "Router",
           "lineStart": 5,
-          "lineEnd": 11
+          "lineEnd": 11,
+          "nesting": 0
         }
       ],
       "imports": [
@@ -1161,7 +1192,8 @@
               "visibility": "public",
               "type": "void",
               "lineStart": 2,
-              "lineEnd": 2
+              "lineEnd": 2,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -1171,7 +1203,8 @@
               "visibility": "public",
               "type": "void",
               "lineStart": 3,
-              "lineEnd": 3
+              "lineEnd": 3,
+              "nesting": 0
             }
           ]
         },
@@ -1183,7 +1216,8 @@
           "visibility": "public",
           "type": "Logger",
           "lineStart": 6,
-          "lineEnd": 11
+          "lineEnd": 11,
+          "nesting": 0
         },
         {
           "name": "logger",
@@ -1222,7 +1256,8 @@
               "exported": false,
               "visibility": "private",
               "lineStart": 2,
-              "lineEnd": 2
+              "lineEnd": 2,
+              "nesting": 0
             },
             {
               "kind": "field",
@@ -1253,7 +1288,8 @@
               "type": "Result<T>",
               "static": true,
               "lineStart": 4,
-              "lineEnd": 6
+              "lineEnd": 6,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -1264,7 +1300,8 @@
               "type": "Result<T>",
               "static": true,
               "lineStart": 8,
-              "lineEnd": 10
+              "lineEnd": 10,
+              "nesting": 0
             },
             {
               "kind": "getter",
@@ -1274,7 +1311,8 @@
               "visibility": "public",
               "type": "boolean",
               "lineStart": 12,
-              "lineEnd": 14
+              "lineEnd": 14,
+              "nesting": 0
             }
           ]
         }
@@ -1329,7 +1367,8 @@
               "type": "void",
               "lifecycle": true,
               "lineStart": 8,
-              "lineEnd": 8
+              "lineEnd": 8,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -1339,7 +1378,8 @@
               "visibility": "public",
               "type": "void",
               "lineStart": 10,
-              "lineEnd": 10
+              "lineEnd": 10,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -1349,7 +1389,8 @@
               "visibility": "public",
               "lifecycle": true,
               "lineStart": 12,
-              "lineEnd": 14
+              "lineEnd": 14,
+              "nesting": 0
             }
           ]
         },
@@ -1360,7 +1401,8 @@
           "kind": "function",
           "signature": "const Badge = ({ label }: { label: string })",
           "lineStart": 17,
-          "lineEnd": 17
+          "lineEnd": 17,
+          "nesting": 0
         }
       ],
       "imports": [

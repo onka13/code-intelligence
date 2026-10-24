@@ -65,7 +65,8 @@
               "visibility": "public",
               "static": true,
               "lineStart": 10,
-              "lineEnd": 17
+              "lineEnd": 17,
+              "nesting": 1
             }
           ]
         }
@@ -156,7 +157,8 @@
           "exported": true,
           "visibility": "public",
           "lineStart": 18,
-          "lineEnd": 18
+          "lineEnd": 18,
+          "nesting": 0
         },
         {
           "kind": "class",
@@ -175,7 +177,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 21,
-              "lineEnd": 21
+              "lineEnd": 21,
+              "nesting": 0
             },
             {
               "kind": "getter",
@@ -185,7 +188,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 22,
-              "lineEnd": 22
+              "lineEnd": 22,
+              "nesting": 0
             }
           ]
         },
@@ -253,7 +257,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 30,
-              "lineEnd": 30
+              "lineEnd": 30,
+              "nesting": 0
             },
             {
               "kind": "constructor",
@@ -262,7 +267,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 31,
-              "lineEnd": 31
+              "lineEnd": 31,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -272,7 +278,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 34,
-              "lineEnd": 34
+              "lineEnd": 34,
+              "nesting": 0
             },
             {
               "kind": "getter",
@@ -282,7 +289,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 37,
-              "lineEnd": 37
+              "lineEnd": 37,
+              "nesting": 0
             },
             {
               "kind": "setter",
@@ -291,7 +299,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 39,
-              "lineEnd": 39
+              "lineEnd": 39,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -300,7 +309,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 41,
-              "lineEnd": 41
+              "lineEnd": 41,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -311,7 +321,8 @@
               "visibility": "public",
               "lifecycle": true,
               "lineStart": 44,
-              "lineEnd": 48
+              "lineEnd": 48,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -321,7 +332,8 @@
               "exported": false,
               "visibility": "private",
               "lineStart": 50,
-              "lineEnd": 50
+              "lineEnd": 50,
+              "nesting": 0
             }
           ]
         },
@@ -343,7 +355,8 @@
               "visibility": "public",
               "lifecycle": true,
               "lineStart": 54,
-              "lineEnd": 54
+              "lineEnd": 54,
+              "nesting": 0
             }
           ]
         },
@@ -412,7 +425,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 66,
-              "lineEnd": 66
+              "lineEnd": 66,
+              "nesting": 0
             }
           ]
         },
@@ -433,7 +447,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 70,
-              "lineEnd": 70
+              "lineEnd": 70,
+              "nesting": 0
             }
           ]
         },
@@ -445,7 +460,8 @@
           "exported": true,
           "visibility": "public",
           "lineStart": 73,
-          "lineEnd": 77
+          "lineEnd": 77,
+          "nesting": 1
         }
       ],
       "imports": [
@@ -515,7 +531,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 5,
-              "lineEnd": 5
+              "lineEnd": 5,
+              "nesting": 0
             }
           ]
         }
@@ -567,7 +584,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 3,
-              "lineEnd": 3
+              "lineEnd": 3,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -576,7 +594,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 4,
-              "lineEnd": 4
+              "lineEnd": 4,
+              "nesting": 0
             }
           ]
         }
@@ -600,7 +619,8 @@
           "exported": true,
           "visibility": "public",
           "lineStart": 7,
-          "lineEnd": 9
+          "lineEnd": 9,
+          "nesting": 0
         },
         {
           "kind": "class",
@@ -621,7 +641,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 12,
-              "lineEnd": 12
+              "lineEnd": 12,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -632,7 +653,8 @@
               "visibility": "public",
               "lifecycle": true,
               "lineStart": 15,
-              "lineEnd": 20
+              "lineEnd": 20,
+              "nesting": 0
             }
           ]
         }
@@ -690,7 +712,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 4,
-              "lineEnd": 4
+              "lineEnd": 4,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -700,7 +723,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 6,
-              "lineEnd": 8
+              "lineEnd": 8,
+              "nesting": 0
             }
           ]
         }
@@ -762,7 +786,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 7,
-              "lineEnd": 7
+              "lineEnd": 7,
+              "nesting": 0
             }
           ]
         },
@@ -793,7 +818,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 13,
-              "lineEnd": 13
+              "lineEnd": 13,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -803,7 +829,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 15,
-              "lineEnd": 18
+              "lineEnd": 18,
+              "nesting": 1
             }
           ]
         }
@@ -920,7 +947,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 9,
-              "lineEnd": 9
+              "lineEnd": 9,
+              "nesting": 0
             },
             {
               "kind": "constructor",
@@ -929,7 +957,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 11,
-              "lineEnd": 13
+              "lineEnd": 13,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -939,7 +968,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 15,
-              "lineEnd": 15
+              "lineEnd": 15,
+              "nesting": 0
             }
           ]
         }
@@ -974,7 +1004,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 8,
-              "lineEnd": 8
+              "lineEnd": 8,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -985,7 +1016,8 @@
               "visibility": "public",
               "lifecycle": true,
               "lineStart": 11,
-              "lineEnd": 11
+              "lineEnd": 11,
+              "nesting": 0
             }
           ]
         },
@@ -1040,7 +1072,8 @@
               "visibility": "public",
               "lifecycle": true,
               "lineStart": 20,
-              "lineEnd": 23
+              "lineEnd": 23,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -1050,7 +1083,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 25,
-              "lineEnd": 33
+              "lineEnd": 33,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -1061,7 +1095,8 @@
               "visibility": "public",
               "lifecycle": true,
               "lineStart": 36,
-              "lineEnd": 41
+              "lineEnd": 41,
+              "nesting": 1
             }
           ]
         }
@@ -1121,7 +1156,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 7,
-              "lineEnd": 7
+              "lineEnd": 7,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -1132,7 +1168,8 @@
               "visibility": "public",
               "lifecycle": true,
               "lineStart": 10,
-              "lineEnd": 17
+              "lineEnd": 17,
+              "nesting": 0
             }
           ]
         }
@@ -1206,7 +1243,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 11,
-              "lineEnd": 11
+              "lineEnd": 11,
+              "nesting": 0
             }
           ]
         },
@@ -1259,7 +1297,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 19,
-              "lineEnd": 19
+              "lineEnd": 19,
+              "nesting": 0
             },
             {
               "kind": "getter",
@@ -1269,7 +1308,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 21,
-              "lineEnd": 21
+              "lineEnd": 21,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -1279,7 +1319,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 23,
-              "lineEnd": 31
+              "lineEnd": 31,
+              "nesting": 1
             },
             {
               "kind": "method",
@@ -1289,7 +1330,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 33,
-              "lineEnd": 33
+              "lineEnd": 33,
+              "nesting": 0
             }
           ]
         }
@@ -1342,7 +1384,8 @@
               "exported": false,
               "visibility": "private",
               "lineStart": 5,
-              "lineEnd": 5
+              "lineEnd": 5,
+              "nesting": 0
             },
             {
               "kind": "field",
@@ -1364,7 +1407,8 @@
               "visibility": "public",
               "static": true,
               "lineStart": 8,
-              "lineEnd": 8
+              "lineEnd": 8,
+              "nesting": 0
             },
             {
               "kind": "field",
@@ -1394,7 +1438,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 13,
-              "lineEnd": 13
+              "lineEnd": 13,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -1404,7 +1449,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 15,
-              "lineEnd": 19
+              "lineEnd": 19,
+              "nesting": 0
             },
             {
               "kind": "method",
@@ -1414,7 +1460,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 21,
-              "lineEnd": 25
+              "lineEnd": 25,
+              "nesting": 0
             }
           ]
         }
@@ -1460,7 +1507,8 @@
               "exported": true,
               "visibility": "public",
               "lineStart": 2,
-              "lineEnd": 2
+              "lineEnd": 2,
+              "nesting": 0
             }
           ]
         },
@@ -1472,7 +1520,8 @@
           "exported": true,
           "visibility": "public",
           "lineStart": 5,
-          "lineEnd": 7
+          "lineEnd": 7,
+          "nesting": 0
         },
         {
           "kind": "function",
@@ -1482,7 +1531,8 @@
           "exported": true,
           "visibility": "public",
           "lineStart": 9,
-          "lineEnd": 9
+          "lineEnd": 9,
+          "nesting": 0
         }
       ],
       "imports": [],
@@ -1554,7 +1604,8 @@
           "exported": true,
           "visibility": "public",
           "lineStart": 4,
-          "lineEnd": 8
+          "lineEnd": 8,
+          "nesting": 0
         }
       ],
       "imports": [

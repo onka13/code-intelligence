@@ -7,11 +7,13 @@ export interface HealthLimits {
   maxFunctionLines: number;
   /** A function longer than this many lines is over the hard limit. */
   hardFunctionLines: number;
+  /** A function whose control-flow blocks nest deeper than this is over the limit. */
+  maxNestingDepth: number;
   /** The shortest run of significant lines counted as a duplicated block. */
   minDuplicateLines: number;
 }
 
-export const LIMIT_NAMES: Array<keyof HealthLimits> = ['maxFileLines', 'maxFunctionLines', 'hardFunctionLines', 'minDuplicateLines'];
+export const LIMIT_NAMES: Array<keyof HealthLimits> = ['maxFileLines', 'maxFunctionLines', 'hardFunctionLines', 'maxNestingDepth', 'minDuplicateLines'];
 
 export interface FileOverLimit {
   path: string;
@@ -28,6 +30,16 @@ export interface FunctionOverLimit {
   lineEnd: number;
   lines: number;
   limit: 'soft' | 'hard';
+}
+
+/** A function whose control-flow blocks nest deeper than `maxNestingDepth`. */
+export interface DeepFunction {
+  path: string;
+  name: string;
+  kind: string;
+  lineStart: number;
+  lineEnd: number;
+  nesting: number;
 }
 
 export interface DuplicateLocation {
@@ -57,6 +69,9 @@ export interface HealthTotals {
   functions: number;
   functionsOverSoft: number;
   functionsOverHard: number;
+  functionsOverNesting: number;
+  /** The deepest nesting of any measured function. */
+  deepestNesting: number;
   duplicateBlocks: number;
   duplicatedLines: number;
   cycles: number;
@@ -68,6 +83,7 @@ export interface HealthReport {
   limits: HealthLimits;
   files: FileOverLimit[];
   functions: FunctionOverLimit[];
+  nesting: DeepFunction[];
   duplicates: DuplicateBlock[];
   cycles: string[][];
   notMeasured: NotMeasured[];
@@ -80,6 +96,8 @@ export interface HealthComparison {
   files: FileOverLimit[];
   /** Functions over a limit in `after` that were not over that limit in `before`. */
   functions: FunctionOverLimit[];
+  /** Functions over the nesting limit in `after` that were not over it in `before`. */
+  nesting: DeepFunction[];
   duplicates: DuplicateBlock[];
   cycles: string[][];
   /** Files in `after` that could not be measured and are new or changed in length. */

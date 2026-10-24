@@ -69,6 +69,7 @@
         "type": { "type": "string" },
         "lineStart": { "type": "integer", "minimum": 1 },
         "lineEnd": { "type": "integer", "minimum": 1 },
+        "nesting": { "type": "integer", "minimum": 0, "description": "A function, method, constructor, getter or setter: its deepest nesting of control-flow blocks (if, loops, switch, try); an else if stays on its if's level." },
         "exported": { "type": "boolean" },
         "visibility": { "enum": ["public", "protected", "private"] },
         "static": { "const": true },

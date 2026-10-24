@@ -2,17 +2,18 @@ import fs from 'node:fs';
 import path from 'node:path';
 import type { CodeMap, FileRecord, SymbolNode, Topology } from '../model.js';
 import type { LanguagePack } from '../packs/pack.js';
+import { FUNCTION_KINDS } from '../packs/symbols.js';
 import { GENERATOR_VERSION } from '../version.js';
 import { findDuplicates, type SourceFile } from './duplicates.js';
-import { LIMIT_NAMES, HealthLimitsError, type FunctionOverLimit, type HealthLimits, type HealthReport, type NotMeasured } from './types.js';
+import {
+  LIMIT_NAMES, HealthLimitsError, type DeepFunction, type FunctionOverLimit, type HealthLimits, type HealthReport, type NotMeasured,
+} from './types.js';
 
 /**
  * The code health of a scanned folder (FR-07, CIN-18): files over the line limit, functions over the soft and hard
- * limits, duplicated blocks and import cycles, from the scan's outputs and the files themselves. Only files a code pack
+ * limits and over the nesting limit, duplicated blocks and import cycles, from the scan's outputs and the files themselves. Only files a code pack
  * declares are measured; data files (JSON, YAML) are left out, and files no pack reads are listed as not measured.
  */
-
-const FUNCTION_KINDS = new Set(['function', 'method', 'constructor', 'getter', 'setter']);
 
 /** Checks that every limit was passed as a positive whole number; no limit is ever assumed. */
 export function checkLimits(input: Partial<Record<keyof HealthLimits, unknown>>): HealthLimits {
@@ -25,20 +26,39 @@ export function checkLimits(input: Partial<Record<keyof HealthLimits, unknown>>)
 
 const lineCount = (content: string) => (content === '' ? 0 : content.replace(/\n$/, '').split('\n').length);
 
-function functionsOf(file: FileRecord, limits: HealthLimits): FunctionOverLimit[] {
-  const walk = (nodes: SymbolNode[], owner?: string): FunctionOverLimit[] => nodes.flatMap((node) => {
+interface FunctionSymbol {
+  path: string;
+  name: string;
+  node: SymbolNode;
+}
+
+/** Every function-like declaration of a file, members named `Class.member`. */
+function functionSymbols(file: FileRecord): FunctionSymbol[] {
+  const walk = (nodes: SymbolNode[], owner?: string): FunctionSymbol[] => nodes.flatMap((node) => {
     const name = owner ? `${owner}.${node.name}` : node.name;
     const inner = node.members ? walk(node.members, node.name) : [];
-    const lines = node.lineEnd - node.lineStart + 1;
-    if (!FUNCTION_KINDS.has(node.kind) || lines <= limits.maxFunctionLines) return inner;
-    const limit = lines > limits.hardFunctionLines ? 'hard' as const : 'soft' as const;
-    return [{ path: file.path, name, kind: node.kind, lineStart: node.lineStart, lineEnd: node.lineEnd, lines, limit }, ...inner];
+    return FUNCTION_KINDS.has(node.kind) ? [{ path: file.path, name, node }, ...inner] : inner;
   });
   return walk(file.symbols);
 }
 
-function countFunctions(nodes: SymbolNode[]): number {
-  return nodes.reduce((n, node) => n + (FUNCTION_KINDS.has(node.kind) ? 1 : 0) + countFunctions(node.members ?? []), 0);
+function overLength({ path: p, name, node }: FunctionSymbol, limits: HealthLimits): FunctionOverLimit[] {
+  const lines = node.lineEnd - node.lineStart + 1;
+  if (lines <= limits.maxFunctionLines) return [];
+  const limit = lines > limits.hardFunctionLines ? 'hard' as const : 'soft' as const;
+  return [{ path: p, name, kind: node.kind, lineStart: node.lineStart, lineEnd: node.lineEnd, lines, limit }];
+}
+
+/** The nesting depth the scan recorded; outputs of a version before 0.4.0 have none and must be scanned again. */
+function nestingOf({ path: p, name, node }: FunctionSymbol): number {
+  if (node.nesting === undefined) throw new Error(`${p}: ${name} has no nesting depth; the scan outputs predate it, scan again.`);
+  return node.nesting;
+}
+
+function overNesting(fn: FunctionSymbol, limits: HealthLimits): DeepFunction[] {
+  const nesting = nestingOf(fn);
+  if (nesting <= limits.maxNestingDepth) return [];
+  return [{ path: fn.path, name: fn.name, kind: fn.node.kind, lineStart: fn.node.lineStart, lineEnd: fn.node.lineEnd, nesting }];
 }
 
 function notMeasuredReason(file: FileRecord): string | null {
@@ -70,15 +90,17 @@ export function health(map: CodeMap, topology: Topology, root: string, limits: H
   checkLimits(limits);
   const { code, notMeasured } = measure(map, root, new Set(packs.filter((p) => p.data).map((p) => p.id)));
   const files = code.filter((f) => f.lines > limits.maxFileLines).map(({ path: p, language, lines }) => ({ path: p, language, lines }));
-  const functions = code.flatMap((f) => functionsOf(f, limits));
+  const symbols = code.flatMap(functionSymbols);
+  const functions = symbols.flatMap((f) => overLength(f, limits));
+  const nesting = symbols.flatMap((f) => overNesting(f, limits));
   const duplicates = findDuplicates(code.map((f): SourceFile => ({ path: f.path, content: f.content })), limits.minDuplicateLines);
   const cycles = topology.summary.circularDependencies.map((c) => c.cycle);
   return {
-    generatorVersion: GENERATOR_VERSION, limits, files, functions, duplicates, cycles, notMeasured,
+    generatorVersion: GENERATOR_VERSION, limits, files, functions, nesting, duplicates, cycles, notMeasured,
     totals: {
-      files: code.length, lines: code.reduce((n, f) => n + f.lines, 0), filesOverLimit: files.length,
-      functions: code.reduce((n, f) => n + countFunctions(f.symbols), 0),
+      files: code.length, lines: code.reduce((n, f) => n + f.lines, 0), filesOverLimit: files.length, functions: symbols.length,
       functionsOverSoft: functions.filter((f) => f.limit === 'soft').length, functionsOverHard: functions.filter((f) => f.limit === 'hard').length,
+      functionsOverNesting: nesting.length, deepestNesting: symbols.reduce((n, f) => Math.max(n, nestingOf(f)), 0),
       duplicateBlocks: duplicates.length, duplicatedLines: duplicates.reduce((n, d) => n + d.lines * (d.locations.length - 1), 0),
       cycles: cycles.length, notMeasured: notMeasured.length,
     },

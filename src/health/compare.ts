@@ -1,13 +1,14 @@
-import { LIMIT_NAMES, HealthLimitsError, type FunctionOverLimit, type HealthComparison, type HealthReport } from './types.js';
+import { LIMIT_NAMES, HealthLimitsError, type DeepFunction, type FunctionOverLimit, type HealthComparison, type HealthReport } from './types.js';
 
 /**
  * What a change did to code health (FR-07, CIN-18): of two reports of the same project made with the same limits, the
- * files and functions that crossed a limit, the new duplicated blocks and import cycles, and the totals before and after.
+ * files and functions that crossed a limit (length or nesting), the new duplicated blocks and import cycles, and the
+ * totals before and after.
  */
 
 const RANK = { soft: 1, hard: 2 } as const;
 
-const functionKey = (f: FunctionOverLimit) => `${f.path}\u0000${f.name}`;
+const functionKey = (f: FunctionOverLimit | DeepFunction) => `${f.path}\u0000${f.name}`;
 
 /** A cycle in a stable form, so the same cycle found from another start file is the same cycle. */
 function cycleKey(cycle: string[]): string {
@@ -25,6 +26,7 @@ export function compareHealth(before: HealthReport, after: HealthReport): Health
   sameLimits(before, after);
   const filesBefore = new Set(before.files.map((f) => f.path));
   const functionsBefore = new Map(before.functions.map((f) => [functionKey(f), RANK[f.limit]]));
+  const deepBefore = new Set(before.nesting.map(functionKey));
   const keysBefore = new Set(before.duplicates.flatMap((d) => d.keys));
   const cyclesBefore = new Set(before.cycles.map(cycleKey));
   const linesBefore = new Map(before.notMeasured.map((f) => [f.path, f.lines]));
@@ -32,6 +34,7 @@ export function compareHealth(before: HealthReport, after: HealthReport): Health
     limits: after.limits,
     files: after.files.filter((f) => !filesBefore.has(f.path)),
     functions: after.functions.filter((f) => (functionsBefore.get(functionKey(f)) ?? 0) < RANK[f.limit]),
+    nesting: after.nesting.filter((f) => !deepBefore.has(functionKey(f))),
     duplicates: after.duplicates.filter((d) => !d.keys.some((k) => keysBefore.has(k))),
     cycles: after.cycles.filter((c) => !cyclesBefore.has(cycleKey(c))),
     notMeasured: after.notMeasured.filter((f) => linesBefore.get(f.path) !== f.lines),

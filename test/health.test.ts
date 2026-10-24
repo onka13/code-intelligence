@@ -11,7 +11,7 @@ import { scan } from '../src/scan/scan.js';
 import { REPO, tempDir, writeFiles } from './helpers.js';
 
 const CLI = path.join(REPO, 'dist', 'src', 'cli.js');
-const LIMITS: HealthLimits = { maxFileLines: 300, maxFunctionLines: 25, hardFunctionLines: 40, minDuplicateLines: 6 };
+const LIMITS: HealthLimits = { maxFileLines: 300, maxFunctionLines: 25, hardFunctionLines: 40, maxNestingDepth: 4, minDuplicateLines: 6 };
 
 /** A TypeScript class of exactly `lines` lines: 3-line filler methods, one-line fields to fill up, then `extra`. */
 function classFile(name: string, lines: number, extra: string[] = []): string {
@@ -74,12 +74,12 @@ test('CIN-18 the command assumes no limit and names the missing ones', async () 
   execFileSync('node', [CLI, 'scan', root]);
   const run = spawnSync('node', [CLI, 'health', root, '--max-file-lines', '300'], { encoding: 'utf8' });
   assert.equal(run.status, 2);
-  assert.match(run.stderr, /Missing limit\(s\): maxFunctionLines, hardFunctionLines, minDuplicateLines/);
-  const flags = ['--max-file-lines', '300', '--max-function-lines', '25', '--hard-function-lines', '40', '--min-duplicate-lines', '6', '--json'];
+  assert.match(run.stderr, /Missing limit\(s\): maxFunctionLines, hardFunctionLines, maxNestingDepth, minDuplicateLines/);
+  const flags = ['--max-file-lines', '300', '--max-function-lines', '25', '--hard-function-lines', '40', '--max-nesting-depth', '4', '--min-duplicate-lines', '6', '--json'];
   const report = JSON.parse(execFileSync('node', [CLI, 'health', root, ...flags], { encoding: 'utf8' }));
   assert.equal(report.totals.filesOverLimit, 1);
   const reportFile = path.join(root, 'after.json');
   fs.writeFileSync(reportFile, JSON.stringify(report));
   const compared = JSON.parse(execFileSync('node', [CLI, 'health-compare', reportFile, reportFile, '--json'], { encoding: 'utf8' }));
-  assert.deepEqual([compared.files, compared.functions, compared.duplicates], [[], [], []]);
+  assert.deepEqual([compared.files, compared.functions, compared.nesting, compared.duplicates], [[], [], [], []]);
 });
