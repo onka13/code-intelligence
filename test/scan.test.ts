@@ -51,7 +51,7 @@ test('CIN-01: a scan writes the published outputs with members, imports and a su
   const out = path.join(tempDir(), 'out');
   const { map, topology } = await scan({ root, out, packs: PACKS });
 
-  for (const file of ['ast_code_map.json', 'graphify_topology.json', 'TopologyFULL.txt', 'project_structure.md']) assert.ok(fs.existsSync(path.join(out, file)), file);
+  for (const file of ['ast_code_map.json', 'topology.json', 'TopologyFULL.txt', 'project_structure.md']) assert.ok(fs.existsSync(path.join(out, file)), file);
   for (const file of Object.keys(MIXED)) assert.ok(map.files.some((f) => f.path === file), file);
   const service = map.files.find((f) => f.path === 'src/orders/orderService.ts')!;
   assert.equal(service.language, 'typescript');

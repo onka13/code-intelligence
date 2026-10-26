@@ -22,7 +22,7 @@ export async function goldenOutputs(pack: string): Promise<Record<string, string
   const { map, topology, out } = await scan({ root: fixturePaths(pack).project, out: path.join(tempDir(), 'out'), packs: PACKS });
   return {
     'ast_code_map.json': `${JSON.stringify({ ...(stableMap(map) as object), rootName: 'project' }, null, 2)}\n`,
-    'graphify_topology.json': `${JSON.stringify(stableTopology(topology), null, 2)}\n`,
+    'topology.json': `${JSON.stringify(stableTopology(topology), null, 2)}\n`,
     'TopologyFULL.txt': fs.readFileSync(path.join(out, 'TopologyFULL.txt'), 'utf8'),
   };
 }

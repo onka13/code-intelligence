@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "graphify_topology.json",
+  "title": "topology.json",
   "description": "The dependency graph: files and their top-level declarations, import, defines, extends and implements edges, degrees, centrality, PageRank, cycles, clusters and hubs.",
   "type": "object",
   "additionalProperties": false,

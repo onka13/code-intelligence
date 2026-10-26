@@ -8,7 +8,7 @@ export const GENERATOR_VERSION: string = JSON.parse(fs.readFileSync(new URL('../
 
 export const OUTPUT_FILES = {
   codeMap: 'ast_code_map.json',
-  topology: 'graphify_topology.json',
+  topology: 'topology.json',
   topologyText: 'TopologyFULL.txt',
   structure: 'project_structure.md',
 } as const;

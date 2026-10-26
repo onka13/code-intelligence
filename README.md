@@ -22,7 +22,7 @@ A second `scan` parses only files whose size or modification time changed (`--fu
 | File | What it holds | Schema |
 | :--- | :--- | :--- |
 | `ast_code_map.json` | Every file: language, declarations as a tree (classes hold their fields, methods, getters and constructors, with signatures and visibility), imports resolved to project files or packages, a skeleton, token estimates, parse errors; the scan summary; the dependency audit | `schema/ast_code_map.schema.json` |
-| `graphify_topology.json` | Files and their top-level declarations as nodes; `imports`, `defines`, `extends`, `implements` edges; in- and out-degree, centrality score, PageRank, clusters, import cycles, top hubs | `schema/graphify_topology.schema.json` |
+| `topology.json` | Files and their top-level declarations as nodes; `imports`, `defines`, `extends`, `implements` edges; in- and out-degree, centrality score, PageRank, clusters, import cycles, top hubs | `schema/topology.schema.json` |
 | `TopologyFULL.txt` | The folder tree with every public declaration and its public members under each file | text |
 | `project_structure.md` | The same declarations as Markdown, one section per file | text |
 

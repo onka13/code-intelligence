@@ -15,7 +15,7 @@ import type { ScanSummary } from './model.js';
 const USAGE = `Usage: codeintel <command> [options]
 
   scan <folder> [--out <dir>] [--exclude <path>]... [--full] [--json]
-        Scan a folder and write ast_code_map.json, graphify_topology.json, TopologyFULL.txt and
+        Scan a folder and write ast_code_map.json, topology.json, TopologyFULL.txt and
         project_structure.md to --out (default <folder>/.codeintel). Unchanged files are not parsed
         again unless --full is given.
   map [<subfolder or file>] [--out <dir>] [--fields] [--full] [--depth <n>] [--folders]

@@ -9,7 +9,7 @@ import { SCHEMA_VERSION } from '../src/version.js';
 import { packFolders, fixturePaths } from './golden.js';
 import { read, readJson, REPO, tempDir } from './helpers.js';
 
-const SCHEMAS = ['ast_code_map.schema.json', 'graphify_topology.schema.json'];
+const SCHEMAS = ['ast_code_map.schema.json', 'topology.schema.json'];
 const schemaFile = (name: string) => path.join(REPO, 'schema', name);
 
 test('CIN-06: every JSON output carries its versions and follows the published schema', async () => {

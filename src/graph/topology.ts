@@ -4,7 +4,7 @@ import { buildGraph } from './build.js';
 import { clusterOf, cycles, degrees, pageRank } from './metrics.js';
 
 /**
- * The topology graph (graphify_topology.json). File degrees count import edges; a declaration's degrees count the
+ * The topology graph (topology.json). File degrees count import edges; a declaration's degrees count the
  * extends and implements edges. `centralityScore` is twice the in-degree plus the out-degree; `pageRank` ranks files
  * by the import graph.
  */
