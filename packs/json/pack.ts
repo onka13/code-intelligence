@@ -23,7 +23,9 @@ export const jsonPack: LanguagePack = {
     try {
       parsed = parseJsonc(content);
     } catch (err) {
-      throw new ParseError(`Invalid JSON: ${(err as Error).message}`);
+      // Node 24 and later append "(line N column M)"; drop it so outputs match on every Node version.
+      const message = (err as Error).message.replace(/ \(line \d+ column \d+\)$/, '');
+      throw new ParseError(`Invalid JSON: ${message}`);
     }
     const declares = path.posix.basename(file) === 'package.json' ? packageDependencies(parsed) : undefined;
     return { symbols: [], imports: [], skeleton: dataSkeleton('JSON', content, parsed), ...(declares ? { declares } : {}) };

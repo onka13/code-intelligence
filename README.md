@@ -3,7 +3,7 @@
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
 [![TypeScript: Strict](https://img.shields.io/badge/TypeScript-strict-3178c6.svg?logo=typescript&logoColor=white)](tsconfig.json)
 [![Tests](https://github.com/onka13/code-intelligence/actions/workflows/ci.yml/badge.svg)](https://github.com/onka13/code-intelligence/actions/workflows/ci.yml)
-[![Node: >=20](https://img.shields.io/badge/node-%3E%3D20-339933.svg?logo=node.js&logoColor=white)](package.json)
+[![Node: >=22](https://img.shields.io/badge/node-%3E%3D22-339933.svg?logo=node.js&logoColor=white)](package.json)
 
 **Give your AI coding tool a map of the codebase, not a pile of files.**
 

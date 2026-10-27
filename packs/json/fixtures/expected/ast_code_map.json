@@ -10,7 +10,7 @@
     "failed": [
       {
         "path": "config/broken.json",
-        "error": "Invalid JSON: Expected ',' or ']' after array element in JSON at position 18 (line 1 column 19)"
+        "error": "Invalid JSON: Expected ',' or ']' after array element in JSON at position 18"
       }
     ],
     "unsupported": {},
@@ -33,7 +33,7 @@
       "skeleton": "",
       "rawTokens": 6,
       "skeletonTokens": 0,
-      "error": "Invalid JSON: Expected ',' or ']' after array element in JSON at position 18 (line 1 column 19)"
+      "error": "Invalid JSON: Expected ',' or ']' after array element in JSON at position 18"
     },
     {
       "path": "config/settings.json",
