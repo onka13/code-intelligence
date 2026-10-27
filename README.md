@@ -14,7 +14,7 @@ Code Intelligence scans a project and produces every file's declarations with th
 >
 > Embeddings are still the better tool for fuzzy questions such as "where do we handle retries?" when you do not know the names. The two complement each other: use search to find where to look, and Code Intelligence to see what surrounds it.
 
-> **Status:** version 0.5. The command-line interface and the library are usable today, and the output schemas are versioned. Details may still change before 1.0.
+> **Status:** version 0.6. The command-line interface and the library are usable today, and the output schemas are versioned. Details may still change before 1.0.
 
 ## What it does, in one example
 
@@ -81,12 +81,12 @@ A production app with three tiers: a Flutter mobile app, a TypeScript API and a 
 
 | Tier | Files scanned | Declarations | Source tokens | Skeleton tokens | Saved | First scan | Rescan |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Flutter app (Dart) | 613 | 5,616 | 456,709 | 68,777 | 85% | 792 ms | 32 ms |
-| API (TypeScript) | 194 | 2,326 | 172,827 | 29,337 | 83% | 263 ms | 15 ms |
-| Admin (React) | 41 | 2,204 | 124,354 | 19,132 | 85% | 204 ms | 8 ms |
-| **Total** | **848** | **10,146** | **753,890** | **117,246** | **84%** | **1.3 s** | **55 ms** |
+| Flutter app (Dart) | 613 | 7,247 | 584,063 | 100,151 | 83% | 844 ms | 33 ms |
+| API (TypeScript) | 194 | 2,326 | 172,827 | 29,337 | 83% | 266 ms | 15 ms |
+| Admin (React) | 41 | 2,204 | 124,354 | 19,132 | 85% | 208 ms | 7 ms |
+| **Total** | **848** | **11,777** | **881,244** | **148,620** | **83%** | **1.3 s** | **55 ms** |
 
-Token columns count the 758 source files that parsed, without data files. 30 Dart files did not parse and are left out: the bundled Dart grammar predates Dart 3 records and patterns, which freezed output uses, and is being replaced. A rescan with no changes reads only file sizes and modification times.
+Every file parsed. The token columns count the 788 source files, without data files (JSON, YAML) and files no pack reads. A rescan with no changes reads only file sizes and modification times.
 
 ## Quick start
 
@@ -237,7 +237,7 @@ node dist/src/cli.js health-compare before.json after.json --json
 | Pack | Files | Notes |
 | :--- | :--- | :--- |
 | `typescript` | `.ts .tsx .mts .cts .js .jsx .mjs .cjs` | Grammar from `tree-sitter-typescript` 0.23.2; a bare `&` in JSX text is read; `tsconfig.json` `paths` and `baseUrl`; NodeNext `./a.js` imports resolve to `a.ts`; CommonJS exports |
-| `dart` | `.dart` | the project's own `package:` imports resolve to `lib/`; Flutter lifecycle methods are marked |
+| `dart` | `.dart` | Dart 3 (records, patterns, switch expressions, class modifiers), with a grammar built from a pinned upstream commit ([grammars/](grammars/README.md)); the project's own `package:` imports resolve to `lib/`; Flutter lifecycle methods are marked |
 | `csharp` | `.cs` | Classes, structs, records, interfaces, enums and delegates with all their members; `using` resolves to project files ([details](packs/csharp/README.md)) |
 | `msbuild` | `.csproj .props .targets .sln .slnx` | Package dependencies, and project references as graph edges ([details](packs/msbuild/README.md)) |
 | `json` | `.json` | comments and trailing commas allowed; `package.json` dependencies |

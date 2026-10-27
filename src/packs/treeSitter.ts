@@ -1,5 +1,6 @@
 import { createRequire } from 'node:module';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { Language, Parser, Query, type Node } from 'web-tree-sitter';
 import { ParseError } from './pack.js';
 
@@ -22,7 +23,12 @@ const OWN_PACKAGE: Record<string, string> = {
   tsx: 'tree-sitter-typescript',
 };
 
+/** Grammars no package ships current, built by this project (`grammars/README.md`; Dart: the packages predate Dart 3). */
+const BUILT_HERE = new Set(['dart']);
+const GRAMMARS_FOLDER = fileURLToPath(new URL('../../../grammars/', import.meta.url));
+
 function grammarFile(grammar: string): string {
+  if (BUILT_HERE.has(grammar)) return path.join(GRAMMARS_FOLDER, `tree-sitter-${grammar}.wasm`);
   const own = OWN_PACKAGE[grammar];
   if (own) return path.join(path.dirname(require.resolve(`${own}/package.json`)), `tree-sitter-${grammar}.wasm`);
   return path.join(path.dirname(require.resolve('tree-sitter-wasms/package.json')), 'out', `tree-sitter-${grammar}.wasm`);

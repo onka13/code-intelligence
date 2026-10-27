@@ -14,6 +14,39 @@ async function scanFiles(files: Record<string, string>) {
   return (file: string) => map.files.find((f) => f.path === file)!;
 }
 
+test('CIN-20: Dart 3 records, patterns, switch expressions and class modifiers are read', async () => {
+  const file = await scanFiles({
+    'lib/shapes.dart': [
+      'sealed class Shape {}',
+      'final class Square extends Shape {',
+      '  final double side;',
+      '  Square(this.side);',
+      '}',
+      '',
+      '({String name, int age}) person() => (name: "Ada", age: 36);',
+      '',
+      'double area(Shape shape) => switch (shape) {',
+      '  Square(side: final s) when s > 0 => s * s,',
+      '  _ => 0,',
+      '};',
+      '',
+      'String describe(Object value) {',
+      '  switch (value) {',
+      '    case (int a, int b) when a > b:',
+      '      return "pair";',
+      '    case _:',
+      '      return "other";',
+      '  }',
+      '}',
+      '',
+    ].join('\n'),
+  });
+  const shapes = file('lib/shapes.dart');
+  assert.equal(shapes.error, undefined);
+  assert.deepEqual(shapes.symbols.map((s) => s.name), ['Shape', 'Square', 'person', 'area', 'describe']);
+  assert.match(shapes.skeleton, /\(\{String name, int age\}\) person\(\)/);
+});
+
 test('CIN-20: a bare & in JSX text is read; a broken element is still an error', async () => {
   const file = await scanFiles({
     'src/Roles.tsx': [
