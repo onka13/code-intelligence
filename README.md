@@ -81,12 +81,12 @@ A production app with three tiers: a Flutter mobile app, a TypeScript API and a 
 
 | Tier | Files scanned | Declarations | Source tokens | Skeleton tokens | Saved | First scan | Rescan |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Flutter app (Dart) | 613 | 5,616 | 456,709 | 68,777 | 85% | 767 ms | 30 ms |
-| API (TypeScript) | 194 | 2,326 | 172,827 | 29,337 | 83% | 491 ms | 14 ms |
-| Admin (React) | 41 | 2,184 | 103,909 | 18,701 | 82% | 387 ms | 7 ms |
-| **Total** | **848** | **10,126** | **733,445** | **116,815** | **84%** | **1.6 s** | **51 ms** |
+| Flutter app (Dart) | 613 | 5,616 | 456,709 | 68,777 | 85% | 792 ms | 32 ms |
+| API (TypeScript) | 194 | 2,326 | 172,827 | 29,337 | 83% | 263 ms | 15 ms |
+| Admin (React) | 41 | 2,204 | 124,354 | 19,132 | 85% | 204 ms | 8 ms |
+| **Total** | **848** | **10,146** | **753,890** | **117,246** | **84%** | **1.3 s** | **55 ms** |
 
-Token columns count the 754 source files that parsed, without data files. 34 files did not parse and are left out: Dart 3 records and patterns (freezed output) and a bare `&` in JSX text are beyond the bundled grammars, which are due for an update. A rescan with no changes reads only file sizes and modification times.
+Token columns count the 758 source files that parsed, without data files. 30 Dart files did not parse and are left out: the bundled Dart grammar predates Dart 3 records and patterns, which freezed output uses, and is being replaced. A rescan with no changes reads only file sizes and modification times.
 
 ## Quick start
 
@@ -236,7 +236,7 @@ node dist/src/cli.js health-compare before.json after.json --json
 
 | Pack | Files | Notes |
 | :--- | :--- | :--- |
-| `typescript` | `.ts .tsx .mts .cts .js .jsx .mjs .cjs` | `tsconfig.json` `paths` and `baseUrl`; NodeNext `./a.js` imports resolve to `a.ts`; CommonJS exports |
+| `typescript` | `.ts .tsx .mts .cts .js .jsx .mjs .cjs` | Grammar from `tree-sitter-typescript` 0.23.2; a bare `&` in JSX text is read; `tsconfig.json` `paths` and `baseUrl`; NodeNext `./a.js` imports resolve to `a.ts`; CommonJS exports |
 | `dart` | `.dart` | the project's own `package:` imports resolve to `lib/`; Flutter lifecycle methods are marked |
 | `csharp` | `.cs` | Classes, structs, records, interfaces, enums and delegates with all their members; `using` resolves to project files ([details](packs/csharp/README.md)) |
 | `msbuild` | `.csproj .props .targets .sln .slnx` | Package dependencies, and project references as graph edges ([details](packs/msbuild/README.md)) |

@@ -13,9 +13,14 @@ const queries = new WeakMap<Language, Map<string, Query>>();
 
 /**
  * Grammars that `tree-sitter-wasms` ships too old for current code come from the grammar's own package, pinned in
- * package.json (C#: tree-sitter-wasms has 0.20, which predates C# 12).
+ * package.json (C#: tree-sitter-wasms has 0.20, which predates C# 12; TypeScript and TSX: its 0.20 grammar rejects a
+ * bare `&` in JSX text).
  */
-const OWN_PACKAGE: Record<string, string> = { c_sharp: 'tree-sitter-c-sharp' };
+const OWN_PACKAGE: Record<string, string> = {
+  c_sharp: 'tree-sitter-c-sharp',
+  typescript: 'tree-sitter-typescript',
+  tsx: 'tree-sitter-typescript',
+};
 
 function grammarFile(grammar: string): string {
   const own = OWN_PACKAGE[grammar];
@@ -45,13 +50,22 @@ export function query(language: Language, key: string, source: string): Query {
   return compiled.get(key)!;
 }
 
+/**
+ * Error nodes that are gaps of a pinned grammar, not errors in the code: valid code the grammar cannot read while the
+ * rest of the tree stays intact. TSX: a bare `&` in JSX text ("Roles & Permissions"), which TypeScript and React accept;
+ * the newest tree-sitter-typescript (0.23.2) still rejects it.
+ */
+const GRAMMAR_GAPS: Record<string, (error: Node) => boolean> = {
+  tsx: (error) => error.parent?.type === 'jsx_element' && /^&[^{}<>]*$/.test(error.text),
+};
+
 /** The first syntax error of a tree, as a message with its line, or undefined. */
-function firstError(node: Node): string | undefined {
+function firstError(node: Node, isGap?: (error: Node) => boolean): string | undefined {
   if (node.isMissing) return `Syntax error at line ${node.startPosition.row + 1}: missing ${node.type}`;
-  if (node.type === 'ERROR') return `Syntax error at line ${node.startPosition.row + 1}`;
+  if (node.type === 'ERROR') return isGap?.(node) ? undefined : `Syntax error at line ${node.startPosition.row + 1}`;
   if (!node.hasError) return undefined;
   for (const child of node.children) {
-    const found = child && firstError(child);
+    const found = child && firstError(child, isGap);
     if (found) return found;
   }
   return undefined;
@@ -66,7 +80,7 @@ export async function withTree<T>(grammar: string, content: string, use: (root: 
   const tree = parser.parse(content);
   if (!tree) throw new ParseError('The parser returned no tree');
   try {
-    const error = firstError(tree.rootNode);
+    const error = firstError(tree.rootNode, GRAMMAR_GAPS[grammar]);
     if (error) throw new ParseError(error);
     return use(tree.rootNode, language);
   } finally {
