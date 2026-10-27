@@ -1,8 +1,20 @@
 # Code Intelligence
 
-A map of a codebase for AI tools: every file's declarations with their members and signatures, the import graph, the most central files, and the files around a change within a token budget. One Tree-sitter **language pack** per language, so anyone can add one.
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
+[![TypeScript: Strict](https://img.shields.io/badge/TypeScript-strict-3178c6.svg?logo=typescript&logoColor=white)](tsconfig.json)
+[![Tests](https://github.com/onka13/code-intelligence/actions/workflows/ci.yml/badge.svg)](https://github.com/onka13/code-intelligence/actions/workflows/ci.yml)
+[![Node: >=20](https://img.shields.io/badge/node-%3E%3D20-339933.svg?logo=node.js&logoColor=white)](package.json)
 
-> Working name until the project is published. License: Apache-2.0.
+**Give your AI coding tool a map of the codebase, not a pile of files.**
+
+Code Intelligence scans a project and produces every file's declarations with their members and signatures, the import graph, the most central files, and the files around a change within a token budget. One Tree-sitter **language pack** per language, so anyone can add one. No network access, no telemetry, no model calls.
+
+> **Why not embeddings?**
+> Vector search is fuzzy and semantic; it misses structural dependencies and import graphs. Text search (grep) has no concept of scopes or ASTs. Code Intelligence gives agents deterministic, language-level structural awareness with zero embedding costs.
+>
+> Embeddings are still the better tool for fuzzy questions such as "where do we handle retries?" when you do not know the names. The two complement each other: use search to find where to look, and Code Intelligence to see what surrounds it.
+
+> **Status:** version 0.5. The command-line interface and the library are usable today, and the output schemas are versioned. Details may still change before 1.0.
 
 ## What it does, in one example
 
@@ -61,7 +73,20 @@ class OrderService implements IOrderService {
 </td></tr>
 </table>
 
-The scan also resolves every import to a project file or a package. That gives a dependency graph, so a tool can ask which files matter most and which files surround a change, and get answers that fit a token budget.
+That is **64% fewer tokens** for this file (259 down to 93). The scan also resolves every import to a project file or a package. That gives a dependency graph, so a tool can ask which files matter most and which files surround a change, and get answers that fit a token budget.
+
+## On a real project
+
+A production app with three tiers: a Flutter mobile app, a TypeScript API and a React admin panel. Measured on an Apple M4 Pro with Node 22.
+
+| Tier | Files scanned | Declarations | Source tokens | Skeleton tokens | Saved | First scan | Rescan |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Flutter app (Dart) | 613 | 5,616 | 456,709 | 68,777 | 85% | 767 ms | 30 ms |
+| API (TypeScript) | 194 | 2,326 | 172,827 | 29,337 | 83% | 491 ms | 14 ms |
+| Admin (React) | 41 | 2,184 | 103,909 | 18,701 | 82% | 387 ms | 7 ms |
+| **Total** | **848** | **10,126** | **733,445** | **116,815** | **84%** | **1.6 s** | **51 ms** |
+
+Token columns count the 754 source files that parsed, without data files. 34 files did not parse and are left out: Dart 3 records and patterns (freezed output) and a bare `&` in JSX text are beyond the bundled grammars, which are due for an update. A rescan with no changes reads only file sizes and modification times.
 
 ## Quick start
 
@@ -213,8 +238,8 @@ node dist/src/cli.js health-compare before.json after.json --json
 | :--- | :--- | :--- |
 | `typescript` | `.ts .tsx .mts .cts .js .jsx .mjs .cjs` | `tsconfig.json` `paths` and `baseUrl`; NodeNext `./a.js` imports resolve to `a.ts`; CommonJS exports |
 | `dart` | `.dart` | the project's own `package:` imports resolve to `lib/`; Flutter lifecycle methods are marked |
-| `csharp` | `.cs` | classes, structs, records (positional parameters as properties), interfaces, enums and delegates, with nested types, methods, constructors, operators, indexers, properties (with their accessors) and fields; `public` and `internal` count as public. A `using` resolves to every project file that declares the namespace (for `using static` and aliases also the namespace the type sits in); any other namespace is a package. Base types named `I` + capital are interfaces. Grammar from `tree-sitter-c-sharp` 0.23.5 (C# 12 and later) |
-| `msbuild` | `.csproj .props .targets .sln .slnx` | `PackageReference` entries are dependencies (`PrivateAssets="all"` as development ones; the version is empty with central package management); `ProjectReference` entries and the projects of a solution are imports, so project references are edges of the graph. Read by a small strict XML reader: a malformed file is recorded with its error |
+| `csharp` | `.cs` | Classes, structs, records, interfaces, enums and delegates with all their members; `using` resolves to project files ([details](packs/csharp/README.md)) |
+| `msbuild` | `.csproj .props .targets .sln .slnx` | Package dependencies, and project references as graph edges ([details](packs/msbuild/README.md)) |
 | `json` | `.json` | comments and trailing commas allowed; `package.json` dependencies |
 | `yaml` | `.yaml .yml` | `pubspec.yaml` dependencies, including SDK, path and git dependencies |
 

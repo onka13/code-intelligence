@@ -1,9 +1,27 @@
 {
   "name": "code-intelligence",
   "version": "0.5.0",
-  "private": true,
+  "private": false,
   "description": "A symbol map, dependency graph and token-budgeted context for any codebase, with one Tree-sitter language pack per language.",
   "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onka13/code-intelligence.git"
+  },
+  "homepage": "https://github.com/onka13/code-intelligence#readme",
+  "bugs": {
+    "url": "https://github.com/onka13/code-intelligence/issues"
+  },
+  "keywords": [
+    "tree-sitter",
+    "ai-agents",
+    "code-context",
+    "code-map",
+    "dependency-graph",
+    "static-analysis",
+    "llm",
+    "mcp"
+  ],
   "type": "module",
   "bin": {
     "codeintel": "dist/src/cli.js"
