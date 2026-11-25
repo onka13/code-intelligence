@@ -1,23 +1,34 @@
-import type { CodeMap, GraphNode, Topology } from '../model.js';
+import type { CodeMap, FileRecord, GraphNode, Topology } from '../model.js';
 import { fileId } from '../graph/build.js';
 
 /**
  * The files around a change (CIN-08): the targets, their direct imports and importers (tier 2), then what those
- * import (tier 1). Related files are taken most central first while their skeletons fit the token budget.
+ * import (tier 1). Each file comes with its brief (its skeleton), or is counted at its full size when the caller reads
+ * contents instead. Without a budget every tier-2 file is taken and tier 1 is only counted; with one, files are taken
+ * tier by tier, most central first, while they fit.
  */
 
 export interface NeighborhoodEntry {
   path: string;
   tier: 1 | 2 | 3;
   reason: string;
-  /** Raw tokens for a target (it is read in full), skeleton tokens for a related file. */
+  /** Brief tokens, or raw tokens when contents were asked for. */
   tokens: number;
+  /** The file's brief; absent when contents were asked for. */
+  brief?: string;
+}
+
+export interface NeighborhoodOptions {
+  /** The most tokens the related files may take; absent: every direct import and importer, and no tier 1. */
+  budget?: number;
+  /** Count files at their full size, for a caller that reads their contents instead of their briefs. */
+  contents?: boolean;
 }
 
 export interface Neighborhood {
   targets: NeighborhoodEntry[];
   selected: NeighborhoodEntry[];
-  budget: number;
+  budget?: number;
   selectedTokens: number;
   omitted: { files: number; tokens: number };
 }
@@ -54,11 +65,17 @@ function candidates(targets: string[], topology: Topology): Candidate[] {
   return [...seen.values()].filter((c) => c.reason !== 'target');
 }
 
-export function neighborhood(map: CodeMap, topology: Topology, targetPaths: string[], budget: number): Neighborhood {
+function entryOf(record: FileRecord, candidate: Omit<NeighborhoodEntry, 'tokens'>, contents: boolean): NeighborhoodEntry {
+  if (contents) return { ...candidate, tokens: record.rawTokens };
+  return { ...candidate, tokens: record.skeletonTokens, brief: record.skeleton };
+}
+
+export function neighborhood(map: CodeMap, topology: Topology, targetPaths: string[], options: NeighborhoodOptions = {}): Neighborhood {
   const records = new Map(map.files.map((f) => [f.path, f]));
   const targets = targetPaths.map((p) => p.replace(/^\.\//, ''));
   const unknown = targets.filter((t) => !records.has(t));
   if (unknown.length) throw new UnknownFileError(`Not in the code map: ${unknown.join(', ')}`);
+  const { budget, contents = false } = options;
   const nodes = new Map<string, GraphNode>(topology.nodes.filter((n) => n.type === 'file').map((n) => [n.path, n]));
   const score = (p: string) => nodes.get(p)?.centralityScore ?? 0;
   const ordered = candidates(targets, topology).sort((a, b) => b.tier - a.tier || score(b.path) - score(a.path) || (a.path < b.path ? -1 : 1));
@@ -66,15 +83,16 @@ export function neighborhood(map: CodeMap, topology: Topology, targetPaths: stri
   let used = 0;
   let omittedTokens = 0;
   for (const c of ordered) {
-    const tokens = records.get(c.path)?.skeletonTokens ?? 0;
-    if (used + tokens <= budget) {
-      selected.push({ ...c, tokens });
-      used += tokens;
-    } else omittedTokens += tokens;
+    const entry = entryOf(records.get(c.path)!, c, contents);
+    const fits = budget === undefined ? c.tier === 2 : used + entry.tokens <= budget;
+    if (fits) {
+      selected.push(entry);
+      used += entry.tokens;
+    } else omittedTokens += entry.tokens;
   }
   return {
-    targets: targets.map((t) => ({ path: t, tier: 3, reason: 'target', tokens: records.get(t)!.rawTokens })),
-    selected, budget, selectedTokens: used,
+    targets: targets.map((t) => entryOf(records.get(t)!, { path: t, tier: 3, reason: 'target' }, contents)),
+    selected, ...(budget === undefined ? {} : { budget }), selectedTokens: used,
     omitted: { files: ordered.length - selected.length, tokens: omittedTokens },
   };
 }

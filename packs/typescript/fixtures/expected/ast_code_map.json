@@ -15,7 +15,7 @@
     },
     "symbols": 90,
     "rawTokens": 2288,
-    "skeletonTokens": 1017,
+    "skeletonTokens": 1015,
     "durationMs": 0
   },
   "files": [
@@ -1069,9 +1069,9 @@
         }
       ],
       "imports": [],
-      "skeleton": "type OrderStatus = 'NEW' | 'PAID' | 'SHIPPED';\n\nenum PaymentMethod {\n  Card = 'CARD';\n  Transfer = 'TRANSFER';\n}\n\ninterface OrderItem {\n  sku: string;\n  quantity: number;\n}\n\ninterface Order {\n  id: string;\n  items: OrderItem[];\n  status: OrderStatus;\n  payment?: PaymentMethod;\n}\n\nconst MAX_ITEMS;",
+      "skeleton": "type OrderStatus = 'NEW' | 'PAID' | 'SHIPPED';\n\nenum PaymentMethod { Card = 'CARD', Transfer = 'TRANSFER' }\n\ninterface OrderItem {\n  sku: string;\n  quantity: number;\n}\n\ninterface Order {\n  id: string;\n  items: OrderItem[];\n  status: OrderStatus;\n  payment?: PaymentMethod;\n}\n\nconst MAX_ITEMS;",
       "rawTokens": 89,
-      "skeletonTokens": 79
+      "skeletonTokens": 77
     },
     {
       "path": "src/orders/validation.ts",

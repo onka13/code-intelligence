@@ -6,7 +6,7 @@ import { previousCodeMap, writeOutputs } from '../outputs.js';
 import { GENERATOR_VERSION, SCHEMA_VERSION } from '../version.js';
 import { walk, type WalkedFile } from '../walk/walk.js';
 import { dependencyAudit } from './audit.js';
-import { DEFAULT_MAX_FILE_BYTES, packFor, parsedRecord, unsupportedRecord } from './records.js';
+import { DEFAULT_MAX_DATA_FILE_BYTES, DEFAULT_MAX_FILE_BYTES, packFor, parsedRecord, unsupportedRecord } from './records.js';
 import { resolveImports } from './resolveImports.js';
 
 /** A scan (FR-01): walk the folder, parse what changed, resolve imports, build the graph, write the four outputs. */
@@ -20,7 +20,10 @@ export interface ScanOptions {
   exclude?: string[];
   /** Parse every file again instead of reusing the records of unchanged ones. */
   full?: boolean;
+  /** Files larger than this are listed without being parsed; 200 KB when absent. */
   maxFileBytes?: number;
+  /** The same for data files (JSON, YAML), which are only shaped; 20 MB when absent. */
+  maxDataFileBytes?: number;
   packs: LanguagePack[];
 }
 
@@ -35,6 +38,10 @@ function reusable(previous: CodeMap | undefined): Map<string, FileRecord> {
   return new Map((previous?.files ?? []).map((f) => [f.path, f]));
 }
 
+function sizeLimit(options: ScanOptions, pack: LanguagePack): number {
+  return pack.data ? (options.maxDataFileBytes ?? DEFAULT_MAX_DATA_FILE_BYTES) : (options.maxFileBytes ?? DEFAULT_MAX_FILE_BYTES);
+}
+
 async function recordsOf(options: ScanOptions, files: WalkedFile[], previous: Map<string, FileRecord>) {
   const records: FileRecord[] = [];
   let parsed = 0;
@@ -44,7 +51,7 @@ async function recordsOf(options: ScanOptions, files: WalkedFile[], previous: Ma
     if (old && old.sizeBytes === file.sizeBytes && old.mtimeMs === file.mtimeMs) records.push(old);
     else if (!pack) records.push(unsupportedRecord(file));
     else {
-      records.push(await parsedRecord(options.root, file, pack, options.maxFileBytes ?? DEFAULT_MAX_FILE_BYTES));
+      records.push(await parsedRecord(options.root, file, pack, sizeLimit(options, pack)));
       parsed++;
     }
   }

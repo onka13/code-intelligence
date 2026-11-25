@@ -14,7 +14,7 @@ Code Intelligence scans a project and produces every file's declarations with th
 >
 > Embeddings are still the better tool for fuzzy questions such as "where do we handle retries?" when you do not know the names. The two complement each other: use search to find where to look, and Code Intelligence to see what surrounds it.
 
-> **Status:** version 0.6. The command-line interface and the library are usable today, and the output schemas are versioned. Details may still change before 1.0.
+> **Status:** version 0.7. The command-line interface and the library are usable today, and the output schemas are versioned. Details may still change before 1.0.
 
 ## What it does, in one example
 
@@ -86,7 +86,7 @@ A production app with three tiers: a Flutter mobile app, a TypeScript API and a 
 | Admin (React) | 41 | 2,204 | 124,354 | 19,132 | 85% | 208 ms | 7 ms |
 | **Total** | **848** | **11,777** | **881,244** | **148,620** | **83%** | **1.3 s** | **55 ms** |
 
-Every file parsed. The token columns count the 788 source files, without data files (JSON, YAML) and files no pack reads. A rescan with no changes reads only file sizes and modification times.
+Every file parsed, measured with version 0.6 (briefs are smaller since 0.7). The token columns count the 788 source files, without data files (JSON, YAML) and files no pack reads. A rescan with no changes reads only file sizes and modification times.
 
 ## Quick start
 
@@ -95,7 +95,8 @@ npm install
 npm run build
 node dist/src/cli.js scan path/to/project --out path/to/project/.codeintel
 node dist/src/cli.js map --out path/to/project/.codeintel --fields --depth 4
-node dist/src/cli.js neighborhood src/orders/orderService.ts --budget 8000 --out path/to/project/.codeintel
+node dist/src/cli.js neighborhood src/orders/orderService.ts --out path/to/project/.codeintel
+node dist/src/cli.js brief src/orders/types.ts --out path/to/project/.codeintel
 node dist/src/cli.js hubs --top 10 --out path/to/project/.codeintel
 ```
 
@@ -114,16 +115,16 @@ $ node dist/src/cli.js scan packs/typescript/fixtures/project --out /tmp/demo
 Scanned 19 files (0 parsed, 19 unchanged) in 3 ms; 90 declarations.
 ```
 
-**Read the map** of a folder: one line per file with its declarations. `--fields` adds fields and constants, and `--full` prints whole signatures.
+**Read the map** of a folder: one line per file with its declarations, indented two spaces per folder level (no tree lines or icons, which cost tokens and add nothing for a model). `--fields` adds fields and constants, and `--full` prints whole signatures.
 
 ```console
 $ node dist/src/cli.js map src/orders --out /tmp/demo
-📁 orders/
-├── 📄 orderEvents.ts  // class OrderEvents { placed() }
-├── 📄 orderRepository.ts  // interface IOrderRepository { findById(), save() } | class InMemoryOrderRepository { findById(), save() }
-├── 📄 orderService.ts  // interface IOrderService { find(), place() } | class OrderService { find(), place() }
-├── 📄 types.ts  // enum PaymentMethod | interface OrderItem | interface Order | type OrderStatus
-└── 📄 validation.ts  // type Validation, validateOrder()
+orders/
+  orderEvents.ts: class OrderEvents { placed() }
+  orderRepository.ts: interface IOrderRepository { findById(), save() } | class InMemoryOrderRepository { findById(), save() }
+  orderService.ts: interface IOrderService { find(), place() } | class OrderService { find(), place() }
+  types.ts: enum PaymentMethod | interface OrderItem | interface Order | type OrderStatus
+  validation.ts: type Validation, validateOrder()
 
 $ node dist/src/cli.js map src/orders/orderService.ts --full --out /tmp/demo
 interface IOrderService { find(id: string): Promise<Order | undefined>; place(items: OrderItem[]): Promise<Result<Order>>; }
@@ -141,12 +142,37 @@ $ node dist/src/cli.js hubs --top 5 --out /tmp/demo
 #5  src/orders/orderEvents.ts  score 5  in 1  out 3  pagerank 0.0524
 ```
 
-**Pick the context for a change.** The target is read in full (tier 3). Then come the files it imports and the files that import it (tier 2), then what those import (tier 1). Within each tier the most central files come first, and they are added as skeletons while they fit the budget. A tool puts exactly this list into its prompt.
+**Pick the context for a change.** `neighborhood` prints the target (tier 3), every file it imports and every file importing it (tier 2), each with its **brief**: the skeleton, or the shape of a data file. The agent sees what surrounds the change in one call instead of opening each file (trimmed):
 
 ```console
-$ node dist/src/cli.js neighborhood src/orders/orderService.ts --budget 400 --out /tmp/demo
-tier 3  src/orders/orderService.ts  (259 tokens; target)
-tier 2  src/orders/types.ts  (79 tokens; imported by src/orders/orderService.ts)
+$ node dist/src/cli.js neighborhood src/orders/orderService.ts --out /tmp/demo
+## tier 3  src/orders/orderService.ts  (93 tokens; target)
+interface IOrderService {
+  find(id: string): Promise<Order | undefined>;
+  place(items: OrderItem[]): Promise<Result<Order>>;
+}
+...
+
+## tier 2  src/orders/types.ts  (77 tokens; imported by src/orders/orderService.ts)
+type OrderStatus = 'NEW' | 'PAID' | 'SHIPPED';
+
+enum PaymentMethod { Card = 'CARD', Transfer = 'TRANSFER' }
+
+interface OrderItem {
+  sku: string;
+  quantity: number;
+}
+...
+
+415 tokens in 9 files; 3 files one ring further left out (143 tokens; give --budget to include them).
+```
+
+With `--budget` it also takes the next ring (tier 1, what the tier-2 files import), most central first within each tier, while the briefs fit. `--list` prints only the paths, `--contents` prints whole files instead of briefs (read from `--root`, by default the folder that holds `--out`), and `brief <file>...` prints the briefs of the files you name.
+
+```console
+$ node dist/src/cli.js neighborhood src/orders/orderService.ts --budget 400 --list --out /tmp/demo
+tier 3  src/orders/orderService.ts  (93 tokens; target)
+tier 2  src/orders/types.ts  (77 tokens; imported by src/orders/orderService.ts)
 tier 2  src/orders/orderRepository.ts  (75 tokens; imported by src/orders/orderService.ts)
 tier 2  src/app.ts  (8 tokens; imports src/orders/orderService.ts)
 tier 2  src/controllers/OrderController.ts  (60 tokens; imports src/orders/orderService.ts)
@@ -155,8 +181,28 @@ tier 2  src/routes/orderRoutes.ts  (14 tokens; imports src/orders/orderService.t
 tier 2  src/shared/result.ts  (46 tokens; imported by src/orders/orderService.ts)
 tier 1  src/shared/logger.ts  (43 tokens; imported by src/orders/orderEvents.ts)
 tier 1  src/orders/validation.ts  (43 tokens; imported by src/controllers/OrderController.ts)
-388 of 400 tokens used; 2 files left out (172 tokens).
+386 of 400 tokens used; 2 files left out (172 tokens).
 ```
+
+**Briefs stay small however large the file is.** A brief keeps the declarations and cuts what repeats: an enum shows its first eight members and counts the rest, a run of more than ten top-level constants (icon or translation tables) keeps ten and counts the rest, and a data file is reduced to its shape. A 130,000-line JSON list of products is 48 tokens:
+
+```text
+// JSON shape
+[
+  {
+    id: string
+    name: string
+    price: number
+    tags: [string] (2 items)
+    meta: {
+      createdAt: string
+      active: boolean
+    }
+  }
+] (10000 items)
+```
+
+An object with eight or more keys whose values share one shape, such as a flat translation file, is folded the same way: `{ [key]: string } (412 keys: "first", "second", "third", ...)`. The full text of any file is one read away.
 
 **Check its health** against your own limits. The sample has one import cycle on purpose: `orderService.ts` and `orderEvents.ts` import each other.
 
@@ -171,7 +217,7 @@ Every command except `map` takes `--json` for the same answer as data.
 
 | File | What it holds | Schema |
 | :--- | :--- | :--- |
-| `ast_code_map.json` | Every file: language, declarations as a tree (classes hold their fields, methods, getters and constructors, with signatures and visibility), imports resolved to project files or packages, a skeleton, token estimates, parse errors; the scan summary; the dependency audit | `schema/ast_code_map.schema.json` |
+| `ast_code_map.json` | Every file: language, declarations as a tree (classes hold their fields, methods, getters and constructors, with signatures and visibility), imports resolved to project files or packages, a skeleton (the brief), token estimates, parse errors; the scan summary; the dependency audit | `schema/ast_code_map.schema.json` |
 | `topology.json` | Files and their top-level declarations as nodes; `imports`, `defines`, `extends`, `implements` edges; in- and out-degree, centrality score, PageRank, clusters, import cycles, top hubs | `schema/topology.schema.json` |
 | `TopologyFULL.txt` | The folder tree with every public declaration and its public members under each file | text |
 | `project_structure.md` | The same declarations as Markdown, one section per file | text |
@@ -219,7 +265,7 @@ The excerpts below come from the tour's scan of `orderService.ts`. The complete 
 
 Every JSON output carries `schemaVersion` and `generatorVersion`. A breaking change to a schema is a new schema version and a new major release; readers refuse outputs of another schema version instead of converting them.
 
-What the scan leaves out: dot folders and files, a default list of dependency, build and platform-shell folders (`node_modules`, `build`, `dist`, `ios`, `android`, ...), everything `.gitignore` and `.contextignore` exclude (at every level, up to the repository root), and the paths given with `--exclude`. Files no pack claims are listed as `other` with no declarations, and the summary counts them by extension; nothing is guessed. A file with a syntax error is recorded with the error and no declarations, and the scan goes on.
+What the scan leaves out: dot folders and files, a default list of dependency, build and platform-shell folders (`node_modules`, `build`, `dist`, `ios`, `android`, ...), everything `.gitignore` and `.contextignore` exclude (at every level, up to the repository root), and the paths given with `--exclude`. Source files over 200 KB and data files over 20 MB are listed with their size and not parsed. Files no pack claims are listed as `other` with no declarations, and the summary counts them by extension; nothing is guessed. A file with a syntax error is recorded with the error and no declarations, and the scan goes on.
 
 ## Code health
 
@@ -248,7 +294,7 @@ Adding a language: see `CONTRIBUTING.md`.
 ## Library
 
 ```ts
-import { scan, renderMap, neighborhood, hubs, health, compareHealth, readCodeMap, readTopology, PACKS } from 'code-intelligence';
+import { scan, renderMap, neighborhood, hubs, health, compareHealth, readCodeMap, readTopology, PACKS } from '@onka13/code-intelligence';
 
 const { map, topology } = await scan({ root: 'path/to/project', out: '.codeintel', packs: PACKS });
 console.log(renderMap(map, { fields: true, depth: 4 }));

@@ -9,6 +9,8 @@ import type { WalkedFile } from '../walk/walk.js';
 /** One file's record: parsed by its pack, or listed without symbols when no pack claims it or it is too large. */
 
 export const DEFAULT_MAX_FILE_BYTES = 200_000;
+/** Data files (JSON, YAML) are only shaped, so much larger ones are read. */
+export const DEFAULT_MAX_DATA_FILE_BYTES = 20_000_000;
 
 export function packFor(file: string, packs: LanguagePack[]): LanguagePack | undefined {
   return packs.find((p) => p.claims(file));

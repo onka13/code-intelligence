@@ -15,7 +15,7 @@
     },
     "symbols": 27,
     "rawTokens": 776,
-    "skeletonTokens": 325,
+    "skeletonTokens": 324,
     "durationMs": 0
   },
   "files": [
@@ -450,9 +450,9 @@
         }
       ],
       "imports": [],
-      "skeleton": "public enum OrderStatus {\n  Draft;\n  Placed = 2;\n}\n\npublic delegate void OrderPlaced(Order order);",
+      "skeleton": "public enum OrderStatus { Draft, Placed = 2 }\n\npublic delegate void OrderPlaced(Order order);",
       "rawTokens": 41,
-      "skeletonTokens": 26
+      "skeletonTokens": 25
     }
   ],
   "audit": [

@@ -1,3 +1,7 @@
 node_modules/
 dist/
 .codeintel/
+# Event streams and diffs of benchmark runs hold code from the measured projects; they stay local.
+bench/results/**/*.jsonl
+bench/results/**/*.diff
+.DS_Store

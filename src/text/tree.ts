@@ -3,7 +3,7 @@ import { byName, collapseNames } from './collapse.js';
 /** The folder tree text of the map and of TopologyFULL.txt. */
 
 export interface FileText {
-  /** Printed after the file name: `📄 a.ts  // class A`. */
+  /** Printed after the file name: `a.ts: class A`. */
   inline?: string;
   /** Printed as lines under the file name. */
   block?: string[];
@@ -40,12 +40,11 @@ function buildFolders(paths: string[]): Folder {
 
 function renderFiles(folder: Folder, prefix: string, opts: TreeOptions, lines: string[]): void {
   const { names } = collapseNames([...folder.files.keys()]);
-  names.forEach((name, i) => {
-    const last = i === names.length - 1;
+  names.forEach((name) => {
     const path = folder.files.get(name);
     const text = path ? opts.describe(path) : {};
-    lines.push(`${prefix}${last ? '└── ' : '├── '}📄 ${name}${text.inline ? `  // ${text.inline}` : ''}`);
-    for (const line of text.block ?? []) lines.push(`${prefix}${last ? '    ' : '│   '}  ${line}`);
+    lines.push(`${prefix}${name}${text.inline ? `: ${text.inline}` : ''}`);
+    for (const line of text.block ?? []) lines.push(`${prefix}  ${line}`);
   });
 }
 
@@ -53,18 +52,20 @@ function renderFolder(folder: Folder, depth: number, prefix: string, opts: TreeO
   if (opts.maxDepth !== undefined && depth > opts.maxDepth) return;
   const folders = [...folder.folders.values()].sort((a, b) => byName(a.name, b.name));
   const showFiles = !opts.foldersOnly && folder.files.size > 0;
-  folders.forEach((sub, i) => {
-    const last = i === folders.length - 1 && !showFiles;
-    lines.push(`${prefix}${last ? '└── ' : '├── '}📁 ${sub.name}/`);
-    renderFolder(sub, depth + 1, prefix + (last ? '    ' : '│   '), opts, lines);
-  });
+  for (const sub of folders) {
+    lines.push(`${prefix}${sub.name}/`);
+    renderFolder(sub, depth + 1, `${prefix}  `, opts, lines);
+  }
   if (showFiles) renderFiles(folder, prefix, opts, lines);
 }
 
-/** The tree of the given file paths under a `📁 <root>/` header. */
+/**
+ * The tree of the given file paths under a `<root>/` header, indented two spaces per level. No tree lines or icons:
+ * they cost many tokens and tell a model nothing the indentation does not.
+ */
 export function renderTree(paths: string[], opts: TreeOptions): string {
-  const lines = [`📁 ${opts.rootName}/`];
-  if (paths.length === 0) lines.push('└── (no files)');
-  else renderFolder(buildFolders(paths), 0, '', opts, lines);
+  const lines = [`${opts.rootName}/`];
+  if (paths.length === 0) lines.push('  (no files)');
+  else renderFolder(buildFolders(paths), 0, '  ', opts, lines);
   return lines.join('\n');
 }

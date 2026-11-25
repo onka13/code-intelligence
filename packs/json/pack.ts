@@ -28,6 +28,6 @@ export const jsonPack: LanguagePack = {
       throw new ParseError(`Invalid JSON: ${message}`);
     }
     const declares = path.posix.basename(file) === 'package.json' ? packageDependencies(parsed) : undefined;
-    return { symbols: [], imports: [], skeleton: dataSkeleton('JSON', content, parsed), ...(declares ? { declares } : {}) };
+    return { symbols: [], imports: [], skeleton: dataSkeleton('JSON', parsed), ...(declares ? { declares } : {}) };
   },
 };

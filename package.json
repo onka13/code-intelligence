@@ -1,6 +1,6 @@
 {
-  "name": "code-intelligence",
-  "version": "0.6.1",
+  "name": "@onka13/code-intelligence",
+  "version": "0.7.0",
   "private": false,
   "description": "A symbol map, dependency graph and token-budgeted context for any codebase, with one Tree-sitter language pack per language.",
   "license": "Apache-2.0",
@@ -38,6 +38,9 @@
   ],
   "engines": {
     "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",

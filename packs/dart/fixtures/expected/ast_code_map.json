@@ -15,7 +15,7 @@
     },
     "symbols": 112,
     "rawTokens": 2024,
-    "skeletonTokens": 902,
+    "skeletonTokens": 900,
     "durationMs": 0
   },
   "files": [
@@ -495,7 +495,7 @@
           "target": "lib/edge/parts/money.dart"
         }
       ],
-      "skeleton": "typedef Mapper<T> = T Function(Product product);\n\nfinal int retries;\n\nconst kTimeout;\n\nlate String sessionId;\n\nint _hidden;\n\nString get appName;\n\nabstract class Repository<T> {\n  Future<T?> find(String id);\n  int get count;\n}\n\nclass CachedRepository<T> extends Repository<T> implements Disposable {\n  static const int maxSize;\n  static const int minSize;\n  cart.Cart? lastCart;\n  CachedRepository();\n  CachedRepository.named({this.lastCart});\n  Future<T?> find(String id);\n  int get count;\n  set limit(int value);\n  bool operator ==(Object other);\n  void dispose();\n}\n\nabstract interface class Disposable {\n  void dispose();\n}\n\nmixin class Tracked {\n  int hits;\n}\n\nenum Status {\n  active('A');\n  inactive('I');\n  final String code;\n  const Status(this.code);\n}\n\nextension on int {\n  int get doubled;\n}\n\nFuture<void> warmUp(Repository<Product> repo, {int times = 1});",
+      "skeleton": "typedef Mapper<T> = T Function(Product product);\n\nfinal int retries;\n\nconst kTimeout;\n\nlate String sessionId;\n\nint _hidden;\n\nString get appName;\n\nabstract class Repository<T> {\n  Future<T?> find(String id);\n  int get count;\n}\n\nclass CachedRepository<T> extends Repository<T> implements Disposable {\n  static const int maxSize;\n  static const int minSize;\n  cart.Cart? lastCart;\n  CachedRepository();\n  CachedRepository.named({this.lastCart});\n  Future<T?> find(String id);\n  int get count;\n  set limit(int value);\n  bool operator ==(Object other);\n  void dispose();\n}\n\nabstract interface class Disposable {\n  void dispose();\n}\n\nmixin class Tracked {\n  int hits;\n}\n\nenum Status {\n  active('A'), inactive('I');\n  final String code;\n  const Status(this.code);\n}\n\nextension on int {\n  int get doubled;\n}\n\nFuture<void> warmUp(Repository<Product> repo, {int times = 1});",
       "rawTokens": 375,
       "skeletonTokens": 228
     },
@@ -975,9 +975,9 @@
         }
       ],
       "imports": [],
-      "skeleton": "enum Category {\n  food;\n  clothing;\n  toys;\n}\n\nclass Product {\n  final String id;\n  final String name;\n  final double price;\n  final Category category;\n  const Product({required this.id, required this.name, required this.price, this.category = Category.food});\n  factory Product.fromJson(Map<String, dynamic> json);\n  Map<String, dynamic> toJson();\n}",
+      "skeleton": "enum Category { food, clothing, toys }\n\nclass Product {\n  final String id;\n  final String name;\n  final double price;\n  final Category category;\n  const Product({required this.id, required this.name, required this.price, this.category = Category.food});\n  factory Product.fromJson(Map<String, dynamic> json);\n  Map<String, dynamic> toJson();\n}",
       "rawTokens": 136,
-      "skeletonTokens": 93
+      "skeletonTokens": 91
     },
     {
       "path": "lib/screens/home_screen.dart",

@@ -33,6 +33,6 @@ export const yamlPack: LanguagePack = {
       throw new ParseError(`Invalid YAML: ${(err as Error).message.split('\n')[0]}`);
     }
     const declares = path.posix.basename(file) === 'pubspec.yaml' ? pubspecDependencies(parsed) : undefined;
-    return { symbols: [], imports: [], skeleton: dataSkeleton('YAML', content, parsed), ...(declares ? { declares } : {}) };
+    return { symbols: [], imports: [], skeleton: dataSkeleton('YAML', parsed), ...(declares ? { declares } : {}) };
   },
 };

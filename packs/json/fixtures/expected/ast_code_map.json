@@ -19,7 +19,7 @@
     },
     "symbols": 0,
     "rawTokens": 164,
-    "skeletonTokens": 136,
+    "skeletonTokens": 139,
     "durationMs": 0
   },
   "files": [
@@ -42,9 +42,9 @@
       "mtimeMs": 0,
       "symbols": [],
       "imports": [],
-      "skeleton": "// JSON shape\n{\n  service: {\n    url: string\n    retries: number\n    tags: [string]\n  }\n  features: [\n    {\n      name: string\n      enabled: boolean\n      rollout: null\n    }\n  ]\n  empty: {}\n  list: []\n}",
+      "skeleton": "// JSON shape\n{\n  service: {\n    url: string\n    retries: number\n    tags: [string] (2 items)\n  }\n  features: [\n    {\n      name: string\n      enabled: boolean\n      rollout: null\n    }\n  ]\n  empty: {}\n  list: []\n}",
       "rawTokens": 49,
-      "skeletonTokens": 54
+      "skeletonTokens": 57
     },
     {
       "path": "package.json",

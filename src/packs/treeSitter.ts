@@ -58,16 +58,29 @@ export function query(language: Language, key: string, source: string): Query {
 
 /**
  * Error nodes that are gaps of a pinned grammar, not errors in the code: valid code the grammar cannot read while the
- * rest of the tree stays intact. TSX: a bare `&` in JSX text ("Roles & Permissions"), which TypeScript and React accept;
- * the newest tree-sitter-typescript (0.23.2) still rejects it.
+ * rest of the tree stays intact. tree-sitter-typescript 0.23.2, the newest, has two:
+ * - TSX: a bare `&` in JSX text ("Roles & Permissions"), which TypeScript and React accept.
+ * - TypeScript and TSX: a tagged template with type arguments (sql<Row>`SELECT ...`, common with Kysely and Drizzle).
+ *   The grammar reads the call correctly but inserts a missing `!` after the type arguments.
  */
+function isTypedTagGap(error: Node): boolean {
+  const nonNull = error.parent;
+  const call = nonNull?.parent;
+  return error.isMissing && error.type === '!' && nonNull?.type === 'non_null_expression'
+    && nonNull.firstChild?.type === 'instantiation_expression' && call?.type === 'call_expression'
+    && call.childForFieldName('arguments')?.type === 'template_string';
+}
+
+const isBareAmpersandGap = (error: Node) => error.parent?.type === 'jsx_element' && /^&[^{}<>]*$/.test(error.text);
+
 const GRAMMAR_GAPS: Record<string, (error: Node) => boolean> = {
-  tsx: (error) => error.parent?.type === 'jsx_element' && /^&[^{}<>]*$/.test(error.text),
+  typescript: isTypedTagGap,
+  tsx: (error) => isTypedTagGap(error) || isBareAmpersandGap(error),
 };
 
 /** The first syntax error of a tree, as a message with its line, or undefined. */
 function firstError(node: Node, isGap?: (error: Node) => boolean): string | undefined {
-  if (node.isMissing) return `Syntax error at line ${node.startPosition.row + 1}: missing ${node.type}`;
+  if (node.isMissing) return isGap?.(node) ? undefined : `Syntax error at line ${node.startPosition.row + 1}: missing ${node.type}`;
   if (node.type === 'ERROR') return isGap?.(node) ? undefined : `Syntax error at line ${node.startPosition.row + 1}`;
   if (!node.hasError) return undefined;
   for (const child of node.children) {

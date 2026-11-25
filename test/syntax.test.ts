@@ -71,3 +71,28 @@ test('CIN-20: a bare & in JSX text is read; a broken element is still an error',
   assert.match(file('src/Broken.tsx').error ?? '', /^Syntax error at line \d+/);
   assert.match(file('src/Twice.tsx').error ?? '', /^Syntax error at line \d+/);
 });
+
+test('CIN-20: a tagged template with type arguments is read; a real missing token is still an error', async () => {
+  const file = await scanFiles({
+    'src/locks.ts': [
+      "import { sql } from 'kysely';",
+      '',
+      'export async function tryLock(conn: unknown, id: number): Promise<boolean> {',
+      '  const { rows } = await sql<{',
+      '    locked: boolean;',
+      '  }>`SELECT pg_try_advisory_lock(${id}) AS locked`.execute(conn);',
+      '  return rows[0].locked;',
+      '}',
+      '',
+      'export const ids = (values: string[]) => sql<string[]>`array[${values}]::uuid[]`;',
+      '',
+    ].join('\n'),
+    'src/View.tsx': 'export const Count = () => <p>{sql<number>`SELECT 1`.compile()}</p>;\n',
+    'src/Broken.ts': 'export function broken(a: number) {\n  return (a + 1;\n}\n',
+  });
+  const locks = file('src/locks.ts');
+  assert.equal(locks.error, undefined);
+  assert.deepEqual(locks.symbols.map((s) => s.name), ['tryLock', 'ids']);
+  assert.equal(file('src/View.tsx').error, undefined);
+  assert.match(file('src/Broken.ts').error ?? '', /^Syntax error at line \d+/);
+});

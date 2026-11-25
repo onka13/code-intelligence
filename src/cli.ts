@@ -10,6 +10,7 @@ import { readCodeMap, readTopology } from './outputs.js';
 import { renderMap } from './queries/map.js';
 import { neighborhood } from './queries/neighborhood.js';
 import { scan } from './scan/scan.js';
+import { briefsText, neighborhoodList, neighborhoodText } from './text/briefs.js';
 import type { ScanSummary } from './model.js';
 
 const USAGE = `Usage: codeintel <command> [options]
@@ -20,8 +21,13 @@ const USAGE = `Usage: codeintel <command> [options]
         again unless --full is given.
   map [<subfolder or file>] [--out <dir>] [--fields] [--full] [--depth <n>] [--folders]
         Print the repo map of the scanned folder, a subfolder, or one file's declarations.
-  neighborhood <file>... --budget <tokens> [--out <dir>] [--json]
-        The files around the given ones, most central first, within a token budget.
+  neighborhood <file>... [--budget <tokens>] [--contents [--root <folder>]] [--list] [--out <dir>] [--json]
+        The files around the given ones with their briefs (declarations without bodies, data shapes).
+        Without --budget: every file they import and every file importing them. With --budget: also
+        the next ring, most central first, while they fit. --contents prints whole files instead,
+        read from --root (default: the folder that holds --out). --list prints only the paths.
+  brief <file>... [--out <dir>]
+        The briefs of the given files.
   hubs [--top <n>] [--out <dir>] [--json]
         The most connected files.
   health <folder> --max-file-lines <n> --max-function-lines <n> --hard-function-lines <n>
@@ -39,7 +45,7 @@ const LIMIT_FLAGS = {
   maxFileLines: 'max-file-lines', maxFunctionLines: 'max-function-lines', hardFunctionLines: 'hard-function-lines',
   maxNestingDepth: 'max-nesting-depth', minDuplicateLines: 'min-duplicate-lines',
 } as const;
-const VALUE_FLAGS = new Set(['out', 'exclude', 'depth', 'budget', 'top', ...Object.values(LIMIT_FLAGS)]);
+const VALUE_FLAGS = new Set(['out', 'exclude', 'depth', 'budget', 'top', 'root', ...Object.values(LIMIT_FLAGS)]);
 
 interface Args {
   positional: string[];
@@ -82,11 +88,19 @@ async function runScan(args: Args): Promise<number> {
 function runNeighborhood(args: Args): number {
   const budget = numberValue(args, 'budget');
   const files = args.positional.slice(1);
-  if (!files.length || budget === undefined || Number.isNaN(budget)) { console.error('neighborhood needs files and --budget <tokens>.'); return 2; }
-  const result = neighborhood(readCodeMap(outDir(args)), readTopology(outDir(args)), files, budget);
-  if (args.flags.has('json')) { console.log(JSON.stringify(result, null, 2)); return 0; }
-  for (const e of [...result.targets, ...result.selected]) console.log(`tier ${e.tier}  ${e.path}  (${e.tokens} tokens; ${e.reason})`);
-  console.log(`${result.selectedTokens} of ${result.budget} tokens used; ${result.omitted.files} files left out (${result.omitted.tokens} tokens).`);
+  if (!files.length || Number.isNaN(budget)) { console.error('neighborhood needs files, and --budget <tokens> must be a number.'); return 2; }
+  const contents = args.flags.has('contents');
+  const result = neighborhood(readCodeMap(outDir(args)), readTopology(outDir(args)), files, { budget, contents });
+  if (args.flags.has('json')) console.log(JSON.stringify(result, null, 2));
+  else if (args.flags.has('list')) console.log(neighborhoodList(result));
+  else console.log(neighborhoodText(result, contents ? { root: path.resolve(value(args, 'root') ?? path.dirname(outDir(args))) } : undefined));
+  return 0;
+}
+
+function runBrief(args: Args): number {
+  const files = args.positional.slice(1);
+  if (!files.length) { console.error('brief needs files.'); return 2; }
+  console.log(briefsText(readCodeMap(outDir(args)), files));
   return 0;
 }
 
@@ -127,6 +141,7 @@ async function main(argv: string[]): Promise<number> {
       console.log(renderMap(readCodeMap(outDir(args)), { folder: args.positional[1], fields: args.flags.has('fields'), full: args.flags.has('full'), depth: numberValue(args, 'depth'), foldersOnly: args.flags.has('folders') }));
       return 0;
     case 'neighborhood': return runNeighborhood(args);
+    case 'brief': return runBrief(args);
     case 'hubs': return runHubs(args);
     case 'health': return runHealth(args);
     case 'health-compare': return runHealthCompare(args);

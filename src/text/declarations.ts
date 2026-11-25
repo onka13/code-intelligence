@@ -60,14 +60,45 @@ export function fullBlock(record: FileRecord): string[] {
   return record.symbols.filter((s) => s.exported).map((s) => (CONTAINER_KINDS.has(s.kind) ? containerBlock(s) : `${s.signature};`));
 }
 
-/** The skeleton of a file: its declarations without bodies (non-private members), or its first lines when it declares nothing. */
+/** A skeleton stays a brief: long enums and long runs of top-level constants are cut, the full text is one read away. */
+const BRIEF = { enumMembers: 8, constantRun: 10 };
+
+/** An enum's members (with their values) on one line, cut after `BRIEF.enumMembers`; other members (Dart) follow on their own lines. */
+function enumSkeleton(symbol: SymbolNode): string {
+  const members = (symbol.members ?? []).filter((m) => m.visibility !== 'private');
+  const names = members.filter((m) => m.kind === 'enumMember').map((m) => m.signature);
+  const shown = names.slice(0, BRIEF.enumMembers).join(', ');
+  const more = names.length > BRIEF.enumMembers ? `, ... +${names.length - BRIEF.enumMembers} more` : '';
+  const others = members.filter((m) => m.kind !== 'enumMember').map((m) => `  ${m.signature};`);
+  if (!others.length) return `${symbol.signature} { ${shown}${more} }`;
+  return `${symbol.signature} {\n  ${shown}${more};\n${others.join('\n')}\n}`;
+}
+
+function symbolSkeleton(symbol: SymbolNode): string {
+  if (symbol.kind === 'enum') return enumSkeleton(symbol);
+  if (!CONTAINER_KINDS.has(symbol.kind)) return `${symbol.signature};`;
+  const members = (symbol.members ?? []).filter((m) => m.visibility !== 'private').map((m) => `  ${m.signature};`);
+  return members.length ? `${symbol.signature} {\n${members.join('\n')}\n}` : `${symbol.signature} {}`;
+}
+
+/** Keeps the first `BRIEF.constantRun` of each run of top-level constants and counts the rest. */
+function cutConstantRuns(symbols: SymbolNode[]): string[] {
+  const blocks: string[] = [];
+  let run = 0;
+  for (const symbol of symbols) {
+    run = symbol.kind === 'variable' ? run + 1 : 0;
+    if (run <= BRIEF.constantRun) blocks.push(symbolSkeleton(symbol));
+    else if (run === BRIEF.constantRun + 1) blocks.push('// ... +1 more constants');
+    else blocks[blocks.length - 1] = `// ... +${run - BRIEF.constantRun} more constants`;
+  }
+  return blocks;
+}
+
+/**
+ * The skeleton of a file, the brief a tool reads instead of the file: its declarations without bodies (non-private
+ * members), with long enums and constant runs cut; or its first lines when it declares nothing.
+ */
 export function skeletonOf(symbols: SymbolNode[], content: string): string {
   if (symbols.length === 0) return content.split('\n').slice(0, 30).join('\n');
-  return symbols
-    .map((s) => {
-      if (!CONTAINER_KINDS.has(s.kind)) return `${s.signature};`;
-      const members = (s.members ?? []).filter((m) => m.visibility !== 'private').map((m) => `  ${m.signature};`);
-      return members.length ? `${s.signature} {\n${members.join('\n')}\n}` : `${s.signature} {}`;
-    })
-    .join('\n\n');
+  return cutConstantRuns(symbols).join('\n\n');
 }

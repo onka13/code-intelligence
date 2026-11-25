@@ -28,21 +28,14 @@ test('CIN-07: the map of a subfolder, with fields and a depth limit, from the st
     'src/other.ts': 'export const other = 1;\n',
   });
   const printed = execFileSync('node', [CLI, 'map', 'src/orders', '--out', out, '--fields', '--depth', '2'], { encoding: 'utf8' });
-  assert.equal(printed, [
-    '📁 orders/',
-    '├── 📁 deep/',
-    '│   └── 📁 a/',
-    '│       └── 📁 b/',
-    '└── 📄 order.ts  // class Order { id: string, total() }',
-    '',
-  ].join('\n'));
+  assert.equal(printed, ['orders/', '  deep/', '    a/', '      b/', '  order.ts: class Order { id: string, total() }', ''].join('\n'));
   const full = execFileSync('node', [CLI, 'map', '--out', out, '--full'], { encoding: 'utf8' });
   assert.ok(full.includes('class Order { id: string; total(): number; }') && full.includes('function far();'));
   const oneFile = execFileSync('node', [CLI, 'map', 'src/orders/order.ts', '--out', out, '--full'], { encoding: 'utf8' });
   assert.equal(oneFile, 'class Order { id: string; total(): number; }\n');
   assert.throws(() => execFileSync('node', [CLI, 'map', 'src/missing.ts', '--out', out], { encoding: 'utf8', stdio: 'pipe' }), /Not in the code map: src\/missing\.ts/);
   const folders = execFileSync('node', [CLI, 'map', '--out', out, '--folders', '--depth', '1'], { encoding: 'utf8' });
-  assert.deepEqual(folders.split('\n').slice(1), ['└── 📁 src/', '    └── 📁 orders/', '']);
+  assert.deepEqual(folders.split('\n').slice(1), ['  src/', '    orders/', '']);
 });
 
 test('CIN-08: a neighborhood within a token budget, with reasons, the same every time', async () => {
@@ -57,7 +50,7 @@ test('CIN-08: a neighborhood within a token budget, with reasons, the same every
   const out = await scannedProject(files);
   const map = readCodeMap(out);
   const topology = readTopology(out);
-  const wide = neighborhood(map, topology, ['src/orders/orderService.ts'], 8000);
+  const wide = neighborhood(map, topology, ['src/orders/orderService.ts'], { budget: 8000 });
   assert.deepEqual(wide.targets.map((t) => [t.path, t.tier]), [['src/orders/orderService.ts', 3]]);
   assert.deepEqual(wide.selected.map((s) => [s.path, s.tier, s.reason]), [
     ['src/orders/repo.ts', 2, 'imported by src/orders/orderService.ts'],
@@ -69,11 +62,36 @@ test('CIN-08: a neighborhood within a token budget, with reasons, the same every
 
   const tokens = (p: string) => map.files.find((f) => f.path === p)!.skeletonTokens;
   const budget = tokens('src/orders/repo.ts') + tokens('src/orders/types.ts');
-  const tight = neighborhood(map, topology, ['src/orders/orderService.ts'], budget);
+  const tight = neighborhood(map, topology, ['src/orders/orderService.ts'], { budget });
   assert.ok(tight.selectedTokens <= budget);
   assert.equal(tight.omitted.files, 4 - tight.selected.length);
-  assert.deepEqual(neighborhood(map, topology, ['src/orders/orderService.ts'], budget), tight);
-  assert.throws(() => neighborhood(map, topology, ['src/missing.ts'], 100), /Not in the code map: src\/missing\.ts/);
+  assert.deepEqual(neighborhood(map, topology, ['src/orders/orderService.ts'], { budget }), tight);
+  assert.throws(() => neighborhood(map, topology, ['src/missing.ts'], { budget: 100 }), /Not in the code map: src\/missing\.ts/);
+
+  // Without a budget: every direct import and importer, with its brief; the next ring is only counted.
+  const direct = neighborhood(map, topology, ['src/orders/orderService.ts']);
+  assert.deepEqual(direct.selected.map((s) => s.path), ['src/orders/repo.ts', 'src/orders/types.ts', 'src/api/controller.ts']);
+  assert.equal(direct.selected[1].brief, 'interface Order {\n  id: string;\n  total: number;\n  lines: string[];\n}');
+  assert.deepEqual(direct.omitted, { files: 1, tokens: tokens('src/db/db.ts') });
+  assert.equal(direct.budget, undefined);
+
+  // Contents: files are counted at their full size and carry no brief.
+  const raw = neighborhood(map, topology, ['src/orders/orderService.ts'], { contents: true });
+  assert.equal(raw.selected[1].tokens, map.files.find((f) => f.path === 'src/orders/types.ts')!.rawTokens);
+  assert.equal(raw.selected[1].brief, undefined);
+
+  const root = tempDir();
+  writeFiles(root, files);
+  const text = execFileSync('node', [CLI, 'neighborhood', 'src/orders/orderService.ts', '--out', out], { encoding: 'utf8' });
+  assert.ok(text.startsWith('## tier 3  src/orders/orderService.ts'));
+  assert.ok(text.includes('## tier 2  src/orders/types.ts') && text.includes('interface Order {'));
+  assert.match(text, /1 files one ring further left out \(\d+ tokens; give --budget to include them\)\.\n$/);
+  const full = execFileSync('node', [CLI, 'neighborhood', 'src/orders/orderService.ts', '--contents', '--root', root, '--out', out], { encoding: 'utf8' });
+  assert.ok(full.includes(files['src/orders/types.ts'].trimEnd()));
+  const list = execFileSync('node', [CLI, 'neighborhood', 'src/orders/orderService.ts', '--list', '--out', out], { encoding: 'utf8' });
+  assert.equal(list.split('\n')[1], `tier 2  src/orders/repo.ts  (${tokens('src/orders/repo.ts')} tokens; imported by src/orders/orderService.ts)`);
+  const brief = execFileSync('node', [CLI, 'brief', 'src/orders/types.ts', '--out', out], { encoding: 'utf8' });
+  assert.equal(brief, `## src/orders/types.ts  (${tokens('src/orders/types.ts')} tokens)\ninterface Order {\n  id: string;\n  total: number;\n  lines: string[];\n}\n`);
 });
 
 test('CIN-09: the dependency audit finds dormant packages and counts every use', async () => {
